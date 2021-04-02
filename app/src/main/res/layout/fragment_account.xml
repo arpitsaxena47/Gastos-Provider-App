@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/idTVHead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="4dp"
+            android:text="Personal Information"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:scaleType="center"
+            android:id="@+id/idIVProfile"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/acc_image_icon" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Upload"
+            android:visibility="gone"
+            android:id="@+id/idBtnUpload"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="Upload Profile\nPicture"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="4dp"
+            android:padding="3dp"
+            android:textSize="18sp"
+            android:text="Owner Name"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/idEdtUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textSize="15sp"
+            android:layout_marginLeft="12dp"
+            android:hint="User Name" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:padding="3dp"
+            android:textSize="18sp"
+            android:text="Owner Date Of Birth"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/idEdtDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textSize="15sp"
+            android:layout_marginLeft="12dp"
+            android:hint="DOB" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:padding="3dp"
+            android:textSize="18sp"
+            android:text="Phone Number"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/idEdtPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textSize="15sp"
+            android:layout_marginLeft="12dp"
+            android:hint="Phone Number" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:padding="3dp"
+            android:textSize="18sp"
+            android:text="Email Address"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/idEdtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textSize="15sp"
+            android:layout_marginLeft="12dp"
+            android:hint="Email" />
+
+        <Button
+            android:id="@+id/idBtnAddData"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_back"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:text="Add Profile Data"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            tools:targetApi="lollipop" />
+
+    </LinearLayout>
+</ScrollView>

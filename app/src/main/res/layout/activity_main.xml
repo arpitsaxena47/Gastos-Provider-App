@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@drawable/blur_background"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="90dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="-50dp"
+        android:src="@drawable/ic_vector_one" />
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="-10dp"
+        android:src="@drawable/ic_image_one" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="27dp"
+        android:background="#FFFFFF"
+        android:elevation="10dp"
+        app:cardCornerRadius="20dp">
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/idViewPager"
+            android:background="#FFFFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+
+        <LinearLayout
+            android:id="@+id/idLLDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="20dp"
+            android:gravity="start|bottom"
+            android:orientation="horizontal" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp"
+            android:id="@+id/idFabNext"
+            android:onClick="OpenLogin"
+            android:background="@color/white"
+            android:backgroundTint="#344E41"
+            android:src="@drawable/ic_right_arrow"
+            app:fabCustomSize="40dp"
+            app:tint="@color/white" />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-60dp"
+        android:layout_marginLeft="-60dp"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/ic_vector_two" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-10dp"
+        android:elevation="15dp"
+        android:src="@drawable/ic_image_two" />
+
+
+</RelativeLayout>
