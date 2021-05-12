@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A588157"
+    tools:context=".Setpin_Activity">
+
+    <TextView
+        android:id="@+id/set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="52dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="150dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="150dp"
+        android:gravity="top"
+        android:text="Set Pin"
+        android:textColor="#004445"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        />
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/set"
+        android:layout_marginTop="73dp">
+
+        <View
+            android:id="@+id/rectangle_2"
+            android:layout_width="310dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/pho_number"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/group_582"
+            />
+        <EditText
+            android:id="@+id/pin1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="4"
+            android:inputType="phone"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="35dp"
+            android:layout_below="@+id/enter_mobile"
+            android:layout_marginTop="22dp"
+            android:hint="New Pin"
+            android:textColorHint="#818181"
+            android:textSize="14dp"
+            android:textColor="#004445"
+            android:background="@null"
+            />
+        <EditText
+            android:id="@+id/pin2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:maxLength="4"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="35dp"
+            android:layout_below="@+id/enter_mobile"
+            android:layout_marginTop="75dp"
+            android:hint="Re-Enter Pin"
+            android:textColorHint="#818181"
+            android:textSize="14dp"
+            android:textColor="#004445"
+            android:background="@null"
+            />
+
+        <ImageView
+            android:id="@+id/go"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="280dp"
+            android:layout_below="@+id/pho_number"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/group579"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r1"
+        android:layout_marginTop="40dp">
+
+
+        <ImageView
+            android:id="@+id/resend"
+            android:layout_width="83dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/rectangle_233"
+            android:elevation="10dp"
+            />
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/resend_otp"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:layout_below="@+id/r1"
+        android:layout_marginTop="48dp"
+        android:text="Reset Pin"
+        android:textSize="7dp"
+        android:textColor="#818181"
+        />
+</RelativeLayout>

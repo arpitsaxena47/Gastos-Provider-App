@@ -5,16 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1A588157"
-    tools:context=".PhoneNumberActivity">
+    tools:context=".phoneNumber2_Activity">
 
 
-    <View
-        android:id="@+id/layer_3"
-        android:layout_width="203dp"
-        android:layout_height="215dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/layer_3"
-        />
 
     <TextView
         android:id="@+id/enter_mobile"
@@ -23,7 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="21dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="52dp"
         android:text="Enter Mobile Number"
         android:textColor="#004445"
         android:textSize="25dp"
@@ -36,7 +29,7 @@
         android:layout_height="65dp"
         android:layout_below="@+id/enter_mobile"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="145dp"
         android:background="@drawable/rectangle_232" />
 
 
@@ -48,7 +41,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="21dp"
         android:layout_below="@+id/enter_mobile"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="170dp"
         android:text="+91"
         android:textColor="#818181"
         android:textSize="12dp"
@@ -60,7 +53,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="62dp"
         android:layout_below="@+id/enter_mobile"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="145dp"
         android:background="@drawable/line_32"
         />
 
@@ -72,7 +65,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="280dp"
         android:layout_below="@+id/enter_mobile"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="155dp"
         android:background="@drawable/group579"
         />
 
@@ -85,7 +78,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="83dp"
         android:layout_below="@+id/enter_mobile"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="170dp"
         android:hint="Mobile Number"
         android:textColorHint="#BF595959"
         android:textSize="14dp"
@@ -93,4 +86,5 @@
         android:gravity="center_horizontal"
         android:background="@null"
         />
+
 </RelativeLayout>
