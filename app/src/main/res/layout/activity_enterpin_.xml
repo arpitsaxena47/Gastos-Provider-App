@@ -13,16 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="52dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="150dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="150dp"
         android:gravity="top"
+        android:maxLines="1"
+        android:layout_centerHorizontal="true"
         android:text="Enter Pin"
         android:textColor="#004445"
         android:textSize="25dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
 
     <View
@@ -47,7 +44,7 @@
         />
 
     <EditText
-        android:id="@+id/inputcode1"
+        android:id="@+id/digit1"
         android:layout_width="27dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/e"
@@ -64,7 +61,7 @@
         />
 
     <EditText
-        android:id="@+id/inputcode2"
+        android:id="@+id/digit2"
         android:layout_width="27dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/e"
@@ -80,7 +77,7 @@
         android:textSize="24sp"/>
 
     <EditText
-        android:id="@+id/inputcode3"
+        android:id="@+id/digit3"
         android:layout_width="27dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/e"
@@ -96,7 +93,7 @@
         android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/inputcode4"
+        android:id="@+id/digit4"
         android:layout_width="27dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/e"
@@ -134,7 +131,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/resend_otp"
+        android:id="@+id/forgotPin"
         android:layout_width="61dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

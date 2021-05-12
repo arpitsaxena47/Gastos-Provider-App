@@ -13,11 +13,10 @@
         android:id="@+id/enter_mobile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="21dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="52dp"
         android:text="Enter Mobile Number"
+        android:layout_centerHorizontal="true"
         android:textColor="#004445"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -46,20 +45,20 @@
         android:textColor="#818181"
         android:textSize="12dp"
         />
-    <View
+    <ImageView
         android:id="@+id/line_32"
         android:layout_width="1dp"
-        android:layout_height="65.05dp"
+        android:layout_height="65.1dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="62dp"
         android:layout_below="@+id/enter_mobile"
         android:layout_marginTop="145dp"
-        android:background="@drawable/line_32"
+        android:background="@drawable/line"
         />
 
 
     <ImageView
-        android:id="@+id/group_579"
+        android:id="@+id/idBtnGetOTP2"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:layout_alignParentLeft="true"
@@ -70,7 +69,7 @@
         />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/idEdtMobile2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -83,7 +82,6 @@
         android:textColorHint="#BF595959"
         android:textSize="14dp"
         android:textColor="#004445"
-        android:gravity="center_horizontal"
         android:background="@null"
         />
 

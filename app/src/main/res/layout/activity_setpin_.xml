@@ -7,21 +7,20 @@
     android:background="#1A588157"
     tools:context=".Setpin_Activity">
 
+
     <TextView
         android:id="@+id/set"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="52dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="150dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="150dp"
-        android:gravity="top"
+        android:maxLines="1"
         android:text="Set Pin"
         android:textColor="#004445"
         android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="52dp"
         android:textStyle="bold"
+        android:layout_gravity="clip_horizontal"
         />
 
     <RelativeLayout
@@ -105,7 +104,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/resend_otp"
+        android:id="@+id/resetPin"
         android:layout_width="61dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

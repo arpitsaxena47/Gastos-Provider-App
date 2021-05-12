@@ -2,10 +2,13 @@ package com.gastos.gastosprovider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,27 +28,31 @@ import java.util.concurrent.TimeUnit;
 public class VerifyOTPActivity extends AppCompatActivity {
 
     private EditText otpEdt1, otpEdt2, otpEdt3, otpEdt4, otpEdt5, otpEdt6;
-    private Button verifyOtpBtn;
+    private ImageView verifyOtpBtn;
     String phoneNumber;
-    private TextView resendOTPTV;
+    private TextView resendOTPTV,pho_number;
     private String verificationId;
     private FirebaseAuth mAuth;
     private PhoneAuthProvider.ForceResendingToken resendOTPtoken;
-
+    String r;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_otp);
-        otpEdt1 = findViewById(R.id.idEdt1);
-        otpEdt2 = findViewById(R.id.idEdt2);
-        otpEdt3 = findViewById(R.id.idEdt3);
-        otpEdt4 = findViewById(R.id.idEdt4);
-        otpEdt5 = findViewById(R.id.idEdt5);
-        otpEdt6 = findViewById(R.id.idEdt6);
+        otpEdt1 = findViewById(R.id.inputcode1);
+        otpEdt2 = findViewById(R.id.inputcode2);
+        otpEdt3 = findViewById(R.id.inputcode3);
+        otpEdt4 = findViewById(R.id.inputcode4);
+        otpEdt5 = findViewById(R.id.inputcode5);
+        otpEdt6 = findViewById(R.id.inputcode6);
+        pho_number=findViewById(R.id.pho_number);
         resendOTPTV = findViewById(R.id.idTVResendOTP);
-        verifyOtpBtn = findViewById(R.id.idBtnVerify);
+        verifyOtpBtn = findViewById(R.id.go);
         mAuth = FirebaseAuth.getInstance();
         phoneNumber = getIntent().getStringExtra("phone");
+         r=getIntent().getStringExtra("via");
+         pho_number.setText(phoneNumber);
+        setupOTPINPUTS();
         sendVerificationCode(phoneNumber);
         verifyOtpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +97,17 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent i = new Intent(VerifyOTPActivity.this, HomeActivity.class);
-                            startActivity(i);
+                            if(r=="false")
+                            {
+                                Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
+                                startActivity(i);
+                            }
+                            else
+                            {
+                                Intent i = new Intent(VerifyOTPActivity.this, SetNewPin_Activity.class);
+                                startActivity(i);
+                            }
+
                             //Toast.makeText(VerifyOTPActivity.this, "User verified..", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(VerifyOTPActivity.this, "Fail to verify the user..", Toast.LENGTH_SHORT).show();
@@ -142,4 +158,107 @@ public class VerifyOTPActivity extends AppCompatActivity {
         }
     };
 
+    private void setupOTPINPUTS()
+    {
+        otpEdt1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (!s.toString().trim().isEmpty())
+                {
+                    otpEdt2.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        otpEdt2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (!s.toString().trim().isEmpty())
+                {
+                    otpEdt3.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        otpEdt3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (!s.toString().trim().isEmpty())
+                {
+                    otpEdt4.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        otpEdt4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (!s.toString().trim().isEmpty())
+                {
+                    otpEdt5.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        otpEdt5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (!s.toString().trim().isEmpty())
+                {
+                    otpEdt6.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
 }

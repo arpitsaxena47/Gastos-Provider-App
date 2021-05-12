@@ -14,10 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="52dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="150dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="150dp"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
         android:gravity="top"
         android:text="Verify"
         android:textColor="#004445"
@@ -151,7 +149,7 @@
         android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/inputpin5"
+        android:id="@+id/inputcode5"
         android:layout_width="27dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pho_number"
@@ -203,7 +201,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/resend_otp"
+        android:id="@+id/idTVResendOTP"
         android:layout_width="61dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

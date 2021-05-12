@@ -22,6 +22,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number);
+
         phoneEdt = findViewById(R.id.idEdtMobile);
         mAuth = FirebaseAuth.getInstance();
         getOtpBtn = findViewById(R.id.idBtnGetOTP);
@@ -47,6 +48,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
         Toast.makeText(this, "OTP has been sent to your number..", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(PhoneNumberActivity.this, VerifyOTPActivity.class);
         i.putExtra("phone", phone);
+        i.putExtra("via", "false");
         startActivity(i);
 
     }
