@@ -59,6 +59,7 @@
         android:layout_toRightOf="@+id/t2"
         android:text="TextView"
         android:textColor="#004445"
+        android:textStyle="bold"
         android:textSize="18dp"
          />
 

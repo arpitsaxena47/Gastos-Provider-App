@@ -14,11 +14,11 @@
 
         <TextView
             android:id="@+id/idTVHead"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="17dp"
             android:padding="4dp"
             android:text="Settings"
             android:textColor="@color/black"
@@ -28,9 +28,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
             android:id="@+id/idCVAccount"
             app:cardCornerRadius="8dp"
             app:cardElevation="6dp">
@@ -41,50 +41,48 @@
 
                 <ImageView
                     android:id="@+id/idIVProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="8dp"
-                    android:padding="3dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="11dp"
                     android:src="@drawable/ic_profile_icon" />
 
                 <TextView
                     android:id="@+id/idTVAccount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="9dp"
                     android:layout_toLeftOf="@id/idIVaction"
                     android:layout_toRightOf="@id/idIVProfile"
-                    android:padding="4dp"
                     android:text="Account"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textColor="#595959"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/idTVAccount"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_toRightOf="@id/idIVProfile"
-                    android:padding="3dp"
                     android:text="Account Holder Name"
-                    android:textColor="@color/black" />
+                    android:textColor="#595959"
+                    android:textSize="15dp"/>
 
 
                 <ImageView
                     android:id="@+id/idIVaction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:layout_marginRight="20dp"
-                    android:padding="3dp"
                     android:src="@drawable/ic_circle_arrow" />
 
 
@@ -96,9 +94,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="15dp"
             app:cardCornerRadius="8dp"
             android:id="@+id/idCVShop"
             app:cardElevation="6dp">
@@ -109,51 +107,50 @@
 
                 <ImageView
                     android:id="@+id/idIVShopIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="8dp"
-                    android:padding="3dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/ic_cart" />
 
                 <TextView
                     android:id="@+id/idTVShopping"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toLeftOf="@id/idIVShopAction"
                     android:layout_toRightOf="@id/idIVShopIcon"
-                    android:padding="4dp"
-                    android:text="Shop Information"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:text="Shop Setting"
+                    android:textColor="#595959"
+                    android:textSize="20dp" />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/idTVShopping"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_toRightOf="@id/idIVShopIcon"
-                    android:padding="3dp"
                     android:text="Address Information"
-                    android:textColor="@color/black" />
+                    android:textColor="#595959"
+                    android:maxLines="5"
+                    android:textSize="15dp" />
 
 
                 <ImageView
                     android:id="@+id/idIVShopAction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:layout_marginRight="20dp"
-                    android:padding="3dp"
                     android:src="@drawable/ic_circle_arrow" />
 
 
@@ -164,10 +161,10 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="15dp"
             android:id="@+id/idCVPayment"
-            android:layout_marginEnd="10dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="6dp">
 
@@ -177,12 +174,11 @@
 
                 <ImageView
                     android:id="@+id/idIVPaymentIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginTop="8dp"
-                    android:padding="3dp"
                     android:src="@drawable/ic_card_icon" />
 
                 <TextView
@@ -194,10 +190,9 @@
                     android:layout_marginTop="8dp"
                     android:layout_toLeftOf="@id/idIVBankAction"
                     android:layout_toRightOf="@id/idIVPaymentIcon"
-                    android:padding="4dp"
-                    android:text="Payment Information"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:text="Payment Setting"
+                    android:textColor="#595959"
+                    android:textSize="20dp"/>
 
 
                 <TextView
@@ -207,21 +202,21 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginTop="13dp"
+                    android:maxLines="5"
                     android:layout_toRightOf="@id/idIVPaymentIcon"
-                    android:padding="3dp"
                     android:text="Bank Information"
-                    android:textColor="@color/black" />
+                    android:textColor="#595959" />
 
 
                 <ImageView
                     android:id="@+id/idIVBankAction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:layout_marginRight="20dp"
-                    android:padding="3dp"
                     android:src="@drawable/ic_circle_arrow" />
 
 
@@ -233,9 +228,9 @@
             android:id="@+id/idRLSupport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="47dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -243,12 +238,11 @@
 
                 <ImageView
                     android:id="@+id/idIVSupportIcons"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginLeft="21dp"
                     android:layout_marginTop="8dp"
-                    android:padding="3dp"
                     android:src="@drawable/ic_question_icon" />
 
                 <TextView
@@ -259,10 +253,9 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/idIVSupportIcons"
-                    android:padding="4dp"
                     android:text="Support"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textColor="#595959"
+                    android:textSize="20dp" />
 
 
                 <TextView
@@ -271,11 +264,12 @@
                     android:layout_below="@id/idTVSupport"
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="8dp"
                     android:layout_toRightOf="@id/idIVSupportIcons"
-                    android:padding="3dp"
                     android:text="Send Feedback and Rate Us"
-                    android:textColor="@color/black" />
+                    android:textColor="#595959"
+                    android:textSize="20dp" />
 
             </RelativeLayout>
         </RelativeLayout>
@@ -284,8 +278,8 @@
             android:id="@+id/idRLAboutUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="14dp"
             android:layout_marginEnd="10dp">
 
             <RelativeLayout
@@ -294,12 +288,11 @@
 
                 <ImageView
                     android:id="@+id/idIVAbout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="8dp"
-                    android:padding="3dp"
                     android:src="@drawable/ic_info_icon" />
 
                 <TextView
@@ -310,10 +303,9 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/idIVAbout"
-                    android:padding="4dp"
                     android:text="About Us"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textColor="#595959"
+                    android:textSize="20dp" />
 
 
                 <TextView
@@ -323,11 +315,10 @@
                     android:layout_below="@id/idTVAbout"
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="15dp"
                     android:layout_toRightOf="@id/idIVAbout"
-                    android:padding="3dp"
                     android:text="Contact Us"
-                    android:textColor="@color/black" />
+                    android:textColor="#595959" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -335,11 +326,10 @@
                     android:layout_below="@id/idTVContact"
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/idIVAbout"
-                    android:padding="3dp"
                     android:text="Legal"
-                    android:textColor="@color/black" />
+                    android:textColor="#595959" />
 
 
             </RelativeLayout>
@@ -349,8 +339,8 @@
             android:id="@+id/idRLLogOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="14dp"
             android:layout_marginEnd="10dp">
 
             <RelativeLayout
@@ -359,26 +349,24 @@
 
                 <ImageView
                     android:id="@+id/idIVLogout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="8dp"
-                    android:padding="3dp"
                     android:src="@drawable/ic_log_out" />
 
                 <TextView
                     android:id="@+id/idTVLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/idIVLogout"
-                    android:padding="4dp"
                     android:text="Log Out"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textColor="#595959"
+                    android:textSize="20dp" />
 
 
             </RelativeLayout>

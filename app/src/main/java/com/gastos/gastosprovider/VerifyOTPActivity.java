@@ -51,7 +51,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         phoneNumber = getIntent().getStringExtra("phone");
          r=getIntent().getStringExtra("via");
-         pho_number.setText(phoneNumber);
+         pho_number.setText(phoneNumber.substring(3));
         setupOTPINPUTS();
         sendVerificationCode(phoneNumber);
         verifyOtpBtn.setOnClickListener(new View.OnClickListener() {
