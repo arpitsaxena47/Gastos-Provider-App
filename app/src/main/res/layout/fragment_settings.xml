@@ -20,16 +20,15 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:padding="4dp"
-            android:text="Settings"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:text="@string/settings"
+            android:textAppearance="@style/settings" />
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:id="@+id/idCVAccount"
             app:cardCornerRadius="8dp"
@@ -59,9 +58,8 @@
                     android:layout_toLeftOf="@id/idIVaction"
                     android:layout_toRightOf="@id/idIVProfile"
                     android:padding="4dp"
-                    android:text="Account"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:text="@string/account"
+                    android:textAppearance="@style/account" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -70,10 +68,11 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/idIVProfile"
                     android:padding="3dp"
                     android:text="Account Holder Name"
-                    android:textColor="@color/black" />
+                    android:textAppearance="@style/maheep_sing" />
 
 
                 <ImageView
@@ -97,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             app:cardCornerRadius="8dp"
             android:id="@+id/idCVShop"
@@ -127,9 +126,8 @@
                     android:layout_toLeftOf="@id/idIVShopAction"
                     android:layout_toRightOf="@id/idIVShopIcon"
                     android:padding="4dp"
-                    android:text="Shop Information"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:text="@string/shop_settin"
+                    android:textAppearance="@style/account" />
 
 
                 <TextView
@@ -139,10 +137,11 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/idIVShopIcon"
                     android:padding="3dp"
                     android:text="Address Information"
-                    android:textColor="@color/black" />
+                    android:textAppearance="@style/maheep_sing" />
 
 
                 <ImageView
@@ -165,7 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/idCVPayment"
             android:layout_marginEnd="10dp"
             app:cardCornerRadius="8dp"
@@ -195,9 +194,8 @@
                     android:layout_toLeftOf="@id/idIVBankAction"
                     android:layout_toRightOf="@id/idIVPaymentIcon"
                     android:padding="4dp"
-                    android:text="Payment Information"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:text="@string/payment_set"
+                    android:textAppearance="@style/account" />
 
 
                 <TextView
@@ -207,10 +205,11 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/idIVPaymentIcon"
                     android:padding="3dp"
                     android:text="Bank Information"
-                    android:textColor="@color/black" />
+                    android:textAppearance="@style/maheep_sing" />
 
 
                 <ImageView
@@ -234,7 +233,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp">
 
             <RelativeLayout
@@ -260,9 +259,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/idIVSupportIcons"
                     android:padding="4dp"
-                    android:text="Support"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:text="@string/support"
+                    android:textAppearance="@style/account" />
 
 
                 <TextView
@@ -272,10 +270,11 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/idIVSupportIcons"
                     android:padding="3dp"
                     android:text="Send Feedback and Rate Us"
-                    android:textColor="@color/black" />
+                    android:textAppearance="@style/maheep_sing" />
 
             </RelativeLayout>
         </RelativeLayout>
@@ -285,7 +284,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp">
 
             <RelativeLayout
@@ -311,9 +310,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/idIVAbout"
                     android:padding="4dp"
-                    android:text="About Us"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:text="@string/about_us"
+                    android:textAppearance="@style/account"/>
 
 
                 <TextView
@@ -324,10 +322,11 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/idIVAbout"
                     android:padding="3dp"
                     android:text="Contact Us"
-                    android:textColor="@color/black" />
+                    android:textAppearance="@style/maheep_sing" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -336,10 +335,11 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/idIVAbout"
                     android:padding="3dp"
                     android:text="Legal"
-                    android:textColor="@color/black" />
+                    android:textAppearance="@style/maheep_sing" />
 
 
             </RelativeLayout>
@@ -350,7 +350,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp">
 
             <RelativeLayout
@@ -376,9 +376,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/idIVLogout"
                     android:padding="4dp"
-                    android:text="Log Out"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:text="@string/log_out"
+                    android:textAppearance="@style/account" />
 
 
             </RelativeLayout>

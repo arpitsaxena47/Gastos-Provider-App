@@ -10,4 +10,6 @@
     <color name="dots_selected_color">#344E41</color>
     <color name="dots_unselected_color">#588157</color>
     <color name="button_background">#344E41</color>
+    <color name="textcolor">#0E3746</color>
+    <color name="textcolor2">#004445</color>
 </resources>

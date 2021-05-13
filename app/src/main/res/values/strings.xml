@@ -1,5 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Gastos App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings">Settings</string>
+    <string name="account">Account</string>
+    <string name="shop_settin">Shop Setting</string>
+    <string name="payment_set">Payment Settting</string>
+    <string name="support">Support</string>
+    <string name="about_us">About Us</string>
+    <string name="log_out">Log out</string>
+    <string name="shop_name">Shop Name</string>
+    <string name="shop_addres">Shop Address</string>
+    <string name="shop_catego">Shop Category</string>
+    <string name="shop_locati">Shop Location pin</string>
+    <string name="shop_locate_city">Shop Location</string>
+    <string name="shop_inform">Shop Information</string>
+    <string name="account_inf">Account Information</string>
+    <string name="owner_name">Owner Name</string>
+    <string name="phone_numbe">Phone Number</string>
+    <string name="email_addre">email Address</string>
+
 </resources>
