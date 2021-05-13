@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
 
-    <View
+  <!--  <View
         android:layout_width="match_parent"
         android:background="@drawable/blur_background"
         android:layout_height="match_parent" />
@@ -93,6 +93,16 @@
         android:layout_marginBottom="-10dp"
         android:elevation="15dp"
         android:src="@drawable/ic_image_two" />
+-->
 
-
+    <Button
+        android:id="@+id/btnverified"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Mobile verification"
+        android:textColor="@color/white"
+        android:background="@null"
+        />
 </RelativeLayout>

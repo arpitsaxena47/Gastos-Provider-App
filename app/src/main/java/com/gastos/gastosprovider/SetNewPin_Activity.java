@@ -32,20 +32,24 @@ public class SetNewPin_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 epin1 = pin1.getText().toString() ;
                 epin2 = pin2.getText().toString() ;
-                if(epin1.length() == 4 && epin1==epin2 ) {
+                if(epin1.length() == 4  ) {
 
-                    setPin(epin1);
-                    Toast.makeText(SetNewPin_Activity.this, "set pin done=" + epin1, Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(SetNewPin_Activity.this, HomeActivity.class);
-                    startActivity(i);
+                    if(epin1==epin2)
+                    {
+                        setPin(epin1);
+                        Toast.makeText(SetNewPin_Activity.this, "set pin done=" + epin1, Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(SetNewPin_Activity.this, HomeActivity.class);
+                        startActivity(i);
+                    }
+                    else{
+                        Toast.makeText(SetNewPin_Activity.this, "Both pin should be same" , Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-                if(epin1.length() != 4){
+              else{
                     Toast.makeText(SetNewPin_Activity.this, "PIN Should Be Of 4 Digits", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
-                    Toast.makeText(SetNewPin_Activity.this, "Both pin should be same" , Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 

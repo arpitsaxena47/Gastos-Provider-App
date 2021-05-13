@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        imageRV = view.findViewById(R.id.idRVImages);
+      /*  imageRV = view.findViewById(R.id.idRVImages);
         searchEdt = view.findViewById(R.id.idEdtSearch);
         usersRV = view.findViewById(R.id.idRvUsers);
         userModalArrayList = new ArrayList<>();
@@ -77,10 +77,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
+       */
+
         return view;
     }
 
-    private void filterData(String query) {
+   /* private void filterData(String query) {
     ArrayList<UserModal> filteredList = new ArrayList<>();
     for(UserModal modal : userModalArrayList){
         if(modal.getUserName().toLowerCase().contains(query.toLowerCase())){
@@ -93,4 +95,6 @@ public class HomeFragment extends Fragment {
         userRVAdapter.filter(filteredList);
     }
     }
+
+    */
 }

@@ -8,22 +8,48 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class PhoneNumberActivity extends AppCompatActivity {
 
-    private EditText phoneEdt;
-    private Button getOtpBtn;
-    private FirebaseAuth mAuth;
-
+   // private EditText phoneEdt;
+    //private ImageView getOtpBtn;
+   // private FirebaseAuth mAuth;
+   private ImageView otp_button;
+    private EditText phone_num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number);
 
-        phoneEdt = findViewById(R.id.idEdtMobile);
+        otp_button=findViewById(R.id.idBtnGetOTP);
+        phone_num=findViewById(R.id.idEdtMobile);
+        otp_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String num=phone_num.getText().toString().trim();
+                if(!num.isEmpty()) {
+                    if (num.length() == 10) {
+                        Intent intent = new Intent(PhoneNumberActivity.this, VerifyOTPActivity.class);
+                        intent.putExtra("phone_number", num);
+                        startActivity(intent);
+
+
+                    } else {
+                        Toast.makeText(PhoneNumberActivity.this, "Please enter correct phone number", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(PhoneNumberActivity.this, "Enter phone number", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+      /*  phoneEdt = findViewById(R.id.idEdtMobile);
         mAuth = FirebaseAuth.getInstance();
         getOtpBtn = findViewById(R.id.idBtnGetOTP);
         String phoneNumber = phoneEdt.getText().toString();
@@ -38,12 +64,14 @@ public class PhoneNumberActivity extends AppCompatActivity {
                     Toast.makeText(PhoneNumberActivity.this, "Please enter a valid 10 digit phone number..", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                sendOTP(phoneEdt.getText().toString());
+                sendOTP(phoneEdt.getText().toString().trim());
             }
         });
+
+       */
     }
 
-    private void sendOTP(String phoneNumber) {
+  /*  private void sendOTP(String phoneNumber) {
         String phone = "+" + "91" + phoneNumber;
         Toast.makeText(this, "OTP has been sent to your number..", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(PhoneNumberActivity.this, VerifyOTPActivity.class);
@@ -52,4 +80,6 @@ public class PhoneNumberActivity extends AppCompatActivity {
         startActivity(i);
 
     }
+
+   */
 }
