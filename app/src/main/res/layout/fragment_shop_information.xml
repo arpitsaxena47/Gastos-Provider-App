@@ -1,164 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShopInformation">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/shop_info_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/long_left_black" />
 
+    <ImageView
+        android:id="@+id/saveShopInfoChanges"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_baseline_done_24" />
+    <TextView
+        android:id="@+id/idTVHeadShopInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:padding="4dp"
+        android:text="@string/shop_inform"
+        android:textAppearance="@style/settings" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_below="@+id/idTVHeadShopInfo"
+        tools:context=".ShopInformation">
 
-        <TextView
-            android:id="@+id/idTVHead"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:padding="4dp"
-            android:text="Shop Information"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:scaleType="center"
-            android:layout_marginTop="30dp"
-            android:id="@+id/idIVShop"
-            android:src="@drawable/acc_image_icon" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:padding="3dp"
-            android:text="Cover Photo\nPicture"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="4dp"
-            android:padding="3dp"
-            android:textSize="18sp"
-            android:text="Shop Name"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/idEdtShopName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textSize="15sp"
-            android:layout_marginLeft="12dp"
-            android:hint="Shop Name" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"
-            android:padding="3dp"
-            android:textSize="18sp"
-            android:text="Shop Address"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/idEdtShopAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textSize="15sp"
-            android:layout_marginLeft="12dp"
-            android:hint="Shop Address" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"
-            android:padding="3dp"
-            android:textSize="18sp"
-            android:text="Shop Map Pin"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/idEdtPin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textSize="15sp"
-            android:layout_marginLeft="12dp"
-            android:hint="Shop Pin" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"
-            android:padding="3dp"
-            android:textSize="18sp"
-            android:text="City"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/idEdtShopCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textSize="15sp"
-            android:layout_marginLeft="12dp"
-            android:hint="City" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"
-            android:padding="3dp"
-            android:textSize="18sp"
-            android:text="Shop Category"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/idEdtShopCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textSize="15sp"
-            android:layout_marginLeft="12dp"
-            android:hint="Category" />
-
-        <Button
-            android:id="@+id/idBtnShopData"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/button_back"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            android:text="Add Shop Data"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            tools:targetApi="lollipop" />
-
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginBottom="50dp">
 
 
+            <RelativeLayout
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center_horizontal">
 
-</ScrollView>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="center"
+                    android:id="@+id/idIVShop"
+                    android:src="@drawable/acc_image_icon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="Cover Photo\nPicture"
+                    android:textAppearance="@style/shop_name" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="140dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:scaleType="center"
+                        android:id="@+id/other1"
+                        android:src="@drawable/acc_image_icon" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Add other \nphoto 1"
+                        android:textAppearance="@style/other" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:scaleType="center"
+                        android:id="@+id/other2"
+                        android:src="@drawable/acc_image_icon" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Add other \nphoto 2"
+                        android:textAppearance="@style/other" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:scaleType="center"
+                        android:id="@+id/other3"
+                        android:src="@drawable/acc_image_icon" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Add other \nphoto 3"
+                        android:textAppearance="@style/other" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:padding="3dp"
+                android:textSize="18sp"
+                android:text="@string/shop_name"
+                android:textAppearance="@style/shop_name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="12dp">
+
+                <EditText
+                    android:id="@+id/idEdtShopName"
+                    android:layout_width="268dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/cafe_bistro"
+                    android:hint="cafe_Bistro"
+                    android:inputType="textMultiLine"/>
+                <ImageButton
+                    android:id="@+id/editShopName"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:padding="3dp"
+                android:textSize="18sp"
+                android:text="@string/shop_addres"
+                android:textAppearance="@style/shop_name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="12dp">
+                <EditText
+                    android:id="@+id/idEdtShopAddress"
+                    android:layout_width="268dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/cafe_bistro"
+                    android:inputType="textMultiLine"
+                    android:hint="# 3, Whitefields 134 - 4 , Ashok Nagar, Pune,
+             Maharashtra 411007" />
+                <ImageButton
+                    android:id="@+id/editShopAddress"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:textAppearance="@style/shop_name"
+                    android:text="@string/shop_catego" />
+
+                <LinearLayout
+                    android:layout_width="138dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/rectangle_236">
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/dropDownCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:drawSelectorOnTop="true"
+                        android:dropDownSelector="@drawable/circle_chevron_right"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:textAppearance="@style/shop_name"
+                    android:text="@string/shop_locati" />
+
+                <Button
+                    android:id="@+id/btnShopLocation"
+                    android:layout_width="61dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="80dp"
+                    android:background="@drawable/rectangle_2"
+                    android:text="add"
+                    android:textAppearance="@style/add" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:textAppearance="@style/shop_name"
+                    android:text="@string/shop_locate_city" />
+
+                <LinearLayout
+                    android:layout_width="138dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/rectangle_236">
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/dropdownCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:drawSelectorOnTop="true"
+                        android:dropDownSelector="@drawable/circle_chevron_right"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+</RelativeLayout>

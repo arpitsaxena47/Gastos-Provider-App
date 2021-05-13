@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,12 +47,13 @@ import static android.app.Activity.RESULT_OK;
 
 public class ShopInformation extends Fragment {
 
-    private EditText shopNameEdt, shopAddressEdt, shopMapEdt, shopCityEdt, shopCategoryEdt;
-    private Button updateShopBtn;
+    private EditText shopNameEdt, shopAddressEdt;
+    private ImageView backShopInfo , saveShopInfoButton , other1, other2 , other3;
+    private Spinner categoryDropDown , cityDropDown;
+    private Button btnAddPinLocation;
     private Context context;
     private FirebaseAuth mAuth;
     private ImageView shopIV;
-    private Uri filePath;
     FirebaseStorage storage;
     StorageReference storageRef;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -72,10 +74,19 @@ public class ShopInformation extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         shopNameEdt = view.findViewById(R.id.idEdtShopName);
         shopAddressEdt = view.findViewById(R.id.idEdtShopAddress);
-        shopMapEdt = view.findViewById(R.id.idEdtPin);
-        shopCityEdt = view.findViewById(R.id.idEdtShopCity);
-        shopCategoryEdt = view.findViewById(R.id.idEdtShopCategory);
-        updateShopBtn = view.findViewById(R.id.idBtnShopData);
+
+        backShopInfo = view.findViewById(R.id.shop_info_back);
+
+        other1 = view.findViewById(R.id.other1);
+        other2 = view.findViewById(R.id.other2);
+        other3 = view.findViewById(R.id.other3);
+
+        categoryDropDown = view.findViewById(R.id.dropDownCategory);
+        cityDropDown = view.findViewById(R.id.dropdownCity);
+
+        btnAddPinLocation = view.findViewById(R.id.btnShopLocation);
+
+        saveShopInfoButton = view.findViewById(R.id.saveShopInfoChanges);
         shopIV = view.findViewById(R.id.idIVShop);
         getShopData();
         shopIV.setOnClickListener(new View.OnClickListener() {
