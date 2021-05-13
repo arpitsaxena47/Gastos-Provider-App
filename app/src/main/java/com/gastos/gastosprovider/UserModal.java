@@ -5,6 +5,26 @@ public class UserModal {
     private String userAmount;
     private String date;
     private String imgUrl;
+    private String payMode;
+
+    public UserModal() {
+    }
+
+    public UserModal(String userName, String userAmount, String date, String imgUrl, String payMode) {
+        this.userName = userName;
+        this.userAmount = userAmount;
+        this.date = date;
+        this.imgUrl = imgUrl;
+        this.payMode = payMode;
+    }
+
+    public String getPayMode() {
+        return payMode;
+    }
+
+    public void setPayMode(String payMode) {
+        this.payMode = payMode;
+    }
 
     public String getUserName() {
         return userName;
@@ -38,10 +58,5 @@ public class UserModal {
         this.imgUrl = imgUrl;
     }
 
-    public UserModal(String userName, String userAmount, String date, String imgUrl) {
-        this.userName = userName;
-        this.userAmount = userAmount;
-        this.date = date;
-        this.imgUrl = imgUrl;
-    }
+
 }

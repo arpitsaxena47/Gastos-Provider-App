@@ -42,6 +42,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
     implementation 'com.google.firebase:firebase-storage:19.2.1'
     implementation ('eu.livotov.labs.android:CAMView:2.0.1@aar') {transitive=true}
+    implementation 'com.google.firebase:firebase-database:19.7.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
