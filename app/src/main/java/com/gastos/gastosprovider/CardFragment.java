@@ -19,7 +19,7 @@ public class CardFragment extends Fragment {
 
     private RecyclerView userRV;
     private ArrayList<UserModal> userModalArrayList;
-    private EditText serchEdt;
+   // private EditText serchEdt;
     private UserRVAdapter userRVAdapter;
 
     public CardFragment() {
@@ -43,8 +43,8 @@ public class CardFragment extends Fragment {
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         userRV.setLayoutManager(manager);
         userRV.setAdapter(userRVAdapter);
-        serchEdt = view.findViewById(R.id.idEdtSearch);
-        serchEdt.addTextChangedListener(new TextWatcher() {
+      //  serchEdt = view.findViewById(R.id.idEdtSearch);
+      /*  serchEdt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -60,6 +60,8 @@ public class CardFragment extends Fragment {
                 filterData(s.toString());
             }
         });
+
+       */
 
         return view;
     }

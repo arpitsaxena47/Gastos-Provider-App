@@ -38,11 +38,11 @@ public class HomeActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
                     switch (item.getItemId()) {
-                        case R.id.card_item:
-                            selectedFragment = new CardFragment();
-                            break;
                         case R.id.home_item:
                             selectedFragment = new HomeFragment();
+                            break;
+                        case R.id.card_item:
+                            selectedFragment = new CardFragment();
                             break;
                         case R.id.settings_item:
                             selectedFragment = new SettingsFragment();
