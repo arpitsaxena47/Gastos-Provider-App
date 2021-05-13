@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GastosApp">
-        <activity android:name=".ShopProfileActivity"></activity>
         <activity android:name=".phoneNumber2_Activity" />
         <activity android:name=".SetNewPin_Activity" />
         <activity android:name=".Enterpin_Activity" />

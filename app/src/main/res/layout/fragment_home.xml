@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
-
+    tools:context=".ShopProfileActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -28,6 +27,13 @@
                 android:background="@drawable/rectangle_1"
                 />
 
+            <ImageView
+                android:id="@+id/arrow_white"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/long_left_white" />
 
             <TextView
                 android:id="@+id/caf_bistro"
@@ -35,8 +41,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="17dp"
+                android:layout_below="@+id/arrow_white"
                 android:textColor="@color/white"
-                android:layout_marginTop="43dp"
+                android:layout_marginTop="4dp"
                 android:text="Cafe Bistro"
                 android:letterSpacing="-0.01"
                 android:textSize="25dp"
@@ -285,6 +292,7 @@
 
 
     </androidx.cardview.widget.CardView>
+
 
 
 </RelativeLayout>
