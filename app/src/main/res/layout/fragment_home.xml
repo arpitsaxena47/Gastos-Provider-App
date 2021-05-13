@@ -25,7 +25,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="-24dp"
-                android:background="@drawable/rectangle_1"
+                android:background="@color/black"
                 />
 
 
@@ -37,7 +37,7 @@
                 android:layout_marginLeft="17dp"
                 android:textColor="@color/white"
                 android:layout_marginTop="43dp"
-                android:text="Cafe Bistro"
+                android:text="Shop Name"
                 android:letterSpacing="-0.01"
                 android:textSize="25dp"
                 />
@@ -123,159 +123,152 @@
                 app:cardCornerRadius="20dp"
                 app:cardBackgroundColor="#FBF4E4"
                 >
-                <RelativeLayout
+
+                <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:id="@+id/l1"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_centerHorizontal="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="33dp">
-                        <TextView
-                            android:id="@+id/payment_ben"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="21dp"
-                            android:text="Owner Name:"
-                            android:textSize="15dp"
-                            android:textColor="@color/textcolor2"
-                            />
-                        <TextView
-                            android:id="@+id/payment_ben_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="21dp"
-                            android:layout_marginTop="10dp"
-                            android:text="Xxxxx"
-                            android:textSize="12dp"
-                            android:textColor="@color/textcolor2"
-                            />
-                        <View
-                            android:layout_width="350dp"
-                            android:layout_height="2dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="21dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/line1"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/l2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_centerHorizontal="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="124dp">
-                        <TextView
-                            android:id="@+id/shop"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="21dp"
-                            android:layout_marginTop="20dp"
-                            android:text="Shop Address"
-                            android:textSize="15dp"
-                            android:textColor="@color/textcolor2"
-                            />
+                        android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:id="@+id/l1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
+                            android:orientation="vertical"
+                            android:layout_centerHorizontal="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="33dp">
                             <TextView
-                                android:id="@+id/Address"
-                                android:layout_width="272dp"
+                                android:id="@+id/payment_ben"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="21dp"
+                                android:text="Owner Name:"
+                                android:textSize="15dp"
+                                android:textColor="@color/textcolor2"
+                                />
+                            <TextView
+                                android:id="@+id/payment_ben_value"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="21dp"
                                 android:layout_marginTop="10dp"
-                                android:maxLines="5"
-                                android:text="Whitefields 134 - 4 , Ashok Nagar, \nPune, Maharashtra 411007 "
+                                android:text="Xxxxx"
                                 android:textSize="12dp"
                                 android:textColor="@color/textcolor2"
                                 />
-
-                            <ImageView
-                                android:id="@+id/btnNearMe"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                            <View
+                                android:layout_width="350dp"
+                                android:layout_height="2dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="21dp"
+                                android:layout_alignParentTop="true"
                                 android:layout_marginTop="10dp"
-                                android:layout_marginLeft="14dp"
-                                android:src="@drawable/near_me_24px" />
+                                android:background="@drawable/line1"
+                                />
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="350dp"
-                            android:layout_height="2dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="21dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/line1"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/l3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_centerHorizontal="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="250dp">
-                        <TextView
-                            android:id="@+id/cat"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/l2"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="21dp"
-                            android:text="Category"
-                            android:textSize="15dp"
-                            android:textColor="@color/textcolor2"
-                            />
-                        <TextView
-                            android:id="@+id/cafe"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="21dp"
-                            android:layout_marginTop="10dp"
-                            android:text="Cafe"
-                            android:textSize="12dp"
-                            android:textColor="@color/textcolor2"
-                            />
-                        <View
-                            android:layout_width="350dp"
-                            android:layout_height="2dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="21dp"
+                            android:orientation="vertical"
+                            android:layout_centerHorizontal="true"
                             android:layout_alignParentTop="true"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/line1"
-                            />
-                    </LinearLayout>
+                            android:layout_marginTop="124dp">
+                            <TextView
+                                android:id="@+id/shop"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="21dp"
+                                android:layout_marginTop="20dp"
+                                android:text="Shop Address"
+                                android:textSize="15dp"
+                                android:textColor="@color/textcolor2"
+                                />
 
-                    <Button
-                        android:id="@+id/Activate"
-                        android:layout_width="match_parent"
-                        android:layout_height="47dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="7dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginRight="7dp"
-                        android:background="@drawable/roundedbutton"
-                        android:text="Pay"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textAllCaps="false"
-                        app:backgroundTint="#F7B401" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
-                </RelativeLayout>
+                                <TextView
+                                    android:id="@+id/Address"
+                                    android:layout_width="272dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="21dp"
+                                    android:layout_marginTop="10dp"
+                                    android:maxLines="5"
+                                    android:text="Xxxx "
+                                    android:textSize="12dp"
+                                    android:textColor="@color/textcolor2"
+                                    />
+
+                                <ImageView
+                                    android:id="@+id/btnNearMe"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginLeft="14dp"
+                                    android:src="@drawable/near_me_24px" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="350dp"
+                                android:layout_height="2dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="21dp"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/line1"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_centerHorizontal="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="250dp">
+                            <TextView
+                                android:id="@+id/cat"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="21dp"
+                                android:text="Category"
+                                android:textSize="15dp"
+                                android:textColor="@color/textcolor2"
+                                />
+                            <TextView
+                                android:id="@+id/cafe"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="21dp"
+                                android:layout_marginTop="10dp"
+                                android:text="Xxxx"
+                                android:textSize="12dp"
+                                android:textColor="@color/textcolor2"
+                                />
+                            <View
+                                android:layout_width="350dp"
+                                android:layout_height="2dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="21dp"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/line1"
+                                />
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </ScrollView>
 
 
             </androidx.cardview.widget.CardView>

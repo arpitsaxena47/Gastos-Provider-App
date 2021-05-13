@@ -206,7 +206,8 @@
                     android:maxLines="5"
                     android:layout_toRightOf="@id/idIVPaymentIcon"
                     android:text="Bank Information"
-                    android:textColor="#595959" />
+                    android:textColor="#595959"
+                    android:textSize="15dp"/>
 
 
                 <ImageView
@@ -240,8 +241,8 @@
                     android:id="@+id/idIVSupportIcons"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginLeft="21dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="8dp"
                     android:src="@drawable/ic_question_icon" />
 
@@ -269,7 +270,7 @@
                     android:layout_toRightOf="@id/idIVSupportIcons"
                     android:text="Send Feedback and Rate Us"
                     android:textColor="#595959"
-                    android:textSize="20dp" />
+                    android:textSize="15dp" />
 
             </RelativeLayout>
         </RelativeLayout>
@@ -318,7 +319,8 @@
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@id/idIVAbout"
                     android:text="Contact Us"
-                    android:textColor="#595959" />
+                    android:textColor="#595959"
+                    android:textSize="15dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -329,7 +331,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/idIVAbout"
                     android:text="Legal"
-                    android:textColor="#595959" />
+                    android:textColor="#595959"
+                    android:textSize="15dp"/>
 
 
             </RelativeLayout>
@@ -363,6 +366,7 @@
                     android:layout_marginStart="13dp"
                     android:layout_marginLeft="13dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_toRightOf="@id/idIVLogout"
                     android:text="Log Out"
                     android:textColor="#595959"

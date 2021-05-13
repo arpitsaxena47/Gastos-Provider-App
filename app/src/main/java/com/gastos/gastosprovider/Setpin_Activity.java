@@ -27,21 +27,21 @@ public class Setpin_Activity extends AppCompatActivity {
 
         pin1 = findViewById(R.id.pin1);
         pin2 = findViewById(R.id.pin2);
-        btnDone = findViewById(R.id.go);
+        btnDone = findViewById(R.id.setpinOk);
        resetPin=findViewById(R.id.resetPin);
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                epin1 = pin1.getText().toString() ;
-                epin2 = pin2.getText().toString() ;
-                if(epin1.length() == 4 && epin1==epin2 ) {
+                epin1 = pin1.getText().toString().trim() ;
+                epin2 = pin2.getText().toString().trim() ;
+                if(epin1.length() == 4 && epin1.equals(epin2)==true ) {
 
                     setPin(epin1);
                     Toast.makeText(Setpin_Activity.this, "set pin done=" + epin1, Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Setpin_Activity.this, HomeActivity.class);
                     startActivity(i);
                 }
-                if(epin1.length() != 4){
+                else if(epin1.length() != 4){
                     Toast.makeText(Setpin_Activity.this, "PIN Should Be Of 4 Digits", Toast.LENGTH_SHORT).show();
                 }
                 else

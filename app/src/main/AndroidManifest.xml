@@ -23,8 +23,8 @@
         android:theme="@style/Theme.GastosApp">
         <activity android:name=".phoneNumber2_Activity"></activity>
         <activity android:name=".SetNewPin_Activity" />
-        <activity android:name=".Enterpin_Activity" />
         <activity android:name=".Setpin_Activity" />
+        <activity android:name=".Enterpin_Activity" />
         <activity android:name=".QRScannerActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".VerifyOTPActivity" />
