@@ -18,7 +18,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
    // private EditText phoneEdt;
     //private ImageView getOtpBtn;
    // private FirebaseAuth mAuth;
-   private ImageView otp_button;
+    private ImageView otp_button;
     private EditText phone_num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
                     if (num.length() == 10) {
                         Intent intent = new Intent(PhoneNumberActivity.this, VerifyOTPActivity.class);
                         intent.putExtra("phone_number", num);
+                        intent.putExtra("via", 1);
                         startActivity(intent);
 
 

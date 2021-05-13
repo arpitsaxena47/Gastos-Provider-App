@@ -46,6 +46,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     private TextView resendOTPTV;
     private String verificationId;
     private PhoneAuthProvider.ForceResendingToken resendOTPtoken;
+    private int r;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +69,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         inputotp6=findViewById(R.id.inputcode6);
         resendOTPTV=findViewById(R.id.idTVResendOTP);
 
-
+        r=getIntent().getIntExtra("via",2);
         setupOTPINPUTS();
         sendVerificationCode(phonenumber_value);
         btnVerify.setOnClickListener(new View.OnClickListener() {
@@ -253,8 +254,16 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
-                            startActivity(i);
+                            if(r==1)
+                            {
+                                Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
+                                startActivity(i);
+                            }
+                            else
+                            {
+                                Intent i = new Intent(VerifyOTPActivity.this, SetNewPin_Activity.class);
+                                startActivity(i);
+                            }
                             //Toast.makeText(VerifyOTPActivity.this, "User verified..", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(VerifyOTPActivity.this, "Fail to verify the user..", Toast.LENGTH_SHORT).show();

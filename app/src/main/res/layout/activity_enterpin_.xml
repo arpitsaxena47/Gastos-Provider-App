@@ -120,7 +120,7 @@
         <ImageView
             android:id="@+id/resend"
             android:layout_width="83dp"
-            android:layout_height="25dp"
+            android:layout_height="28dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/rectangle_233"
             android:elevation="10dp"
@@ -139,7 +139,7 @@
         android:layout_below="@+id/go"
         android:layout_marginTop="48dp"
         android:text="Forgot Pin?"
-        android:textSize="7dp"
+        android:textSize="11dp"
         android:textColor="#818181"
         />
 
