@@ -30,19 +30,18 @@ import java.util.Collections;
 
 public class CardFragment extends Fragment {
 
-//    private RecyclerView userRV;
-//    private ArrayList<UserModal> userModalArrayList;
-//   // private EditText serchEdt;
-//    private UserRVAdapter userRVAdapter;
-
-    FirebaseAuth auth;
+    RecyclerView userRV;
+    ArrayList<UserModal> userModalArrayList;
+     UserRVAdapter userRVAdapter;
     FirebaseDatabase database;
-   ArrayList listView;
-              Context context;
-    //Typeface typeface;
-    ArrayList<UserModal> arrayList = new ArrayList<>();
-    boolean isDetailincomplete=false;
-    ArrayList<UserModal> subarraylist = new ArrayList<>();
+//    FirebaseAuth auth;
+    // FirebaseDatabase database;
+//   ArrayList listView;
+   Context context;
+//    //Typeface typeface;
+//    ArrayList<UserModal> arrayList = new ArrayList<>();
+//    boolean isDetailincomplete=false;
+//    ArrayList<UserModal> subarraylist = new ArrayList<>();
 
     public CardFragment() {
         // Required empty public constructor
@@ -54,49 +53,38 @@ public class CardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_card, container, false);
 
-        listView = view.findViewById(R.id.list_view_payment);
-        auth = FirebaseAuth.getInstance();
-        database=  FirebaseDatabase.getInstance();
+        userRV =view.findViewById(R.id.list_view_payment);
+      //  userRV.setHasFixedSize(true);
+        userModalArrayList=new ArrayList<>();
+        userRVAdapter = new UserRVAdapter(userModalArrayList, container.getContext());
+       // userRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+       // userRV.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
 
-        DatabaseReference ref = database.getReference("Transaction_History_Merchant/"+auth.getUid());
+       // userRVAdapter=new UserRVAdapter(userModalArrayList,context);
+
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        userRV.setLayoutManager(manager);
+        userRV.setAdapter(userRVAdapter);
+
+       // userRV.setAdapter(userRVAdapter);
+
+        database=  FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("Transaction_History_merchant");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
-                arrayList.clear();
-
                 for (DataSnapshot data :dataSnapshot.getChildren()) {
-
-                    UserModal history = data.getValue(UserModal.class);
-
-
-//                    assert history != null;
-//                    if(history.getStatus().equals("Success")){
-//                        arrayList.add(data.getValue(Transaction_History.class));
-//                    }
-                           arrayList.add(data.getValue(UserModal.class));
-
-
-//                } HomeAdapter adapter = new HomeAdapter(Home.this, arrayList);
-//                listView.setAdapter(adapter);
+                    UserModal userModal=data.getValue(UserModal.class);
+                    userModalArrayList.add(userModal);
                 }
-//                subarraylist.clear();
-//                if(arrayList.size() > 10)
-//                    subarraylist = new ArrayList<Transaction_History>(arrayList.subList(0,10));
-
-               // else
-                    subarraylist = arrayList;
-
-               // Collections.sort(subarraylist);
-                UserRVAdapter adapter = new UserRVAdapter( subarraylist,context);
-                listView.setAdapter(adapter);
+                userRVAdapter.notifyDataSetChanged();
+                Toast.makeText(context, "Retrive Data", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onCancelled ( @NonNull DatabaseError databaseError ) {
-
+                Toast.makeText(context, "Not able to Retrive", Toast.LENGTH_SHORT).show();
             }
         });
-
         return view;
 //        userRV = view.findViewById(R.id.idRVUsers);
 //        userModalArrayList = new ArrayList<>();
