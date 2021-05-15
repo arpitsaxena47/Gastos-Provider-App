@@ -5,8 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
    android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:layout_marginBottom="15dp"
-    app:cardElevation="0dp">
+    android:layout_marginTop="15dp"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,6 +22,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="14dp"
             android:layout_marginBottom="11dp"
+            android:background="@drawable/prof_pic"
             />
 
         <TextView
@@ -61,9 +63,9 @@
             android:id="@+id/idTVDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:padding="4dp"
             android:text="28 Dec 2020"
@@ -75,8 +77,10 @@
             android:layout_height="35dp"
             android:layout_below="@+id/idTVDate"
             android:layout_alignParentRight="true"
-           android:layout_margin="10dp"
-            android:background="@drawable/gpay"
+           android:layout_marginTop="5dp"
+            android:layout_marginRight="23dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/money_mode"
            />
 
     </RelativeLayout>

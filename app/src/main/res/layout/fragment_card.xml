@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CardFragment">
+    tools:context=".Card.CardFragment"
+    android:background="@color/white"
+    >
 
 
 
@@ -37,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/idtvsubhead"
-        android:layout_marginTop="15dp">
+       >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_view_payment"
