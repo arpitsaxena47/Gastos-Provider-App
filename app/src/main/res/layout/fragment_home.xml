@@ -59,10 +59,15 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="70dp"
                 android:layout_below="@+id/caf_bistro"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="58dp"
                 android:max="5"
                 android:numStars="5"
-                android:rating="4" />
+                android:rating="4"
+                android:stepSize="0.5"
+                android:isIndicator="false"
+                android:progressTint="#EAE8DC"
+                style="?android:attr/ratingBarStyleSmall"
+                />
 
         </RelativeLayout>
 
