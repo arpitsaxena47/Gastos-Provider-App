@@ -21,9 +21,9 @@ public class HomeFragment extends Fragment {
     private RecyclerView imageRV;
     private ArrayList<String> imageURls;
     private RecyclerView usersRV;
-    private ArrayList<UserModal> userModalArrayList;
+  //  private ArrayList<UserModal> userModalArrayList;
     private EditText searchEdt;
-    private UserRVAdapter userRVAdapter;
+ //   private UserRVAdapter userRVAdapter;
 
     public HomeFragment() {
         // Required empty public constructor

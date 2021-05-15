@@ -16,27 +16,46 @@
             android:id="@+id/idCIVImage"
             android:layout_width="51dp"
             android:layout_height="51dp"
-            android:layout_margin="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginBottom="11dp"
+            />
 
         <TextView
             android:id="@+id/idTVUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/idCIVImage"
-            android:padding="4dp"
+            android:layout_marginTop="11dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="78dp"
+            android:textSize="20dp"
             android:text="User Name"
-            android:textColor="@color/black" />
+            android:textColor="#0E3746" />
+
+        <ImageView
+            android:id="@+id/vector"
+            android:layout_width="9.5dp"
+            android:layout_height="14dp"
+            android:layout_below="@id/idTVUserName"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="78dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rupee_sign"
+            />
 
         <TextView
             android:id="@+id/idTVAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/idTVUserName"
-            android:layout_toRightOf="@id/idCIVImage"
-            android:padding="4dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="4.5dp"
+            android:layout_toRightOf="@+id/vector"
+            android:textColor="#595959"
             android:text="Rs 21233"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/idTVDate"
