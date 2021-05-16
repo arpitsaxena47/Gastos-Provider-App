@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="200dp"
+      android:layout_centerHorizontal="true"
+      android:src="@drawable/ic_image_one" />
 
   <!--  <View
         android:layout_width="match_parent"
@@ -97,11 +101,11 @@
 
     <Button
         android:id="@+id/btnverified"
-        android:layout_width="match_parent"
+        android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Mobile verification"
+        android:text="Next"
         android:textColor="@color/white"
         android:background="@null"
         />
