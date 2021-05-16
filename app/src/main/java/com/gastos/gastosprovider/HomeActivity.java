@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.gastos.gastosprovider.Card.CardFragment;
 import com.gastos.gastosprovider.Home.HomeFragment;
+import com.gastos.gastosprovider.Setting.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {

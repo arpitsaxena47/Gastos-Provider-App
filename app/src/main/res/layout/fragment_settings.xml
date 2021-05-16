@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SettingsFragment">
+    tools:context=".Setting.SettingsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +55,6 @@
                     android:layout_marginStart="11dp"
                     android:layout_marginLeft="11dp"
                     android:layout_marginTop="9dp"
-                    android:layout_toLeftOf="@id/idIVaction"
                     android:layout_toRightOf="@id/idIVProfile"
                     android:text="Account"
                     android:textColor="#595959"
@@ -76,7 +75,7 @@
 
 
                 <ImageView
-                    android:id="@+id/idIVaction"
+                    android:id="@+id/idbtn1"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
@@ -121,7 +120,6 @@
                     android:layout_marginStart="11dp"
                     android:layout_marginLeft="11dp"
                     android:layout_marginTop="10dp"
-                    android:layout_toLeftOf="@id/idIVShopAction"
                     android:layout_toRightOf="@id/idIVShopIcon"
                     android:text="Shop Setting"
                     android:textColor="#595959"
@@ -144,7 +142,7 @@
 
 
                 <ImageView
-                    android:id="@+id/idIVShopAction"
+                    android:id="@+id/idbtn2"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
@@ -188,7 +186,6 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="8dp"
-                    android:layout_toLeftOf="@id/idIVBankAction"
                     android:layout_toRightOf="@id/idIVPaymentIcon"
                     android:text="Payment Setting"
                     android:textColor="#595959"
@@ -211,7 +208,7 @@
 
 
                 <ImageView
-                    android:id="@+id/idIVBankAction"
+                    android:id="@+id/idbtn3"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
@@ -260,6 +257,7 @@
 
 
                 <TextView
+                    android:id="@+id/rateus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/idTVSupport"
@@ -310,7 +308,7 @@
 
 
                 <TextView
-                    android:id="@+id/idTVContact"
+                    android:id="@+id/Contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/idTVAbout"
@@ -323,9 +321,10 @@
                     android:textSize="15dp"/>
 
                 <TextView
+                    android:id="@+id/legal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/idTVContact"
+                    android:layout_below="@id/Contact"
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="10dp"
@@ -360,7 +359,7 @@
                     android:src="@drawable/ic_log_out1" />
 
                 <TextView
-                    android:id="@+id/idTVLogout"
+                    android:id="@+id/logout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="13dp"
