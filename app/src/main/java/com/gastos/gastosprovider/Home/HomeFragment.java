@@ -90,62 +90,62 @@ public class HomeFragment extends Fragment {
        */
         //New code
 
-        auth = FirebaseAuth.getInstance();
+//        auth = FirebaseAuth.getInstance();
+//
+//        recycler = view.findViewById(R.id.local_r2);
+//        recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//        FirebaseRecyclerOptions<ShopPic> options =
+//                new FirebaseRecyclerOptions.Builder<ShopPic>()
+//                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Merchant_data/"+auth.getUid()), ShopPic.class)
+//                        .build();
+//
+//        adap = new ShopPicAdapter(options);
+//        recycler.setAdapter(adap);
+//        recycler.setHasFixedSize(true);
+//        //end of code
+//
+//        // For other Data
+//        database=  FirebaseDatabase.getInstance();
+//        DatabaseReference ref = database.getReference("Merchant_data/"+auth.getUid());
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
+//                shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
+//
+//                ((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
+//               ImageView ProfileImage=view.findViewById(R.id.rectangle_1);
+////                String link = dataSnapshot.getValue(String.class);
+//
+//                // loading that data into rImage
+//                // variable which is ImageView
+////                Picasso.get().load(link).into(ProfileImage);
+//                ((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
+//                ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
+//                ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
+//
+//
+//            }
 
-        recycler = view.findViewById(R.id.local_r2);
-        recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        FirebaseRecyclerOptions<ShopPic> options =
-                new FirebaseRecyclerOptions.Builder<ShopPic>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Merchant_data/"+auth.getUid()), ShopPic.class)
-                        .build();
-
-        adap = new ShopPicAdapter(options);
-        recycler.setAdapter(adap);
-        recycler.setHasFixedSize(true);
-        //end of code
-
-        // For other Data
-        database=  FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("Merchant_data/"+auth.getUid());
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
-                shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
-
-                ((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "Shop Name");
-               ImageView ProfileImage=view.findViewById(R.id.rectangle_1);
-                String link = dataSnapshot.getValue(String.class);
-
-                // loading that data into rImage
-                // variable which is ImageView
-                Picasso.get().load(link).into(ProfileImage);
-                ((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "Owner Name");
-                ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "Shop Address");
-                ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "Shop Category");
-
-
-            }
-
-            @Override
-            public void onCancelled ( @NonNull DatabaseError databaseError ) {
-
-            }
-        });
+//            @Override
+//            public void onCancelled ( @NonNull DatabaseError databaseError ) {
+//
+//            }
+//        });
 
 
         return view;
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        adap.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        adap.stopListening();
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+////        adap.startListening();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+////        adap.stopListening();
+//    }
    /* private void filterData(String query) {
     ArrayList<UserModal> filteredList = new ArrayList<>();
     for(UserModal modal : userModalArrayList){

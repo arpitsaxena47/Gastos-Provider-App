@@ -27,12 +27,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.gastos.gastosprovider.Card.Post;
 import com.gastos.gastosprovider.Setting.SettingsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -62,6 +65,9 @@ public class AccountFragment extends Fragment {
     FirebaseStorage storage;
     StorageReference storageRef;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    Post_test Post;
+    DatabaseReference ref;
+
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -163,24 +169,22 @@ public class AccountFragment extends Fragment {
                 } else if (phoneNumEdt.getText().toString().isEmpty()) {
                     Toast.makeText(context, "Please enter phone num..", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(phoneNumEdt.getText().toString().length() != 10){
+                } else if (phoneNumEdt.getText().toString().length() != 10) {
                     Toast.makeText(context, "Phone number should be  10 Digits long", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(emailEdt.getText().toString().isEmpty()){
+                } else if (emailEdt.getText().toString().isEmpty()) {
                     Toast.makeText(context, "Please enter Email ID....", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(emailEdt.getText().toString().matches(emailPattern)){
+                } else if (emailEdt.getText().toString().matches(emailPattern)) {
                     Toast.makeText(context, "Please enter correct Email ID....", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                addDataToFirebase(ownerNameEdt.getText().toString(), phoneNumEdt.getText().toString(), emailEdt.getText().toString());
+//                addDataToFirebase(ownerNameEdt.getText().toString(), phoneNumEdt.getText().toString(), emailEdt.getText().toString());
+                save(ownerNameEdt.getText().toString(), phoneNumEdt.getText().toString(), emailEdt.getText().toString());
                 saveAccountInfoButton.setVisibility(View.GONE);
 
                 Fragment fragment = new SettingsFragment();
-                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.idFLContainer, fragment).commit();
             }
         });
 
@@ -212,39 +216,67 @@ public class AccountFragment extends Fragment {
         });
 
 
-
-
         return view;
     }
 
-    private void addDataToFirebase(String userName, String phone, String email) {
-
-        ProgressDialog progressDialog
-                = new ProgressDialog(context);
-        progressDialog.setTitle("Uploading...");
-        progressDialog.show();
-
-
-        Map<String, Object> user = new HashMap<>();
+//    private void addDataToFirebase(String userName, String phone, String email) {
+//
+//        ProgressDialog progressDialog
+//                = new ProgressDialog(context);
+//        progressDialog.setTitle("Uploading...");
+//        progressDialog.show();
+//
+//
+//        Map<String, Object> user = new HashMap<>();
+//        user.put("OwnerName", userName);
+//        user.put("PhoneNumber", phone);
+//        user.put("EmailAddress", email);
+//
+//        String userId = mAuth.getCurrentUser().getUid();
+//        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data");
+//        ref.child("Merchant_data").child(userId).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()) {
+//                    Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
+//                    progressDialog.dismiss();
+//                } else {
+//                    progressDialog.dismiss();
+//                    Toast.makeText(context, "Fail to Add Data.", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
+//        });
+//}
+        private void save(String userName, String phone, String email) {
+            Map<String, Object> user = new HashMap<>();
         user.put("OwnerName", userName);
         user.put("PhoneNumber", phone);
         user.put("EmailAddress", email);
 
-        String userId = mAuth.getCurrentUser().getUid();
-        db.collection("Merchant_data").document(userId).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                } else {
-                    progressDialog.dismiss();
-                    Toast.makeText(context, "Fail to Add Data.", Toast.LENGTH_SHORT).show();
+            String userId = mAuth.getCurrentUser().getUid();
+             ref = FirebaseDatabase.getInstance().getReference().child("Merchant_Data/" + mAuth.getUid());
 
+                    ref.setValue(user)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Log.i("jfbvkj", "onComplete: ");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.i("jfbvkj", "onFailure: "+e.toString());
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.i("jfbvkj", "onSuccess: ");
                 }
-            }
-        });
-    }
+            });
+        }
+
 
     public String getOwnerNameEdt() {
         String userId = mAuth.getCurrentUser().getUid();
