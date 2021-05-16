@@ -71,14 +71,15 @@
                     android:textAppearance="@style/cafe_bistro"
                     android:hint="Mahdeep Singh"
                     android:inputType="textMultiLine"/>
+
                 <ImageButton
                     android:id="@+id/editOwnerName"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="50dp"
                     android:background="@null"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    />
+                    android:clickable="true"
+                    android:src="@drawable/ic_baseline_edit_24" />
             </LinearLayout>
 
             <TextView
@@ -104,14 +105,15 @@
                     android:textAppearance="@style/cafe_bistro"
                     android:inputType="textMultiLine"
                     android:hint="9999111100" />
+
                 <ImageButton
                     android:id="@+id/editPhoneNum"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="50dp"
                     android:background="@null"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    />
+                    android:clickable="true"
+                    android:src="@drawable/ic_baseline_edit_24" />
             </LinearLayout>
 
 
@@ -137,14 +139,15 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/cafe_bistro"
                     android:hint="mahdeep@gmail.com" />
+
                 <ImageButton
                     android:id="@+id/editEmailAddress"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="50dp"
                     android:background="@null"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    />
+                    android:clickable="true"
+                    android:src="@drawable/ic_baseline_edit_24" />
             </LinearLayout>
 
 

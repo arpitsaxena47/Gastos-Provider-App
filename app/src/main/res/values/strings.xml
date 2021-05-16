@@ -20,5 +20,7 @@
     <string name="owner_name">Owner Name</string>
     <string name="phone_numbe">Phone Number</string>
     <string name="email_addre">email Address</string>
-
+    <string name="dialog_permission_title">Grant Permissions</string>
+    <string name="dialog_permission_message">This app needs permission to use this feature. You can grant them in app settings.</string>
+    <string name="go_to_settings">GOTO SETTINGS</string>
 </resources>
