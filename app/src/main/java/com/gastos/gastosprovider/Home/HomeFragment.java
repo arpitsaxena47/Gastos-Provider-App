@@ -1,30 +1,38 @@
-package com.gastos.gastosprovider;
+package com.gastos.gastosprovider.Home;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.gastos.gastosprovider.R;
-
-import java.util.ArrayList;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 
 public class HomeFragment extends Fragment {
-
-    private RecyclerView imageRV;
-    private ArrayList<String> imageURls;
-    private RecyclerView usersRV;
-  //  private ArrayList<UserModal> userModalArrayList;
-    private EditText searchEdt;
+    private RecyclerView recycler;
+    private ShopPicAdapter adap;
+    private  FirebaseAuth auth;
+    private  FirebaseDatabase database;
+//    private RecyclerView imageRV;
+//    private ArrayList<String> imageURls;
+//    private RecyclerView usersRV;
+//  //  private ArrayList<UserModal> userModalArrayList;
+//    private EditText searchEdt;
  //   private UserRVAdapter userRVAdapter;
 
     public HomeFragment() {
@@ -80,10 +88,64 @@ public class HomeFragment extends Fragment {
         });
 
        */
+        //New code
+
+        auth = FirebaseAuth.getInstance();
+
+        recycler = view.findViewById(R.id.local_r2);
+        recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        FirebaseRecyclerOptions<ShopPic> options =
+                new FirebaseRecyclerOptions.Builder<ShopPic>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Merchant_data/"+auth.getUid()), ShopPic.class)
+                        .build();
+
+        adap = new ShopPicAdapter(options);
+        recycler.setAdapter(adap);
+        recycler.setHasFixedSize(true);
+        //end of code
+
+        // For other Data
+        database=  FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("Merchant_data/"+auth.getUid());
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
+                shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
+
+                ((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "Shop Name");
+               ImageView ProfileImage=view.findViewById(R.id.rectangle_1);
+                String link = dataSnapshot.getValue(String.class);
+
+                // loading that data into rImage
+                // variable which is ImageView
+                Picasso.get().load(link).into(ProfileImage);
+                ((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "Owner Name");
+                ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "Shop Address");
+                ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "Shop Category");
+
+
+            }
+
+            @Override
+            public void onCancelled ( @NonNull DatabaseError databaseError ) {
+
+            }
+        });
+
 
         return view;
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        adap.startListening();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        adap.stopListening();
+    }
    /* private void filterData(String query) {
     ArrayList<UserModal> filteredList = new ArrayList<>();
     for(UserModal modal : userModalArrayList){
