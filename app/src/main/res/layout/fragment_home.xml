@@ -20,7 +20,7 @@
                 android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="-24dp"
+                android:layout_marginTop="0dp"
                 android:background="#595959"
                 />
 
@@ -103,8 +103,7 @@
                 android:layout_below="@+id/menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="49dp"
+                android:layout_marginTop="16dp"
                 />
 
 
@@ -115,8 +114,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="299dp"
-            >
+            android:layout_marginTop="310dp"
+           >
 
                 <ScrollView
                     android:layout_width="match_parent"

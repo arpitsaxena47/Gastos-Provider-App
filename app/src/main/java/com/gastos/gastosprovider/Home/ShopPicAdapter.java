@@ -24,7 +24,7 @@ public class ShopPicAdapter extends FirebaseRecyclerAdapter<ShopPic, ShopPicAdap
     @Override
     protected void onBindViewHolder(@NonNull ShopPicAdapter.ViewHolder holder, int position, @NonNull ShopPic model) {
 
-        Picasso.get().load(model.getOtherPic()).into(holder.otherpic);
+        Picasso.get().load(model.getOtherPic()).into(holder.otherimg);
     }
 
     @NonNull
@@ -37,11 +37,11 @@ public class ShopPicAdapter extends FirebaseRecyclerAdapter<ShopPic, ShopPicAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-       private ImageView otherpic;
+       private ImageView otherimg;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            otherpic = itemView.findViewById(R.id.other);
+            otherimg = itemView.findViewById(R.id.other);
         }
     }
 }

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.gastos.gastosprovider.Home.ShopPic;
+import com.gastos.gastosprovider.Home.ShopPicAdapter;
 import com.gastos.gastosprovider.R;
 import com.google.firebase.database.FirebaseDatabase;
 
