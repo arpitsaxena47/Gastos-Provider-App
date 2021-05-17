@@ -1,4 +1,4 @@
-package com.gastos.gastosprovider;
+package com.gastos.gastosprovider.Setting.ShopInformation;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.gastos.gastosprovider.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;

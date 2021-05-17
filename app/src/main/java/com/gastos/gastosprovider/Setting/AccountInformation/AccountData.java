@@ -1,4 +1,4 @@
-package com.gastos.gastosprovider;
+package com.gastos.gastosprovider.Setting.AccountInformation;
 
 public class AccountData {
     private String ownerName;

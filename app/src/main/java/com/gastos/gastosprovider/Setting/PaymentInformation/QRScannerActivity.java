@@ -1,4 +1,4 @@
-package com.gastos.gastosprovider;
+package com.gastos.gastosprovider.Setting.PaymentInformation;
 
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.gastos.gastosprovider.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

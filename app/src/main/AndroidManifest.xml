@@ -11,13 +11,13 @@
         android:theme="@style/Theme.GastosApp">
         <activity android:name=".phoneNumber2_Activity" />
         <activity android:name=".DynamicWebview"/>
-        <activity android:name=".ImagePickerActivity"/>
-        <activity android:name=".AccountInformation"/>
-        <activity android:name=".ShopInformation"/>
+        <activity android:name=".Setting.ShopInformation.ImagePickerActivity"/>
+        <activity android:name=".Setting.AccountInformation.AccountInformation"/>
+        <activity android:name=".Setting.ShopInformation.ShopInformation"/>
         <activity android:name=".SetNewPin_Activity" />
         <activity android:name=".Setpin_Activity" />
         <activity android:name=".Enterpin_Activity" />
-        <activity android:name=".QRScannerActivity" />
+        <activity android:name=".Setting.PaymentInformation.QRScannerActivity" />
         <activity android:name=".HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

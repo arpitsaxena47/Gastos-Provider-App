@@ -1,4 +1,4 @@
-package com.gastos.gastosprovider;
+package com.gastos.gastosprovider.Setting.PaymentInformation;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gastos.gastosprovider.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,7 +65,7 @@ public class PaymentInformation extends Fragment {
         addQRCodeCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(context,QRScannerActivity.class);
+                Intent i=new Intent(context, QRScannerActivity.class);
                 startActivity(i);
             }
         });

@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/idTVHeadShopInfo"
-        tools:context=".ShopInformation">
+        tools:context=".Setting.ShopInformation.ShopInformation">
 
 
         <LinearLayout
