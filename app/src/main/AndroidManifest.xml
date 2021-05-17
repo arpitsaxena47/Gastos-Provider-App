@@ -10,20 +10,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GastosApp">
         <activity android:name=".phoneNumber2_Activity" />
+        <activity android:name=".DynamicWebview"/>
+        <activity android:name=".ImagePickerActivity"/>
+        <activity android:name=".AccountInformation"/>
+        <activity android:name=".ShopInformation"/>
         <activity android:name=".SetNewPin_Activity" />
         <activity android:name=".Setpin_Activity" />
         <activity android:name=".Enterpin_Activity" />
         <activity android:name=".QRScannerActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".VerifyOTPActivity" />
-        <activity android:name=".PhoneNumberActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".VerifyOTPActivity" />
+        <activity android:name=".PhoneNumberActivity" />
+        <activity android:name=".MainActivity">
+
+        </activity>
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider" />
+        </provider>
     </application>
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Permission for camera -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permission to vibrate -->

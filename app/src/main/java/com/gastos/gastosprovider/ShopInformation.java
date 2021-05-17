@@ -28,11 +28,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -42,6 +44,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -70,19 +75,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
 
-public class ShopInformation extends Fragment {
+public class ShopInformation extends AppCompatActivity {
 
     private EditText shopNameEdt, shopAddressEdt;
+    private TextView txtCoverPhoto , txtOther1 , txtOther2 , txtOther3;
     private ImageView backShopInfo , saveShopInfoButton , other1, other2 , other3;
     private ImageView shopIV , editShopName , editShopAddress;
     private Spinner categoryDropDown , cityDropDown;
     private Button btnAddPinLocation;
     private Context context;
     private FirebaseAuth mAuth;
-    FirebaseStorage storage;
+    DatabaseReference ref;
     StorageReference storageRef;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String shopPicUrl = null , other1Url = null,other2Url = null , other3Url = null;
+    private String shopPicUrl = "" , other1Url = null,other2Url = null , other3Url = null;
+    private String prevShopName = "" , prevShopAddress = "";
 
     public static final int REQUEST_IMAGE = 100;
 
@@ -92,52 +99,56 @@ public class ShopInformation extends Fragment {
    private Uri filePath ;
     public ShopInformation() {
         // Required empty public constructor
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_shop_information, container, false);
-        context = container.getContext();
-        storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.fragment_shop_information);
+        context = ShopInformation.this;
         mAuth = FirebaseAuth.getInstance();
-        shopNameEdt = view.findViewById(R.id.idEdtShopName);
-        shopAddressEdt = view.findViewById(R.id.idEdtShopAddress);
+        shopNameEdt = findViewById(R.id.idEdtShopName);
+        shopAddressEdt = findViewById(R.id.idEdtShopAddress);
 
-        backShopInfo = view.findViewById(R.id.shop_info_back);
+        backShopInfo = findViewById(R.id.shop_info_back);
 
-        other1 = view.findViewById(R.id.other1);
-        other2 = view.findViewById(R.id.other2);
-        other3 = view.findViewById(R.id.other3);
+        txtCoverPhoto = findViewById(R.id.txtCoverPhoto);
+        txtOther1 = findViewById(R.id.txtOther1);
+        txtOther2 = findViewById(R.id.txtOther2);
+        txtOther3 = findViewById(R.id.txtOther3);
 
-        editShopName = view.findViewById(R.id.editShopName);
-        editShopAddress = view.findViewById(R.id.editShopAddress);
+        other1 = findViewById(R.id.other1);
+        other2 = findViewById(R.id.other2);
+        other3 = findViewById(R.id.other3);
 
-        categoryDropDown = view.findViewById(R.id.dropDownCategory);
-        cityDropDown = view.findViewById(R.id.dropdownCity);
+        editShopName = findViewById(R.id.editShopName);
+        editShopAddress = findViewById(R.id.editShopAddress);
 
-        btnAddPinLocation = view.findViewById(R.id.btnShopLocation);
+        categoryDropDown = findViewById(R.id.dropDownCategory);
+        cityDropDown = findViewById(R.id.dropdownCity);
 
-        saveShopInfoButton = view.findViewById(R.id.saveShopInfoChanges);
+        btnAddPinLocation = findViewById(R.id.btnShopLocation);
+
+        saveShopInfoButton = findViewById(R.id.saveShopInfoChanges);
         saveShopInfoButton.setVisibility(View.GONE);
 
-        shopIV = view.findViewById(R.id.idIVShop);
+        shopIV = findViewById(R.id.idIVShop);
         loadProfileDefault();
         ImagePickerActivity.clearCache(context);
 
         editShopName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shopNameEdt.setOnClickListener(this);
+                shopNameEdt.setFocusableInTouchMode(true);
             }
         });
 
         editShopAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shopAddressEdt.setOnClickListener(this);
+                shopAddressEdt.setFocusableInTouchMode(true);
             }
         });
         shopIV.setOnClickListener(new View.OnClickListener() {
@@ -182,15 +193,18 @@ public class ShopInformation extends Fragment {
                     Toast.makeText(context, "Please enter shop address..", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                 if(shopPicUrl.isEmpty()){
+                if(shopPicUrl.isEmpty()){
                     Toast.makeText(context, "Please Set Shop Profile Picture....", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 saveShopInfoButton.setVisibility(View.GONE);
-                uploadImage(shopNameEdt.getText().toString(), shopAddressEdt.getText().toString(), shopPicUrl , other1Url , other2Url , other3Url);
+                addDataToFirebase(shopNameEdt.getText().toString(), shopAddressEdt.getText().toString(), shopPicUrl , other1Url , other2Url , other3Url);
 
-                Fragment fragment = new SettingsFragment();
-                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
+//                Fragment fragment = new SettingsFragment();
+//                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
+                Intent homeIntent = new Intent(ShopInformation.this , HomeActivity.class);
+                startActivity(homeIntent);
+                finish();
             }
         });
 
@@ -209,13 +223,13 @@ public class ShopInformation extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!editable.toString().equals(getShopNameEdt()))
+                if(!editable.toString().equals(prevShopName))
                 {
                     saveShopInfoButton.setVisibility(View.VISIBLE);
                 }
                 else
-                if( shopAddressEdt.getText().toString().equals(getShopAddressEdt()) && shopPicUrl == null &&
-                        other1Url == null && other2Url == null && other3Url == null)
+                if( shopAddressEdt.getText().toString().equals(prevShopAddress) && shopPicUrl.isEmpty() &&
+                        other1Url != null  && other2Url != null && other3Url != null)
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
@@ -236,65 +250,62 @@ public class ShopInformation extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!editable.toString().equals(getShopAddressEdt()))
+                if(!editable.toString().equals(prevShopAddress))
                 {
                     saveShopInfoButton.setVisibility(View.VISIBLE);
                 }
                 else
-                if( shopNameEdt.getText().toString().equals(getShopNameEdt()) && shopPicUrl == null &&
-                        other1Url == null && other2Url == null && other3Url == null)
+                if( shopNameEdt.getText().toString().equals(prevShopName)  && shopPicUrl.isEmpty() &&
+                        other1Url != null  && other2Url != null && other3Url != null)
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
             }
         });
 
-        return view;
     }
 
-    public String getShopNameEdt() {
-        String userId = mAuth.getCurrentUser().getUid();
-        final String[] shopName = {""};
-        DocumentReference documentReference = db.collection("Merchant_data").document(userId);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.e("TAG", "NO DATA FOUND");
-                    shopName[0] = "";
-                }
-                else
-                if (value != null && value.exists()) {
-                    shopName[0] =  value.getData().get("ShopName").toString();
 
 
-                }
-            }
-        });
-        return shopName[0];
-    }
-
-    public String getShopAddressEdt() {
-        String userId = mAuth.getCurrentUser().getUid();
-        final String[] shopAddress = {""};
-        DocumentReference documentReference = db.collection("Merchant_data").document(userId);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.e("TAG", "NO DATA FOUND");
-                    shopAddress[0] = "";
-                }
-                else
-                if (value != null && value.exists()) {
-                    shopAddress[0] =  value.getData().get("ShopAddress").toString();
-
-
-                }
-            }
-        });
-        return shopAddress[0];
-    }
+//    public String getShopNameEdt() {
+//        String userId = mAuth.getCurrentUser().getUid();
+//        final String[] shopName = {""};
+//        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("ShopName");
+//        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+////                   Log.e("firebase", "Error getting data", task.getException());
+//                    shopName[0]  = null;
+//                }
+//                else {
+//                    shopName[0] = task.getResult().getValue().toString();
+////                   Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//                }
+//            }
+//        });
+//        return shopName[0];
+//    }
+//
+//    public String getShopAddressEdt() {
+//        String userId = mAuth.getCurrentUser().getUid();
+//        final String[] shopAddress = {""};
+//        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("ShopAddress");
+//        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+////                   Log.e("firebase", "Error getting data", task.getException());
+//                    shopAddress[0]  = null;
+//                }
+//                else {
+//                    shopAddress[0] = task.getResult().getValue().toString();
+////                   Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//                }
+//            }
+//        });
+//        return shopAddress[0];
+//    }
 
     private void loadProfile(String url ) {
         Log.d("TAG", "Image cache path: " + url);
@@ -302,6 +313,7 @@ public class ShopInformation extends Fragment {
         shopPicUrl = url;
         Picasso.get().load(url).into(shopIV);
         shopIV.setColorFilter(ContextCompat.getColor(context, android.R.color.transparent));
+        txtCoverPhoto.setVisibility(View.GONE);
     }
 
     private void loadOther1(String url ) {
@@ -310,6 +322,7 @@ public class ShopInformation extends Fragment {
         other1Url = url;
         Picasso.get().load(url).into(other1);
         other1.setColorFilter(ContextCompat.getColor(context, android.R.color.transparent));
+        txtOther1.setVisibility(View.GONE);
     }
 
     private void loadOther2(String url ) {
@@ -318,6 +331,7 @@ public class ShopInformation extends Fragment {
         other2Url = url;
         Picasso.get().load(url).into(other2);
         other2.setColorFilter(ContextCompat.getColor(context, android.R.color.transparent));
+        txtOther2.setVisibility(View.GONE);
     }
 
     private void loadOther3(String url ) {
@@ -326,46 +340,111 @@ public class ShopInformation extends Fragment {
         other3Url = url;
         Picasso.get().load(url).into(other3);
         other3.setColorFilter(ContextCompat.getColor(context, android.R.color.transparent));
+        txtOther3.setVisibility(View.GONE);
     }
 
 
     private void loadProfileDefault() {
+        ProgressDialog progressDialog
+                = new ProgressDialog(context);
+        progressDialog.setTitle("Fetching Data!! Please Wait...");
+        progressDialog.show();
+
         String userId = mAuth.getCurrentUser().getUid();
-        DocumentReference documentReference = db.collection("Merchant_data").document(userId);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Shop_Information");
+
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.e("TAG", "NO DATA FOUND");
-                    return;
-                }
-                if (value != null && value.exists()) {
-                    if(!value.getData().get("ShopName").toString().isEmpty())
-                    shopNameEdt.setText(value.getData().get("ShopName").toString());
-
-                    if(!value.getData().get("ShopAddress").toString().isEmpty())
-                    shopAddressEdt.setText(value.getData().get("ShopAddress").toString());
-                    if(!value.getData().get("ShopPic").toString().isEmpty())
-                    Picasso.get().load(value.getData().get("ShopPic").toString())
-                            .into(shopIV);
-                    if(!value.getData().get("Other1").toString().isEmpty())
-                    Picasso.get().load(value.getData().get("Other1").toString())
-                            .into(shopIV);
-                    if(!value.getData().get("Other2").toString().isEmpty())
-                    Picasso.get().load(value.getData().get("Other2").toString())
-                            .into(shopIV);
-                    if(!value.getData().get("Other3").toString().isEmpty())
-                    Picasso.get().load(value.getData().get("Other3").toString())
-                            .into(shopIV);
-
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+//                   Log.e("firebase", "Error getting data", task.getException());
+                    Toast.makeText(context, "Some Error Occurred..." , Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
 
                 }
+                else {
+                    if(task.getResult().getValue() != null) {
+
+//                        AccountData accountData = task.getResult(AccountData.class);
+
+                        prevShopName = task.getResult().child("ShopName").getValue() != null?task.getResult().child("ShopName").getValue() + "":"";
+                        prevShopAddress = task.getResult().child("ShopAddress").getValue() !=null?task.getResult().child("ShopAddress").getValue() + "": "";
+
+//                        if(task.getResult().child("ShopName").getValue() != null)
+                            shopNameEdt.setText(prevShopName);
+
+//                        if(!task.getResult().child("ShopAddress").getValue().toString().trim().isEmpty())
+                            shopAddressEdt.setText(prevShopAddress);
+                        if(task.getResult().child("ShopPic").getValue() != null)
+                            Picasso.get().load(task.getResult().child("ShopPic").getValue()+"")
+                                    .into(shopIV);
+                        if(task.getResult().child("OtherImages").child("Other1").getValue() != null)
+                            Picasso.get().load(task.getResult().child("OtherImages").child("Other1").getValue()+"")
+                                    .into(other1);
+                        if(task.getResult().child("OtherImages").child("Other2").getValue()!= null)
+                            Picasso.get().load(task.getResult().child("OtherImages").child("Other2").getValue()+"")
+                                    .into(other2);
+                        if(task.getResult().child("OtherImages").child("Other3").getValue() != null)
+                            Picasso.get().load(task.getResult().child("OtherImages").child("Other3").getValue()+"")
+                                    .into(other3);
+
+
+
+
+//                        ownerNameEdt.setText(task.getResult().child("OwnerName").getValue() + "");
+//                        phoneNumEdt.setText(task.getResult().child("PhoneNumber").getValue() + "");
+////                  Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//                        emailEdt.setText(task.getResult().child("EmailAddress").getValue() + "");
+
+                        progressDialog.dismiss();
+                    }
+                    else {
+                        Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }
+
             }
         });
+
+//        String userId = mAuth.getCurrentUser().getUid();
+//        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId);
+//        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+////                   Log.e("firebase", "Error getting data", task.getException());
+//                }
+//                else {
+//                    if(task.getResult().exists()){
+//                        if(!task.getResult().child("ShopName").getValue().toString().trim().isEmpty())
+//                            shopNameEdt.setText(task.getResult().child("ShopName").getValue() + "");
+//
+//                        if(!task.getResult().child("ShopAddress").getValue().toString().trim().isEmpty())
+//                            shopAddressEdt.setText(task.getResult().child("ShopAddress").getValue() + "");
+//                        if(!task.getResult().child("ShopPic").getValue().toString().isEmpty())
+//                            Picasso.get().load(task.getResult().child("ShopPic").getValue().toString())
+//                                    .into(shopIV);
+//                        if(!task.getResult().child("Other1").getValue().toString().isEmpty())
+//                            Picasso.get().load(task.getResult().child("Other1").getValue().toString())
+//                                    .into(shopIV);
+//                        if(!task.getResult().child("Other2").getValue().toString().isEmpty())
+//                            Picasso.get().load(task.getResult().child("Other2").getValue().toString())
+//                                    .into(shopIV);
+//                        if(!task.getResult().child("Other3").getValue().toString().isEmpty())
+//                            Picasso.get().load(task.getResult().child("Other3").getValue().toString())
+//                                    .into(shopIV);
+//                    }
+////                   Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//                }
+//            }
+//        });
+
+
     }
 
     void onProfileImageClick() {
-        Dexter.withActivity(getActivity())
+        Dexter.withActivity(ShopInformation.this)
                 .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
@@ -431,6 +510,7 @@ public class ShopInformation extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getParcelableExtra("path");
@@ -439,16 +519,13 @@ public class ShopInformation extends Fragment {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
 
                     // loading profile image from local cache
-                    if(selectedImage == "shopIV")
+                    if (selectedImage == "shopIV")
                         loadProfile(uri.toString());
-                    else
-                    if(selectedImage == "other1")
+                    else if (selectedImage == "other1")
                         loadOther1(uri.toString());
-                    else
-                    if(selectedImage == "other2")
+                    else if (selectedImage == "other2")
                         loadOther2(uri.toString());
-                    else
-                    if(selectedImage == "other3")
+                    else if (selectedImage == "other3")
                         loadOther3(uri.toString());
 
                     saveShopInfoButton.setVisibility(View.VISIBLE);
@@ -498,32 +575,75 @@ public class ShopInformation extends Fragment {
         user.put("ShopName",shopName);
         user.put("ShopAddress", shopAddress);
         user.put("ShopPic" , shopPic);
-//        if(!other1.equals(""))
-            user.put("Other1", other1);
-//        if(!other2.equals(""))
-            user.put("Other2", other2);
-//        if(!other3.equals(""))
-            user.put("Other3", other3);
+
 
         String userId = mAuth.getCurrentUser().getUid();
-        db.collection("Merchant_data").document(userId).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Shop_Information");
+
+        ref.setValue(user)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+//                            Log.i("jfbvkj", "onComplete: ");
+                        if(task.isSuccessful()){
+//                            Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
+//                            progressDialog.dismiss();
+                        }
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+//                            Log.i("jfbvkj", "onFailure: "+e.toString());
+//                        Toast.makeText(context, "Fail to Add Data.", Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+//                    Log.i("jfbvkj", "onSuccess: ");
+//                Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
+//                progressDialog.dismiss();
+            }
+        });
+
+        Map<String, Object> other = new HashMap<>();
+
+//        if(!other1.equals(""))
+        other.put("Other1", other1);
+//        if(!other2.equals(""))
+        other.put("Other2", other2);
+//        if(!other3.equals(""))
+        other.put("Other3", other3);
+
+        ref.child("OtherImages").setValue(other).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
+//                            Log.i("jfbvkj", "onComplete: ");
+                if(task.isSuccessful()){
                     Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-
-                } else {
-                    Toast.makeText(context, "Fail to Add Data.", Toast.LENGTH_SHORT).show();
+                    if(progressDialog.isShowing())
                     progressDialog.dismiss();
                 }
+
             }
-
-
-        }).addOnFailureListener(new OnFailureListener() {
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+//                            Log.i("jfbvkj", "onFailure: "+e.toString());
+                        Toast.makeText(context, "Fail to Add Data.", Toast.LENGTH_SHORT).show();
+                        if(progressDialog.isShowing())
+                        progressDialog.dismiss();
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-
+            public void onSuccess(Void aVoid) {
+//                    Log.i("jfbvkj", "onSuccess: ");
+                Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
+                if(progressDialog.isShowing())
+                progressDialog.dismiss();
             }
         });
     }
