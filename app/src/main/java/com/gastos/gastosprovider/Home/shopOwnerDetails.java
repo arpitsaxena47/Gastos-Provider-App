@@ -2,25 +2,49 @@ package com.gastos.gastosprovider.Home;
 
 public class shopOwnerDetails {
 
-    String ownerName,PhoneNumber,emailAddress,shopName,shopAddress,shopCategory,shopImage;
+    String OwnerName,PhoneNumber,EmailAddress,ProfileImage,ShopName,ShopAddress,ShopCategory;
 
     public shopOwnerDetails() {
     }
 
-    public String getShopImage() {
-        return shopImage;
+    public String getProfileImage() {
+        return ProfileImage;
     }
 
-    public void setShopImage(String shopImage) {
-        this.shopImage = shopImage;
+    public void setProfileImage(String profileImage) {
+        ProfileImage = profileImage;
+    }
+
+    public String getShopName() {
+        return ShopName;
+    }
+
+    public void setShopName(String shopName) {
+        ShopName = shopName;
+    }
+
+    public String getShopAddress() {
+        return ShopAddress;
+    }
+
+    public void setShopAddress(String shopAddress) {
+        ShopAddress = shopAddress;
+    }
+
+    public String getShopCategory() {
+        return ShopCategory;
+    }
+
+    public void setShopCategory(String shopCategory) {
+        ShopCategory = shopCategory;
     }
 
     public String getOwnerName() {
-        return ownerName;
+        return OwnerName;
     }
 
     public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+        OwnerName = ownerName;
     }
 
     public String getPhoneNumber() {
@@ -32,34 +56,10 @@ public class shopOwnerDetails {
     }
 
     public String getEmailAddress() {
-        return emailAddress;
+        return EmailAddress;
     }
 
     public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
-    public String getShopAddress() {
-        return shopAddress;
-    }
-
-    public void setShopAddress(String shopAddress) {
-        this.shopAddress = shopAddress;
-    }
-
-    public String getShopCategory() {
-        return shopCategory;
-    }
-
-    public void setShopCategory(String shopCategory) {
-        this.shopCategory = shopCategory;
+        EmailAddress = emailAddress;
     }
 }
