@@ -11,12 +11,12 @@
         android:theme="@style/Theme.GastosApp">
         <activity android:name=".phoneNumber2_Activity" />
         <activity android:name=".SetNewPin_Activity" />
-        <activity android:name=".Setpin_Activity" />
         <activity android:name=".Enterpin_Activity" />
+        <activity android:name=".VerifyOTPActivity" />
         <activity android:name=".QRScannerActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".VerifyOTPActivity" />
         <activity android:name=".PhoneNumberActivity" />
+        <activity android:name=".Setpin_Activity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
