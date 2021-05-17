@@ -3,7 +3,6 @@ package com.gastos.gastosprovider.Setting;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.gastos.gastosprovider.AccountFragment;
+
 import com.gastos.gastosprovider.DynamicWebview;
-import com.gastos.gastosprovider.PaymentInformation;
+import com.gastos.gastosprovider.Setting.PaymentInformation.PaymentInformation;
 import com.gastos.gastosprovider.PhoneNumberActivity;
 import com.gastos.gastosprovider.R;
-import com.gastos.gastosprovider.ShopInformation;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.gastos.gastosprovider.Setting.AccountInformation.AccountInformation;
+import com.gastos.gastosprovider.Setting.ShopInformation.ShopInformation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,7 +28,7 @@ public class SettingsFragment extends Fragment {
     private ImageView accountCV, shopCV, paymentCV;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
-    Context context;
+    public Context context;
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -41,6 +39,8 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        context = container.getContext();
+
         accountCV = view.findViewById(R.id.idbtn1);
         shopCV = view.findViewById(R.id.idbtn2);
         paymentCV = view.findViewById(R.id.idbtn3);
@@ -48,16 +48,21 @@ public class SettingsFragment extends Fragment {
         accountCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new AccountFragment();
-                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
+//                Fragment fragment = new AccountFragment();
+//                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
+
+                Intent accountIntent = new Intent(context , AccountInformation.class);
+                startActivity(accountIntent);
             }
         });
 
         shopCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new ShopInformation();
-                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
+//                Fragment fragment = new ShopInformation();
+//                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
+                Intent shopIntent = new Intent(context , ShopInformation.class);
+                startActivity(shopIntent);
 
             }
         });

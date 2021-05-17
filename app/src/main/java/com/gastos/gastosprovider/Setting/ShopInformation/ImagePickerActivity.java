@@ -1,4 +1,4 @@
-package com.gastos.gastosprovider;
+package com.gastos.gastosprovider.Setting.ShopInformation;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.gastos.gastosprovider.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -130,7 +131,7 @@ public class ImagePickerActivity extends AppCompatActivity {
     }
 
     private void chooseImageFromGallery() {
-        Dexter.withActivity(this)
+        Dexter.withActivity(ImagePickerActivity.this)
                 .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
@@ -191,9 +192,9 @@ public class ImagePickerActivity extends AppCompatActivity {
         options.setCompressionQuality(IMAGE_COMPRESSION);
 
         // applying UI theme
-        options.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        options.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        options.setActiveControlsWidgetColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        options.setToolbarColor(ContextCompat.getColor(ImagePickerActivity.this, R.color.colorPrimary));
+        options.setStatusBarColor(ContextCompat.getColor(ImagePickerActivity.this, R.color.colorPrimary));
+        options.setActiveControlsWidgetColor(ContextCompat.getColor(ImagePickerActivity.this, R.color.colorPrimary));
 
         if (lockAspectRatio)
             options.withAspectRatio(ASPECT_RATIO_X, ASPECT_RATIO_Y);
@@ -203,7 +204,7 @@ public class ImagePickerActivity extends AppCompatActivity {
 
         UCrop.of(sourceUri, destinationUri)
                 .withOptions(options)
-                .start(this);
+                .start(ImagePickerActivity.this);
     }
 
     private void handleUCropResult(Intent data) {

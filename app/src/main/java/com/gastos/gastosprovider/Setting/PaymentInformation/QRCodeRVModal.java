@@ -1,4 +1,4 @@
-package com.gastos.gastosprovider;
+package com.gastos.gastosprovider.Setting.PaymentInformation;
 
 public class QRCodeRVModal {
 
