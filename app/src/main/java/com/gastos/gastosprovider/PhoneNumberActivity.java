@@ -3,6 +3,7 @@ package com.gastos.gastosprovider;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,6 +21,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
    // private FirebaseAuth mAuth;
     private ImageView otp_button;
     private EditText phone_num;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,13 @@ public class PhoneNumberActivity extends AppCompatActivity {
                         Intent intent = new Intent(PhoneNumberActivity.this, VerifyOTPActivity.class);
                         intent.putExtra("phone_number", num);
                         intent.putExtra("via", 1);
+
+                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("phoneNum", num);
+                        editor.apply();
+
+
                         startActivity(intent);
 
 

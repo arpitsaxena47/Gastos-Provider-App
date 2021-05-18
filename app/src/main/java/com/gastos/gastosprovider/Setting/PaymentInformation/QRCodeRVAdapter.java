@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,8 +35,10 @@ public class QRCodeRVAdapter extends RecyclerView.Adapter<QRCodeRVAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull QRCodeRVAdapter.ViewHolder holder, int position) {
         QRCodeRVModal modal = qrCodeRVModalArrayList.get(position);
-        holder.upiIdTV.setText(modal.getUpiId());
-        Picasso.get().load(modal.getQrCodeImg()).into(holder.qrCodeIV);
+        holder.upiName.setText(modal.getUpiName());
+        holder.upiId.setText(modal.getUpiId());
+
+
     }
 
     @Override
@@ -44,14 +47,24 @@ public class QRCodeRVAdapter extends RecyclerView.Adapter<QRCodeRVAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView upiIdTV;
-        private ImageView qrCodeIV;
+        private TextView upiId;
+        private TextView upiName;
+        private ImageButton editUpiId;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            upiIdTV = itemView.findViewById(R.id.idTVUpiId);
-            qrCodeIV = itemView.findViewById(R.id.idIVQrCode);
+            upiId = itemView.findViewById(R.id.txtUpiId);
+            upiName = itemView.findViewById(R.id.txtUpiName);
+            editUpiId = itemView.findViewById(R.id.editUpi);
+            editUpiId.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
 
         }
+
+
     }
 }

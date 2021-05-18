@@ -61,7 +61,7 @@
                 android:text="@string/owner_name"
                 android:textAppearance="@style/shop_name" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -75,17 +75,19 @@
                     android:clickable="true"
                     android:hint="Mahdeep Singh"
                     android:inputType="textMultiLine"
+                    android:layout_alignParentStart="true"
                     android:textAppearance="@style/cafe_bistro" />
 
                 <ImageButton
                     android:id="@+id/editOwnerName"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="50dp"
                     android:background="@null"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="30dp"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_edit_24" />
-            </LinearLayout>
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -97,7 +99,7 @@
                 android:text="@string/phone_numbe"
                 android:textAppearance="@style/shop_name" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -108,20 +110,23 @@
                     android:id="@+id/idEdtPhoneNum"
                     android:layout_width="268dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:clickable="true"
                     android:hint="9999111100"
                     android:inputType="number"
+
                     android:textAppearance="@style/cafe_bistro" />
 
                 <ImageButton
                     android:id="@+id/editPhoneNum"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="30dp"
                     android:background="@null"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_edit_24" />
-            </LinearLayout>
+            </RelativeLayout>
 
 
             <TextView
@@ -134,7 +139,7 @@
                 android:text="@string/email_addre"
                 android:textAppearance="@style/shop_name" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -147,6 +152,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:hint="mahdeep@gmail.com"
+                    android:layout_alignParentStart="true"
                     android:inputType="textEmailAddress"
                     android:textAppearance="@style/cafe_bistro" />
 
@@ -154,11 +160,12 @@
                     android:id="@+id/editEmailAddress"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="30dp"
                     android:background="@null"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_edit_24" />
-            </LinearLayout>
+            </RelativeLayout>
 
 
 

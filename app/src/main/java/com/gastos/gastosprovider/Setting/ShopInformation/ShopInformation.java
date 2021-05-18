@@ -14,6 +14,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,6 +51,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,10 +60,10 @@ import java.util.UUID;
 public class ShopInformation extends AppCompatActivity {
 
     private EditText shopNameEdt, shopAddressEdt;
-    private TextView txtCoverPhoto , txtOther1 , txtOther2 , txtOther3;
+    private TextView txtCoverPhoto , txtOther1 , txtOther2 , txtOther3 ;
     private ImageView backShopInfo , saveShopInfoButton , other1, other2 , other3;
     private ImageView shopIV , editShopName , editShopAddress;
-    private Spinner categoryDropDown , cityDropDown;
+    private Spinner categoryDropDown , locationDropDown;
     private Button btnAddPinLocation;
     private Context context;
     private FirebaseAuth mAuth;
@@ -68,7 +71,11 @@ public class ShopInformation extends AppCompatActivity {
     StorageReference storageRef;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String shopPicUrl = "" , other1Url = null,other2Url = null , other3Url = null;
-    private String prevShopName = "" , prevShopAddress = "";
+    private String prevShopName = "" , prevShopAddress = "" , prevLocation = "" , prevCategory = "" ;
+
+    private ArrayList<String> locations = new ArrayList<>();
+    private ArrayList<String> categories = new ArrayList<>();
+    String location =  null , category = null;
 
     public static final int REQUEST_IMAGE = 100;
 
@@ -98,6 +105,7 @@ public class ShopInformation extends AppCompatActivity {
         txtOther2 = findViewById(R.id.txtOther2);
         txtOther3 = findViewById(R.id.txtOther3);
 
+
         other1 = findViewById(R.id.other1);
         other2 = findViewById(R.id.other2);
         other3 = findViewById(R.id.other3);
@@ -106,15 +114,15 @@ public class ShopInformation extends AppCompatActivity {
         editShopAddress = findViewById(R.id.editShopAddress);
 
         categoryDropDown = findViewById(R.id.dropDownCategory);
-        cityDropDown = findViewById(R.id.dropdownCity);
+        locationDropDown = findViewById(R.id.dropdownCity);
 
         btnAddPinLocation = findViewById(R.id.btnShopLocation);
 
         saveShopInfoButton = findViewById(R.id.saveShopInfoChanges);
-        saveShopInfoButton.setVisibility(View.GONE);
 
         shopIV = findViewById(R.id.idIVShop);
         loadProfileDefault();
+        saveShopInfoButton.setVisibility(View.GONE);
         ImagePickerActivity.clearCache(context);
 
         editShopName.setOnClickListener(new View.OnClickListener() {
@@ -162,23 +170,40 @@ public class ShopInformation extends AppCompatActivity {
             }
         });
 
+        backShopInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         saveShopInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (shopNameEdt.getText().toString().isEmpty()) {
                     Toast.makeText(context, "Please enter shop name..", Toast.LENGTH_SHORT).show();
                     return;
-                }  if (shopAddressEdt.getText().toString().isEmpty()) {
+                }
+                else if (shopAddressEdt.getText().toString().isEmpty()) {
                     Toast.makeText(context, "Please enter shop address..", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(shopPicUrl.isEmpty()){
+                else if(shopPicUrl.isEmpty()){
                     Toast.makeText(context, "Please Set Shop Profile Picture....", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                saveShopInfoButton.setVisibility(View.GONE);
-                addDataToFirebase(shopNameEdt.getText().toString(), shopAddressEdt.getText().toString(), shopPicUrl , other1Url , other2Url , other3Url);
+                else if(category == null)
+                {
+                    Toast.makeText(context, "Please Set Shop Category....", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if(location == null)
+                {
+                    Toast.makeText(context, "Please Set Shop Location....", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                addDataToFirebase(shopNameEdt.getText().toString(), shopAddressEdt.getText().toString(), shopPicUrl , other1Url ,
+                        other2Url , other3Url , location , category );
+                saveShopInfoButton.setVisibility(View.GONE);
 //                Fragment fragment = new SettingsFragment();
 //                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
                 Intent homeIntent = new Intent(ShopInformation.this , HomeActivity.class);
@@ -208,7 +233,7 @@ public class ShopInformation extends AppCompatActivity {
                 }
                 else
                 if( shopAddressEdt.getText().toString().equals(prevShopAddress) && shopPicUrl.isEmpty() &&
-                        other1Url != null  && other2Url != null && other3Url != null)
+                        other1Url == null  && other2Url == null && other3Url == null && location == null && category == null)
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
@@ -235,10 +260,78 @@ public class ShopInformation extends AppCompatActivity {
                 }
                 else
                 if( shopNameEdt.getText().toString().equals(prevShopName)  && shopPicUrl.isEmpty() &&
-                        other1Url != null  && other2Url != null && other3Url != null)
+                        other1Url == null  && other2Url == null && other3Url == null && location == null && category == null)
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        locations = fillLocations(locations);
+        categories = fillCategories(categories);
+
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(ShopInformation.this, android.R.layout.simple_spinner_dropdown_item, categories){
+            @Override
+            public int getCount() {
+                return super.getCount() - 1;
+            }
+        };
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoryDropDown.setAdapter(categoryAdapter);
+        categoryDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(prevCategory.equals(parent.getItemAtPosition(position).toString())|| parent.getItemAtPosition(position).toString().equals(
+                        categories.get(categories.size()-1) ))
+                {
+                    saveShopInfoButton.setVisibility(View.GONE);
+                }
+                else {
+                    saveShopInfoButton.setVisibility(View.VISIBLE);
+                    category = parent.getItemAtPosition(position).toString();
+                    categoryDropDown.setSelection(position);
+                }
+
+//                 txtCategory.setVisibility(View.GONE);
+//                Toast.makeText(parent.getContext(), "Selected: " + tutorialsName,  Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+
+            }
+        });
+
+        ArrayAdapter<String> locationAdapter = new ArrayAdapter<String>(ShopInformation.this, android.R.layout.simple_spinner_dropdown_item, locations){
+            @Override
+            public int getCount() {
+                return super.getCount() -1;
+            }
+        };
+        locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationDropDown.setAdapter(locationAdapter);
+        locationDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(prevLocation.equals(parent.getItemAtPosition(position).toString()) ||
+                        parent.getItemAtPosition(position).toString().equals(locations.get(locations.size()-1)))
+                {
+                    saveShopInfoButton.setVisibility(View.GONE);
+                }
+                else {
+
+                    saveShopInfoButton.setVisibility(View.VISIBLE);
+                    location = parent.getItemAtPosition(position).toString();
+                    locationDropDown.setSelection(position);
+                }
+
+
+//                txtLocation.setVisibility(View.GONE);
+//                Toast.makeText(parent.getContext(), "Selected: " + tutorialsName,  Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+
             }
         });
 
@@ -355,25 +448,55 @@ public class ShopInformation extends AppCompatActivity {
 //                        if(!task.getResult().child("ShopAddress").getValue().toString().trim().isEmpty())
                             shopAddressEdt.setText(prevShopAddress);
                         if(task.getResult().child("ShopPic").getValue() != null)
+                        {
                             Picasso.get().load(task.getResult().child("ShopPic").getValue()+"")
                                     .into(shopIV);
-                        if(task.getResult().child("OtherImages").child("Other1").getValue() != null)
+                            shopPicUrl = task.getResult().child("ShopPic").getValue()+"";
+                            txtCoverPhoto.setVisibility(View.GONE);
+                        }
+
+                        if(task.getResult().child("OtherImages").child("Other1").getValue() != null){
+
                             Picasso.get().load(task.getResult().child("OtherImages").child("Other1").getValue()+"")
                                     .into(other1);
-                        if(task.getResult().child("OtherImages").child("Other2").getValue()!= null)
+                            other1Url = task.getResult().child("OtherImages").child("Other1").getValue()+"";
+                            txtOther1.setVisibility(View.GONE);
+                        }
+
+                        if(task.getResult().child("OtherImages").child("Other2").getValue()!= null){
+
                             Picasso.get().load(task.getResult().child("OtherImages").child("Other2").getValue()+"")
                                     .into(other2);
-                        if(task.getResult().child("OtherImages").child("Other3").getValue() != null)
+                            other2Url = task.getResult().child("OtherImages").child("Other2").getValue()+"";
+                            txtOther2.setVisibility(View.GONE);
+                        }
+
+                        if(task.getResult().child("OtherImages").child("Other3").getValue() != null){
                             Picasso.get().load(task.getResult().child("OtherImages").child("Other3").getValue()+"")
                                     .into(other3);
+                            other3Url = task.getResult().child("OtherImages").child("Other3").getValue()+"";
+                            txtOther3.setVisibility(View.GONE);
+                        }
 
+                        if(task.getResult().child("Category").getValue() != null)
+                        {
+                            categoryDropDown.setSelection(categories.indexOf(task.getResult().child("Category").getValue()+""));
+                            prevCategory = task.getResult().child("Category").getValue()+"";
 
+                        }
+                        else{
+                            categoryDropDown.setSelection(categories.size()-1);
+                        }
 
+                        if(task.getResult().child("Location").getValue() != null)
+                        {
+                            locationDropDown.setSelection(locations.indexOf(task.getResult().child("Location").getValue()+""));
+                            prevLocation = task.getResult().child("Location").getValue()+"";
 
-//                        ownerNameEdt.setText(task.getResult().child("OwnerName").getValue() + "");
-//                        phoneNumEdt.setText(task.getResult().child("PhoneNumber").getValue() + "");
-////                  Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//                        emailEdt.setText(task.getResult().child("EmailAddress").getValue() + "");
+                        }
+                        else{
+                            locationDropDown.setSelection(locations.size()-1);
+                        }
 
                         progressDialog.dismiss();
                     }
@@ -385,39 +508,6 @@ public class ShopInformation extends AppCompatActivity {
 
             }
         });
-
-//        String userId = mAuth.getCurrentUser().getUid();
-//        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId);
-//        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-////                   Log.e("firebase", "Error getting data", task.getException());
-//                }
-//                else {
-//                    if(task.getResult().exists()){
-//                        if(!task.getResult().child("ShopName").getValue().toString().trim().isEmpty())
-//                            shopNameEdt.setText(task.getResult().child("ShopName").getValue() + "");
-//
-//                        if(!task.getResult().child("ShopAddress").getValue().toString().trim().isEmpty())
-//                            shopAddressEdt.setText(task.getResult().child("ShopAddress").getValue() + "");
-//                        if(!task.getResult().child("ShopPic").getValue().toString().isEmpty())
-//                            Picasso.get().load(task.getResult().child("ShopPic").getValue().toString())
-//                                    .into(shopIV);
-//                        if(!task.getResult().child("Other1").getValue().toString().isEmpty())
-//                            Picasso.get().load(task.getResult().child("Other1").getValue().toString())
-//                                    .into(shopIV);
-//                        if(!task.getResult().child("Other2").getValue().toString().isEmpty())
-//                            Picasso.get().load(task.getResult().child("Other2").getValue().toString())
-//                                    .into(shopIV);
-//                        if(!task.getResult().child("Other3").getValue().toString().isEmpty())
-//                            Picasso.get().load(task.getResult().child("Other3").getValue().toString())
-//                                    .into(shopIV);
-//                    }
-////                   Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//                }
-//            }
-//        });
 
 
     }
@@ -542,7 +632,8 @@ public class ShopInformation extends AppCompatActivity {
     }
 
 
-    private void addDataToFirebase(String shopName, String shopAddress, String shopPic , String other1 , String other2 , String other3) {
+    private void addDataToFirebase(String shopName, String shopAddress, String shopPic , String other1 , String other2 ,
+                                   String other3,  String location, String category) {
 
         ProgressDialog progressDialog
                 = new ProgressDialog(context);
@@ -554,6 +645,8 @@ public class ShopInformation extends AppCompatActivity {
         user.put("ShopName",shopName);
         user.put("ShopAddress", shopAddress);
         user.put("ShopPic" , shopPic);
+        user.put("Location" , location);
+        user.put("Category" , category);
 
 
         String userId = mAuth.getCurrentUser().getUid();
@@ -586,6 +679,7 @@ public class ShopInformation extends AppCompatActivity {
 //                progressDialog.dismiss();
             }
         });
+
 
         Map<String, Object> other = new HashMap<>();
 
@@ -627,7 +721,8 @@ public class ShopInformation extends AppCompatActivity {
         });
     }
 
-        private void uploadImage(String shopName, String shopAddress, String shopPic , String other1 , String other2 , String other3) {
+        private void uploadImage(String shopName, String shopAddress, String shopPic , String other1 , String other2 ,
+                                 String other3,  String location, String category) {
         if (filePath != null) {
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog
@@ -650,7 +745,7 @@ public class ShopInformation extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             Log.e("tag", "onSuccess: Uploaded Image URl is " + uri.toString());
-                                            addDataToFirebase(shopName,  shopAddress,  shopPic , other1 ,  other2 ,  other3);
+                                            addDataToFirebase(shopName,  shopAddress,  shopPic , other1 ,  other2 ,  other3 , location , category);
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
@@ -694,6 +789,42 @@ public class ShopInformation extends AppCompatActivity {
                             });
         }
     }
+
+    private ArrayList<String> fillLocations(ArrayList<String> arr)
+    {
+        arr.add("Alwar");
+        arr.add("Bhiwadi");
+        arr.add("Chandigarh");
+        arr.add("Delhi");
+        arr.add("Ludhiana");
+        arr.add("Mumbai");
+        arr.add("Patna");
+        arr.add("Kolkata");
+        arr.add("Select Location");
+
+        return arr;
+
+    }
+
+    private ArrayList<String> fillCategories(ArrayList<String> arr)
+    {
+        arr.add("Food");
+        arr.add("Salon");
+        arr.add("Pub");
+        arr.add("General Store");
+        arr.add("Club");
+        arr.add("Lounges");
+        arr.add("Boutique");
+        arr.add("Grocery");
+        arr.add("Medical");
+        arr.add("Select" +
+                " Category");
+
+
+        return arr;
+
+    }
+
 }
 
 

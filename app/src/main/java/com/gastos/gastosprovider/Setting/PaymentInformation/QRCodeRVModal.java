@@ -2,27 +2,20 @@ package com.gastos.gastosprovider.Setting.PaymentInformation;
 
 public class QRCodeRVModal {
 
-    private String scannedCode;
-    private String qrCodeImg;
+    private String upiName;
     private String upiId;
 
-    public QRCodeRVModal(){
-
-    }
-    public String getScannedCode() {
-        return scannedCode;
+    public QRCodeRVModal(String upiName, String upiId) {
+        this.upiName = upiName;
+        this.upiId = upiId;
     }
 
-    public void setScannedCode(String scannedCode) {
-        this.scannedCode = scannedCode;
+    public String getUpiName() {
+        return upiName;
     }
 
-    public String getQrCodeImg() {
-        return qrCodeImg;
-    }
-
-    public void setQrCodeImg(String qrCodeImg) {
-        this.qrCodeImg = qrCodeImg;
+    public void setUpiName(String upiName) {
+        this.upiName = upiName;
     }
 
     public String getUpiId() {
@@ -30,12 +23,6 @@ public class QRCodeRVModal {
     }
 
     public void setUpiId(String upiId) {
-        this.upiId = upiId;
-    }
-
-    public QRCodeRVModal(String scannedCode, String qrCodeImg, String upiId) {
-        this.scannedCode = scannedCode;
-        this.qrCodeImg = qrCodeImg;
         this.upiId = upiId;
     }
 }

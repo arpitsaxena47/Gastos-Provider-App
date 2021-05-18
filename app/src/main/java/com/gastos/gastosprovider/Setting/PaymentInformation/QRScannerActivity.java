@@ -1,71 +1,174 @@
 package com.gastos.gastosprovider.Setting.PaymentInformation;
 
-import android.app.ProgressDialog;
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.os.Vibrator;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
+import com.budiyev.android.codescanner.AutoFocusMode;
+import com.budiyev.android.codescanner.CodeScanner;
+import com.budiyev.android.codescanner.CodeScannerView;
+import com.budiyev.android.codescanner.DecodeCallback;
+import com.budiyev.android.codescanner.ScanMode;
 import com.gastos.gastosprovider.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
-
-import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import eu.livotov.labs.android.camview.ScannerLiveView;
-import eu.livotov.labs.android.camview.scanner.decoder.zxing.ZXDecoder;
-
-import static android.Manifest.permission.VIBRATE;
-import static android.Manifest.permission_group.CAMERA;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.zxing.Result;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class QRScannerActivity extends AppCompatActivity {
-    private ScannerLiveView camera;
-    private TextView qrCodeTV;
-    private ImageView qrCodeIV;
-    private EditText upiEdt;
-    private Button submitQRBtn;
-    FirebaseStorage storage;
-    StorageReference storageRef;
-    String scannedQRCOde;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseAuth mauth;
-    String userID;
+
+    private CodeScanner mCodeScanner;
+    private boolean isPermissionGranted = false;
+    private final int RequestCameraPermissionId = 50;
+    private String str , meruid;
+    private int a = 0;
+    FirebaseDatabase database;
+    FirebaseAuth mAuth;
+    DatabaseReference mRef;
+    String upiRegex = "^[\\w\\.\\-_]{3,}@[a-zA-Z]{3,}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_q_r_scanner);
+        CodeScannerView scannerView = findViewById(R.id.scanner_view);
+        mCodeScanner = new CodeScanner(this, scannerView);
+
+        database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(QRScannerActivity.this , new String[]{Manifest.permission.CAMERA}
+                    , RequestCameraPermissionId);
+            return;
+        }
+
+        try
+        {
+            isPermissionGranted = true;
+            startScanner();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case RequestCameraPermissionId:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+                        return;
+                    }
+                    try {
+                        isPermissionGranted = true;
+                        startScanner();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isPermissionGranted)
+            startScanner();
+    }
+
+    @Override
+    protected void onPause() {
+        mCodeScanner.releaseResources();
+        sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+        super.onPause();
+    }
+
+    public void startScanner() {
+        mCodeScanner.startPreview();
+        mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);// or CAMERA_FRONT or specific camera id
+        mCodeScanner.setFormats(CodeScanner.ALL_FORMATS); // list of type BarcodeFormat,
+        // ex. listOf(BarcodeFormat.QR_CODE)
+        mCodeScanner.setAutoFocusMode(AutoFocusMode.SAFE); // or CONTINUOUS
+        mCodeScanner.setScanMode(ScanMode.SINGLE); // or CONTINUOUS or PREVIEW
+        mCodeScanner.setAutoFocusEnabled(true); // Whether to enable auto focus or not
+        mCodeScanner.setFlashEnabled(false);// Whether to enable flash or not
+        mCodeScanner.setDecodeCallback(new DecodeCallback() {
+            @Override
+            public void onDecoded(@NonNull final Result result) {
+                Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(500);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(QRScannerActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+
+                        String input = result.getText();
+//                        Pattern pattern = Pattern.compile("[a-zA-z0-9]+@[a-zA-z0-9]+");
+//                        Pattern pattern = Pattern.compile("[a-zA-z0-9]");
+
+//                        if(input.matches("[a-zA-Z0-9]+@+ [a-zA-Z0-9]"))
+                        {
+                            Intent paymentInfoIntent = new Intent(QRScannerActivity.this , PaymentInformation.class);
+                            paymentInfoIntent.putExtra("UPI",input);
+                            setResult(Activity.RESULT_OK,paymentInfoIntent);
+                            finish();
+                        }
+//                        else
+//                        {
+//                            Toast.makeText(QRScannerActivity.this, "Invalid UPI !! ", Toast.LENGTH_SHORT).show();
+//                        }
+
+                    }
+                });
+            }
+        });
+    }
+
+
+
+
+//    private ScannerLiveView camera;
+//    private TextView qrCodeTV;
+//    private ImageView qrCodeIV;
+//    private EditText upiEdt;
+//    private Button submitQRBtn;
+//    FirebaseStorage storage;
+//    StorageReference storageRef;
+//    String scannedQRCOde;
+//    FirebaseFirestore db = FirebaseFirestore.getInstance();
+//    FirebaseAuth mauth;
+//    String userID;
+//    private boolean isPermissionGranted = false;
+//    private final int RequestCameraPermissionId = 50;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_q_r_scanner);
 //        qrCodeIV = findViewById(R.id.idIVQrCode);
 //        camera = findViewById(R.id.camview);
 //        upiEdt = findViewById(R.id.idEdtUPI);
@@ -75,53 +178,72 @@ public class QRScannerActivity extends AppCompatActivity {
 //        storageRef = storage.getReference();
 ////        userID = mauth.getCurrentUser().getUid();
 //
-//        qrCodeTV = findViewById(R.id.idTVQrCode);
-//        if (checkPermission()) {
-//            // if permission is already granted display a toast message
-//            // Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show();
-//        } else {
-//            requestPermission();
+//        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//
+//            ActivityCompat.requestPermissions(QRScannerActivity.this , new String[]{Manifest.permission.CAMERA}
+//                    , RequestCameraPermissionId);
+//            return;
 //        }
-//        camera.setScannerViewEventListener(new ScannerLiveView.ScannerViewEventListener() {
-//            @Override
-//            public void onScannerStarted(ScannerLiveView scanner) {
-//                // method is called when scanner is started
-//                //   Toast.makeText(QRScannerActivity.this, "Scanner Started", Toast.LENGTH_SHORT).show();
-//            }
 //
-//            @Override
-//            public void onScannerStopped(ScannerLiveView scanner) {
-//                // method is called when scanner is stoped.
-//                // Toast.makeText(QRScannerActivity.this, "Scanner Stopped", Toast.LENGTH_SHORT).show();
-//            }
+//        try
+//        {
+//            isPermissionGranted = true;
+//            camera.startScanner();
 //
-//            @Override
-//            public void onScannerError(Throwable err) {
-//                // method is called when scanner gives some error.
-//                //   Toast.makeText(QRScannerActivity.this, "Scanner Error: " + err.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 //
-//            @Override
-//            public void onCodeScanned(String data) {
-//                // method is called when camera scans the
-//                // qr code and the data from qr code is
-//                // stored in data in string format.
-//                setQRCode(data);
-//            }
-//        });
-//
-//        submitQRBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String upiId = upiEdt.getText().toString();
-//                if (TextUtils.isEmpty(upiId)) {
-//                    Toast.makeText(QRScannerActivity.this, "Please enter URP id..", Toast.LENGTH_SHORT).show();
-//                    return;
-//                } else {
-//                    uploadQRCodeToFirebase(upiId);
+////        qrCodeTV = findViewById(R.id.idTVQrCode);
+////        if (checkPermission()) {
+////            // if permission is already granted display a toast message
+////            // Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show();
+////        } else {
+////            requestPermission();
+////        }
+//            camera.setScannerViewEventListener(new ScannerLiveView.ScannerViewEventListener() {
+//                @Override
+//                public void onScannerStarted(ScannerLiveView scanner) {
+//                    // method is called when scanner is started
+//                    //   Toast.makeText(QRScannerActivity.this, "Scanner Started", Toast.LENGTH_SHORT).show();
+//                    camera.startScanner();
 //                }
-//            }
-//        });
+//
+//                @Override
+//                public void onScannerStopped(ScannerLiveView scanner) {
+//                    // method is called when scanner is stoped.
+//                    // Toast.makeText(QRScannerActivity.this, "Scanner Stopped", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onScannerError(Throwable err) {
+//                    // method is called when scanner gives some error.
+//                    //   Toast.makeText(QRScannerActivity.this, "Scanner Error: " + err.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onCodeScanned(String data) {
+//                    // method is called when camera scans the
+//                    // qr code and the data from qr code is
+//                    // stored in data in string format.
+//                    setQRCode(data);
+//                }
+//            });
+//
+//
+//            submitQRBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    String upiId = upiEdt.getText().toString();
+//                    if (TextUtils.isEmpty(upiId)) {
+//                        Toast.makeText(QRScannerActivity.this, "Please enter URP id..", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    } else {
+////                        uploadQRCodeToFirebase(upiId);
+//                    }
+//                }
+//            });
+//
 //
 //    }
 //
@@ -212,7 +334,7 @@ public class QRScannerActivity extends AppCompatActivity {
 //        // this method is to request
 //        // the runtime permission.
 //        int PERMISSION_REQUEST_CODE = 200;
-//        ActivityCompat.requestPermissions(this, new String[]{CAMERA, VIBRATE}, PERMISSION_REQUEST_CODE);
+//        ActivityCompat.requestPermissions(this, new String[]{CAMERA}, PERMISSION_REQUEST_CODE);
 //    }
 //
 //    @Override
@@ -224,6 +346,7 @@ public class QRScannerActivity extends AppCompatActivity {
 //        decoder.setScanAreaPercent(0.8);
 //        // below method will set secoder to camera.
 //        camera.setDecoder(decoder);
+//        if(isPermissionGranted)
 //        camera.startScanner();
 //    }
 //
@@ -241,24 +364,34 @@ public class QRScannerActivity extends AppCompatActivity {
 //        // if permission is granted then we are returning
 //        // true otherwise false.
 //        int camera_permission = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
-//        int vibrate_permission = ContextCompat.checkSelfPermission(getApplicationContext(), VIBRATE);
-//        return camera_permission == PackageManager.PERMISSION_GRANTED && vibrate_permission == PackageManager.PERMISSION_GRANTED;
+////        int vibrate_permission = ContextCompat.checkSelfPermission(getApplicationContext(), VIBRATE);
+//        return camera_permission == PackageManager.PERMISSION_GRANTED ;
+////                && vibrate_permission == PackageManager.PERMISSION_GRANTED;
 //    }
 //
 //    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        // this method is called when user
-//        // allows the permission to use camera.
-//        if (grantResults.length > 0) {
-//            boolean cameraaccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-//            boolean vibrateaccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-//            if (cameraaccepted && vibrateaccepted) {
-//                Toast.makeText(this, "Permission granted..", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(this, "Permission Denined \n You cannot use app without providing permssion", Toast.LENGTH_SHORT).show();
-//            }
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        switch (requestCode) {
+//            case RequestCameraPermissionId:
+//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//
+//                        return;
+//                    }
+//                    try {
+//                        isPermissionGranted = true;
+//                        camera.startScanner();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                break;
 //        }
 //    }
+//
+//
+//
 //
 //    private void setQRCode(String code) {
 //        Log.e("TAG", "CODE IS " + code);
@@ -279,5 +412,5 @@ public class QRScannerActivity extends AppCompatActivity {
 //        } catch (WriterException e) {
 //            e.printStackTrace();
 //        }
-    }
+//    }
 }

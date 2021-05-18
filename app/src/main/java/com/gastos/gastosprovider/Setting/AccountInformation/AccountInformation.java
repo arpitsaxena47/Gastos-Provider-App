@@ -3,6 +3,7 @@ package com.gastos.gastosprovider.Setting.AccountInformation;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,7 +35,7 @@ public class AccountInformation extends AppCompatActivity {
 
     private EditText ownerNameEdt, phoneNumEdt, emailEdt;
     private ImageButton editOwnerName, editPhoneNum, editEmail;
-    private ImageView saveAccountInfoButton;
+    private ImageView saveAccountInfoButton , btnAccountBack;
     private Context context;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 //    FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -51,6 +52,7 @@ public class AccountInformation extends AppCompatActivity {
         setContentView(R.layout.fragment_account);
         context = AccountInformation.this;
         saveAccountInfoButton = findViewById(R.id.saveAccountChanges);
+        btnAccountBack =findViewById(R.id.account_info_back);
 
         ownerNameEdt = findViewById(R.id.idEdtOwnerName);
 //        ownerNameEdt.setFocusable(false);
@@ -218,6 +220,13 @@ public class AccountInformation extends AppCompatActivity {
             public void onClick(View view) {
 
 
+            }
+        });
+
+        btnAccountBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -407,7 +416,14 @@ public class AccountInformation extends AppCompatActivity {
                         prevEmail = task.getResult().child("EmailAddress").getValue() + "";
 
                         ownerNameEdt.setText(prevOwnerName);
-                        phoneNumEdt.setText(prevPhoneNum);
+                        if(prevPhoneNum.equals("")){
+
+                            SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE);
+                            phoneNumEdt.setText(pref.getString("phoneNum",""));
+                        }
+                        else{
+                            phoneNumEdt.setText(prevPhoneNum);
+                        }
                         emailEdt.setText(prevEmail);
 //                        ownerNameEdt.setText(task.getResult().child("OwnerName").getValue() + "");
 //                        phoneNumEdt.setText(task.getResult().child("PhoneNumber").getValue() + "");

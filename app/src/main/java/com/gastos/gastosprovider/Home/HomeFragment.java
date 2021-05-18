@@ -122,7 +122,7 @@ public class HomeFragment extends Fragment {
                 // loading that data into rImage
               //  Picasso.get().load(url).into(ProfileImage);
                 // variable which is ImageView
-                Picasso.get().load(info.getProfileImage()).into(ProfileImage);
+//                Picasso.get().load(info.getProfileImage()).into(ProfileImage);
                // ProfileImage = (String) info.getProfileImage();
               // Picasso..load(url).into(ProfileImage);
                 ((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");

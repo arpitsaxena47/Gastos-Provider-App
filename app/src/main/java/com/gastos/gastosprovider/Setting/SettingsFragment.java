@@ -70,8 +70,8 @@ public class SettingsFragment extends Fragment {
         paymentCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new PaymentInformation();
-                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
+                Intent paymentIntent = new Intent(context , PaymentInformation.class);
+                startActivity(paymentIntent);
 
             }
         });
