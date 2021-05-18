@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.gastos.gastosprovider.R;
 import com.gastos.gastosprovider.Setting.AccountInformation.AccountData;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -93,7 +96,7 @@ public class HomeFragment extends Fragment {
        */
         //For other Images
         auth1 = FirebaseAuth.getInstance();
-
+        database=  FirebaseDatabase.getInstance();
 //        recycler = view.findViewById(R.id.local_r2);
 //        recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 //        FirebaseRecyclerOptions<ShopPic> options =
@@ -178,7 +181,7 @@ public class HomeFragment extends Fragment {
         });
 
          // For Shop Details
-        DatabaseReference ref2 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information");
+      /*  DatabaseReference ref2 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information");
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
@@ -234,6 +237,84 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+       */
+
+        String userId = auth1.getCurrentUser().getUid();
+        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Shop_Information");
+
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+//                   Log.e("firebase", "Error getting data", task.getException());
+                    Toast.makeText(context, "Some Error ..." , Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    if(task.getResult().getValue() != null) {
+
+//                        AccountData accountData = task.getResult(AccountData.class);
+                        TextView shopName=view.findViewById(R.id.shop_name);
+                        TextView shopAddress=view.findViewById(R.id.Address);
+                        TextView shopCategory=view.findViewById(R.id.category);
+                       String prevShopName = task.getResult().child("ShopName").getValue() != null?task.getResult().child("ShopName").getValue() + "":"";
+                        String prevShopAddress = task.getResult().child("ShopAddress").getValue() !=null?task.getResult().child("ShopAddress").getValue() + "": "";
+                        String prevShopCategory = task.getResult().child("Category").getValue() != null?task.getResult().child("Category").getValue() + "":"";
+//                        if(task.getResult().child("ShopName").getValue() != null)
+                        shopName.setText(prevShopName);
+
+//                        if(!task.getResult().child("ShopAddress").getValue().toString().trim().isEmpty())
+                        shopAddress.setText(prevShopAddress);
+                        shopCategory.setText(prevShopCategory);
+
+
+                        ImageView shopIVV=view.findViewById(R.id.rectangle_1);
+                        if(task.getResult().child("ShopPic").getValue() != null)
+                        {
+                            Picasso.get().load(task.getResult().child("ShopPic").getValue()+"")
+                                    .into(shopIVV);
+                            //shopPicUrl = task.getResult().child("ShopPic").getValue()+"";
+                            //txtCoverPhoto.setVisibility(View.GONE);
+                        }
+                        ImageView otherpic1=view.findViewById(R.id.otherpic1);
+                        if(task.getResult().child("OtherImages").child("Other1").getValue() != null){
+
+                            Picasso.get().load(task.getResult().child("OtherImages").child("Other1").getValue()+"")
+                                    .into(otherpic1);
+                           // other1Url = task.getResult().child("OtherImages").child("Other1").getValue()+"";
+                           // txtOther1.setVisibility(View.GONE);
+                        }
+                        ImageView otherpic2=view.findViewById(R.id.otherpic2);
+                        if(task.getResult().child("OtherImages").child("Other2").getValue()!= null){
+
+                            Picasso.get().load(task.getResult().child("OtherImages").child("Other2").getValue()+"")
+                                    .into(otherpic2);
+                            //other2Url = task.getResult().child("OtherImages").child("Other2").getValue()+"";
+                          //  txtOther2.setVisibility(View.GONE);
+                        }
+                        ImageView otherpic3=view.findViewById(R.id.otherpic3);
+                        if(task.getResult().child("OtherImages").child("Other3").getValue() != null){
+                            Picasso.get().load(task.getResult().child("OtherImages").child("Other3").getValue()+"")
+                                    .into(otherpic3);
+                          //  other3Url = task.getResult().child("OtherImages").child("Other3").getValue()+"";
+                            //txtOther3.setVisibility(View.GONE);
+                        }
+
+
+
+
+
+                    }
+                    else {
+                        Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
+                       // progressDialog.dismiss();
+                    }
+                }
+
+            }
+        });
+
 
         ImageView map=view.findViewById(R.id.btnNearMe);
         map.setOnClickListener(new View.OnClickListener() {

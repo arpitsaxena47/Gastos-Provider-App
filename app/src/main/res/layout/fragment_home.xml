@@ -16,12 +16,13 @@
 
             <ImageView
                 android:id="@+id/rectangle_1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="0dp"
                 android:background="#595959"
+                android:scaleType="fitXY"
                 />
 
 
@@ -323,7 +324,7 @@
                                 android:textColor="@color/textcolor2"
                                 />
                             <TextView
-                                android:id="@+id/cafe"
+                                android:id="@+id/category"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="21dp"
