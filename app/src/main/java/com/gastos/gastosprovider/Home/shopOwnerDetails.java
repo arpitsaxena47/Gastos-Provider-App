@@ -2,17 +2,17 @@ package com.gastos.gastosprovider.Home;
 
 public class shopOwnerDetails {
 
-    String OwnerName,PhoneNumber,EmailAddress,ProfileImage,ShopName,ShopAddress,ShopCategory;
+    String OwnerName,PhoneNumber,EmailAddress,ShopPic,ShopName,ShopAddress,ShopCategory;
 
     public shopOwnerDetails() {
     }
 
-    public String getProfileImage() {
-        return ProfileImage;
+    public String getShopPic() {
+        return ShopPic;
     }
 
-    public void setProfileImage(String profileImage) {
-        ProfileImage = profileImage;
+    public void setShopPic(String shopPic) {
+        ShopPic = shopPic;
     }
 
     public String getShopName() {
