@@ -554,7 +554,9 @@ public class ShopInformation extends AppCompatActivity {
         user.put("ShopName",shopName);
         user.put("ShopAddress", shopAddress);
         user.put("ShopPic" , shopPic);
-
+        user.put("OtherPic1", other1);
+        user.put("OtherPic2", other2);
+        user.put("OtherPic3", other3);
 
         String userId = mAuth.getCurrentUser().getUid();
         ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Shop_Information");
@@ -587,44 +589,44 @@ public class ShopInformation extends AppCompatActivity {
             }
         });
 
-        Map<String, Object> other = new HashMap<>();
-
-//        if(!other1.equals(""))
-        other.put("Other1", other1);
-//        if(!other2.equals(""))
-        other.put("Other2", other2);
-//        if(!other3.equals(""))
-        other.put("Other3", other3);
-
-        ref.child("OtherImages").setValue(other).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-//                            Log.i("jfbvkj", "onComplete: ");
-                if(task.isSuccessful()){
-                    Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
-                    if(progressDialog.isShowing())
-                    progressDialog.dismiss();
-                }
-
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-//                            Log.i("jfbvkj", "onFailure: "+e.toString());
-                        Toast.makeText(context, "Fail to Add Data.", Toast.LENGTH_SHORT).show();
-                        if(progressDialog.isShowing())
-                        progressDialog.dismiss();
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-//                    Log.i("jfbvkj", "onSuccess: ");
-                Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
-                if(progressDialog.isShowing())
-                progressDialog.dismiss();
-            }
-        });
+//        Map<String, Object> other = new HashMap<>();
+//
+////        if(!other1.equals(""))
+//        other.put("Other1", other1);
+////        if(!other2.equals(""))
+//        other.put("Other2", other2);
+////        if(!other3.equals(""))
+//        other.put("Other3", other3);
+//
+//        ref.child("OtherImages").setValue(other).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+////                            Log.i("jfbvkj", "onComplete: ");
+//                if(task.isSuccessful()){
+//                    Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
+//                    if(progressDialog.isShowing())
+//                    progressDialog.dismiss();
+//                }
+//
+//            }
+//        })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+////                            Log.i("jfbvkj", "onFailure: "+e.toString());
+//                        Toast.makeText(context, "Fail to Add Data.", Toast.LENGTH_SHORT).show();
+//                        if(progressDialog.isShowing())
+//                        progressDialog.dismiss();
+//                    }
+//                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+////                    Log.i("jfbvkj", "onSuccess: ");
+//                Toast.makeText(context, "Data updated successfully..", Toast.LENGTH_SHORT).show();
+//                if(progressDialog.isShowing())
+//                progressDialog.dismiss();
+//            }
+//        });
     }
 
         private void uploadImage(String shopName, String shopAddress, String shopPic , String other1 , String other2 , String other3) {

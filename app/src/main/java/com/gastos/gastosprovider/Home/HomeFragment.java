@@ -107,44 +107,44 @@ public class HomeFragment extends Fragment {
         //end of code
 
         //For othershopimages
-        database=  FirebaseDatabase.getInstance();
-        DatabaseReference ref3 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information").child("OtherImages");
-        ref3.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
-                // shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
-               // ShopDetails info = dataSnapshot.getValue(ShopDetails.class);
-                //((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
-                // String link = dataSnapshot.getValue(String.class);
-                // loading that data into rImage
-//                ImageView OtherImage1= view.findViewById(R.id.otherpic1);
-//                String url1 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
-//                Picasso.get().load(url1).into(OtherImage1);
+//        database=  FirebaseDatabase.getInstance();
+//        DatabaseReference ref3 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information").child("OtherImages");
+//        ref3.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
+//                // shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
+//               // ShopDetails info = dataSnapshot.getValue(ShopDetails.class);
+//                //((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
+//                // String link = dataSnapshot.getValue(String.class);
+//                // loading that data into rImage
+////                ImageView OtherImage1= view.findViewById(R.id.otherpic1);
+////                String url1 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
+////                Picasso.get().load(url1).into(OtherImage1);
+////
+////                ImageView OtherImage2= view.findViewById(R.id.otherpic2);
+////                String url2 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
+////                Picasso.get().load(url2).into(OtherImage2);
+////
+////                ImageView OtherImage3= view.findViewById(R.id.otherpic3);
+////                String url3 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
+////                Picasso.get().load(url3).into(OtherImage3);
+//                // variable which is ImageView
+//                // Picasso.get().load(info.getProfileImage()).into(ProfileImage);
+//                // ProfileImage = (String) info.getProfileImage();
+//                // Picasso..load(url).into(ProfileImage);
+//                //((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
+//              //  ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
+//                //  ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
 //
-//                ImageView OtherImage2= view.findViewById(R.id.otherpic2);
-//                String url2 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
-//                Picasso.get().load(url2).into(OtherImage2);
 //
-//                ImageView OtherImage3= view.findViewById(R.id.otherpic3);
-//                String url3 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
-//                Picasso.get().load(url3).into(OtherImage3);
-                // variable which is ImageView
-                // Picasso.get().load(info.getProfileImage()).into(ProfileImage);
-                // ProfileImage = (String) info.getProfileImage();
-                // Picasso..load(url).into(ProfileImage);
-                //((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
-              //  ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
-                //  ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
-
-
-            }
-
-            @Override
-            public void onCancelled ( @NonNull DatabaseError databaseError ) {
-
-            }
-        });
-
+//            }
+//
+//            @Override
+//            public void onCancelled ( @NonNull DatabaseError databaseError ) {
+//
+//            }
+//        });
+//
 
         // For OwnerName
 
@@ -185,17 +185,45 @@ public class HomeFragment extends Fragment {
                // shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
                 ShopDetails info = dataSnapshot.getValue(ShopDetails.class);
                   ((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
-                  ImageView ProfileImage= view.findViewById(R.id.rectangle_1);
+                ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
+
+
+                if(info!=null)
+                {
+                    ImageView ProfileImage= view.findViewById(R.id.rectangle_1);
+                    Picasso.get().load(info.getShopPic()).into(ProfileImage);
+
+                }
+                if(info!=null)
+                {
+                    ImageView otherpic1= view.findViewById(R.id.otherpic1);
+                    Picasso.get().load(info.getOtherPic1()).into(otherpic1);
+
+
+                }
+                if(info!=null)
+                {
+                    ImageView otherpic2= view.findViewById(R.id.otherpic2);
+                    Picasso.get().load(info.getOtherPic2()).into(otherpic2);
+
+                }
+
+                if(info!=null)
+                {
+                    ImageView otherpic3= view.findViewById(R.id.otherpic3);
+                    Picasso.get().load(info.getOtherPic3()).into(otherpic3);
+
+                }
                 // String link = dataSnapshot.getValue(String.class);
-                 String url = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").getValue(String.class);
+                 //String url = dataSnapshot.child("Merchant_data/"+auth1.getUid()).child("Shop_Information").getValue(String.class);
                 // loading that data into rImage
-                  Picasso.get().load(url).into(ProfileImage);
+                 // Picasso.get().load(url).into(ProfileImage);
                 // variable which is ImageView
-                // Picasso.get().load(info.getProfileImage()).into(ProfileImage);
+
                 // ProfileImage = (String) info.getProfileImage();
                 // Picasso..load(url).into(ProfileImage);
                 //((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
-                 ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
+
                 //  ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
 
 
