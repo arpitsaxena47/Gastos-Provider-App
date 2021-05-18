@@ -235,6 +235,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        ImageView map=view.findViewById(R.id.btnNearMe);
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
     }
