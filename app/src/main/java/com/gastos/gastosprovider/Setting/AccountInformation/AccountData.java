@@ -1,34 +1,34 @@
 package com.gastos.gastosprovider.Setting.AccountInformation;
 
 public class AccountData {
-    private String ownerName;
-    private String phoneNumber;
-    private String email;
+    private String OwnerName;
+    private String PhoneNumber;
+    private String EmailAddress;
 
     public AccountData() {
     }
 
     public String getOwnerName() {
-        return ownerName;
+        return OwnerName;
     }
 
     public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+        OwnerName = ownerName;
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return PhoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        PhoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailAddress() {
+        return EmailAddress;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailAddress(String emailAddress) {
+        EmailAddress = emailAddress;
     }
 }

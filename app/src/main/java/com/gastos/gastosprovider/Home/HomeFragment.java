@@ -2,7 +2,6 @@ package com.gastos.gastosprovider.Home;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.gastos.gastosprovider.R;
+import com.gastos.gastosprovider.Setting.AccountInformation.AccountData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,10 +27,10 @@ import com.squareup.picasso.Picasso;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recycler;
-    private ShopPicAdapter adap;
-    private  FirebaseAuth auth;
+   // private ShopPicAdapter adap;
+    private  FirebaseAuth auth1;
     private  FirebaseDatabase database;
-   private Context context;
+    private Context context;
 //    private RecyclerView imageRV;
 //    private ArrayList<String> imageURls;
 //    private RecyclerView usersRV;
@@ -91,43 +91,82 @@ public class HomeFragment extends Fragment {
         });
 
        */
-        //New code
+        //For other Images
+        auth1 = FirebaseAuth.getInstance();
 
-        auth = FirebaseAuth.getInstance();
-
-        recycler = view.findViewById(R.id.local_r2);
-        recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        FirebaseRecyclerOptions<ShopPic> options =
-                new FirebaseRecyclerOptions.Builder<ShopPic>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference("Merchant_Data/"+auth.getUid()).child("Other"), ShopPic.class)
-                        .build();
-        //Log.i("jfbvkj", "FirebaseDatabase.getInstance().getReference().child(\"OtherPictures\"), ShopPic.class ");
-        adap = new ShopPicAdapter(options);
-        recycler.setAdapter(adap);
-        recycler.setHasFixedSize(true);
+//        recycler = view.findViewById(R.id.local_r2);
+//        recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//        FirebaseRecyclerOptions<ShopPic> options =
+//                new FirebaseRecyclerOptions.Builder<ShopPic>()
+//                        .setQuery(FirebaseDatabase.getInstance().getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information").child("OtherImages"), ShopPic.class)
+//                        .build();
+//        //Log.i("jfbvkj", "FirebaseDatabase.getInstance().getReference().child(\"OtherPictures\"), ShopPic.class ");
+//        adap = new ShopPicAdapter(options);
+//        recycler.setAdapter(adap);
+//        recycler.setHasFixedSize(true);
         //end of code
 
-        // For other Data
-        database=  FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("Merchant_Data/"+auth.getUid());
+        //For othershopimages
+//        database=  FirebaseDatabase.getInstance();
+//        DatabaseReference ref3 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information").child("OtherImages");
+//        ref3.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
+//                // shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
+//               // ShopDetails info = dataSnapshot.getValue(ShopDetails.class);
+//                //((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
+//                // String link = dataSnapshot.getValue(String.class);
+//                // loading that data into rImage
+////                ImageView OtherImage1= view.findViewById(R.id.otherpic1);
+////                String url1 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
+////                Picasso.get().load(url1).into(OtherImage1);
+////
+////                ImageView OtherImage2= view.findViewById(R.id.otherpic2);
+////                String url2 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
+////                Picasso.get().load(url2).into(OtherImage2);
+////
+////                ImageView OtherImage3= view.findViewById(R.id.otherpic3);
+////                String url3 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
+////                Picasso.get().load(url3).into(OtherImage3);
+//                // variable which is ImageView
+//                // Picasso.get().load(info.getProfileImage()).into(ProfileImage);
+//                // ProfileImage = (String) info.getProfileImage();
+//                // Picasso..load(url).into(ProfileImage);
+//                //((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
+//              //  ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
+//                //  ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled ( @NonNull DatabaseError databaseError ) {
+//
+//            }
+//        });
+//
+
+        // For OwnerName
+
+        DatabaseReference ref = database.getReference("Merchant_data/"+auth1.getUid()).child("Account_Information");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
-                shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
-
-               ((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
-               ImageView ProfileImage= view.findViewById(R.id.rectangle_1);
+               // shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
+                AccountData info = dataSnapshot.getValue(AccountData.class);
+             //  ((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
+             //  ImageView ProfileImage= view.findViewById(R.id.rectangle_1);
              // String link = dataSnapshot.getValue(String.class);
                // String url = dataSnapshot.child("Merchant_Data/"+auth.getUid()).getValue(String.class);
                 // loading that data into rImage
               //  Picasso.get().load(url).into(ProfileImage);
                 // variable which is ImageView
-//                Picasso.get().load(info.getProfileImage()).into(ProfileImage);
+               // Picasso.get().load(info.getProfileImage()).into(ProfileImage);
                // ProfileImage = (String) info.getProfileImage();
               // Picasso..load(url).into(ProfileImage);
                 ((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
-                ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
-                ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
+               // ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
+              //  ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
 
 
             }
@@ -138,20 +177,85 @@ public class HomeFragment extends Fragment {
             }
         });
 
+         // For Shop Details
+        DatabaseReference ref2 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information");
+        ref2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
+               // shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
+                ShopDetails info = dataSnapshot.getValue(ShopDetails.class);
+                  ((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
+                ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
+
+
+                if(info!=null)
+                {
+                    ImageView ProfileImage= view.findViewById(R.id.rectangle_1);
+                    Picasso.get().load(info.getShopPic()).into(ProfileImage);
+
+                }
+                if(info!=null)
+                {
+                    ImageView otherpic1= view.findViewById(R.id.otherpic1);
+                    Picasso.get().load(info.getOtherPic1()).into(otherpic1);
+
+
+                }
+                if(info!=null)
+                {
+                    ImageView otherpic2= view.findViewById(R.id.otherpic2);
+                    Picasso.get().load(info.getOtherPic2()).into(otherpic2);
+
+                }
+
+                if(info!=null)
+                {
+                    ImageView otherpic3= view.findViewById(R.id.otherpic3);
+                    Picasso.get().load(info.getOtherPic3()).into(otherpic3);
+
+                }
+                // String link = dataSnapshot.getValue(String.class);
+                 //String url = dataSnapshot.child("Merchant_data/"+auth1.getUid()).child("Shop_Information").getValue(String.class);
+                // loading that data into rImage
+                 // Picasso.get().load(url).into(ProfileImage);
+                // variable which is ImageView
+
+                // ProfileImage = (String) info.getProfileImage();
+                // Picasso..load(url).into(ProfileImage);
+                //((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
+
+                //  ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
+
+
+            }
+
+            @Override
+            public void onCancelled ( @NonNull DatabaseError databaseError ) {
+
+            }
+        });
+
+        ImageView map=view.findViewById(R.id.btnNearMe);
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        adap.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        adap.stopListening();
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        adap.startListening();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        adap.stopListening();
+ //   }
    /* private void filterData(String query) {
     ArrayList<UserModal> filteredList = new ArrayList<>();
     for(UserModal modal : userModalArrayList){
