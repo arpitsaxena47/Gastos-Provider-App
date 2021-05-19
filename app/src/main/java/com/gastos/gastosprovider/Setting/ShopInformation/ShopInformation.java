@@ -61,8 +61,8 @@ import java.util.UUID;
 
 public class ShopInformation extends AppCompatActivity {
     private static final String TAG = "Location of shop";
-     private String gotlocationlatitude;
-    private String gotlocationlongitude;
+     private String gotlocationlatitude="";
+    private String gotlocationlongitude="";
     private EditText shopNameEdt, shopAddressEdt;
     private TextView txtCoverPhoto , txtOther1 , txtOther2 , txtOther3 ;
     private ImageView backShopInfo , saveShopInfoButton , other1, other2 , other3;
@@ -202,6 +202,10 @@ public class ShopInformation extends AppCompatActivity {
                 }else if(location == null)
                 {
                     Toast.makeText(context, "Please Set Shop Location....", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (gotlocationlongitude.isEmpty()|| gotlocationlatitude.isEmpty()){
+                    Toast.makeText(context, "Add Location Pin....", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

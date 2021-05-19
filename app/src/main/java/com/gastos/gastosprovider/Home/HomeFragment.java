@@ -1,6 +1,8 @@
 package com.gastos.gastosprovider.Home;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
+
 
 public class HomeFragment extends Fragment {
     private RecyclerView recycler;
@@ -34,6 +38,9 @@ public class HomeFragment extends Fragment {
     private  FirebaseAuth auth1;
     private  FirebaseDatabase database;
     private Context context;
+ //   private String Latitude;
+  //  private  String Logitude;
+    String prevShopAddress;
 //    private RecyclerView imageRV;
 //    private ArrayList<String> imageURls;
 //    private RecyclerView usersRV;
@@ -239,19 +246,19 @@ public class HomeFragment extends Fragment {
         });
 
        */
-
+       //For Shop information
         String userId = auth1.getCurrentUser().getUid();
         ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Shop_Information");
 
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-//                   Log.e("firebase", "Error getting data", task.getException());
-                    Toast.makeText(context, "Some Error ..." , Toast.LENGTH_SHORT).show();
-
-                }
-                else {
+//                if (!task.isSuccessful()) {
+////                   Log.e("firebase", "Error getting data", task.getException());
+//                    Toast.makeText(context, "Some Error ..." , Toast.LENGTH_SHORT).show();
+//
+//                }
+               // else {
                     if(task.getResult().getValue() != null) {
 
 //                        AccountData accountData = task.getResult(AccountData.class);
@@ -259,8 +266,10 @@ public class HomeFragment extends Fragment {
                         TextView shopAddress=view.findViewById(R.id.Address);
                         TextView shopCategory=view.findViewById(R.id.category);
                        String prevShopName = task.getResult().child("ShopName").getValue() != null?task.getResult().child("ShopName").getValue() + "":"";
-                        String prevShopAddress = task.getResult().child("ShopAddress").getValue() !=null?task.getResult().child("ShopAddress").getValue() + "": "";
+                         prevShopAddress = task.getResult().child("ShopAddress").getValue() !=null?task.getResult().child("ShopAddress").getValue() + "": "";
                         String prevShopCategory = task.getResult().child("Category").getValue() != null?task.getResult().child("Category").getValue() + "":"";
+                       //  Latitude = task.getResult().child("ShopAddressLatitude").getValue() != null?task.getResult().child("ShopAddressLatitude").getValue() + "":"";
+                       //  Logitude = task.getResult().child("ShopAddressLogitude").getValue() != null?task.getResult().child("ShopAddressLogitude").getValue() + "":"";
 //                        if(task.getResult().child("ShopName").getValue() != null)
                         shopName.setText(prevShopName);
 
@@ -310,7 +319,7 @@ public class HomeFragment extends Fragment {
                         Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
                        // progressDialog.dismiss();
                     }
-                }
+               // }
 
             }
         });
@@ -320,7 +329,20 @@ public class HomeFragment extends Fragment {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?q=loc:%f,%f", Latitude,Logitude);
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                startActivity(intent);
 
+
+//                Uri mapUri = Uri.parse("geo:0,0?q=Latitude,Logitude");
+//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+//                mapIntent.setPackage("com.google.android.apps.maps");
+//                startActivity(mapIntent);
+
+                Uri mapUri = Uri.parse("geo:0,0?q=" + Uri.encode(prevShopAddress));
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
             }
         });
 
