@@ -13,11 +13,6 @@
         <activity android:name=".phoneNumber2_Activity" />
         <activity android:name=".DynamicWebview"/>
         <activity android:name=".Setting.PaymentInformation.PaymentInformation">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Setting.ShopInformation.ImagePickerActivity"/>
         <activity android:name=".Setting.AccountInformation.AccountInformation"/>
@@ -28,7 +23,11 @@
         <activity android:name=".Setting.PaymentInformation.QRScannerActivity" >
         </activity>
         <activity android:name=".HomeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".VerifyOTPActivity" />
         <activity android:name=".PhoneNumberActivity" />

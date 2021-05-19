@@ -10,10 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.gastos.gastosprovider.R;
 import com.gastos.gastosprovider.Setting.AccountInformation.AccountData;
 import com.google.firebase.auth.FirebaseAuth;
@@ -107,7 +105,7 @@ public class HomeFragment extends Fragment {
         //end of code
 
         //For othershopimages
-//        database=  FirebaseDatabase.getInstance();
+        database=  FirebaseDatabase.getInstance();
 //        DatabaseReference ref3 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information").child("OtherImages");
 //        ref3.addValueEventListener(new ValueEventListener() {
 //            @Override

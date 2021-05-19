@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -68,8 +69,7 @@ public class ShopInformation extends AppCompatActivity {
     private Context context;
     private FirebaseAuth mAuth;
     DatabaseReference ref;
-    StorageReference storageRef;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     private String shopPicUrl = "" , other1Url = null,other2Url = null , other3Url = null;
     private String prevShopName = "" , prevShopAddress = "" , prevLocation = "" , prevCategory = "" ;
 
@@ -82,7 +82,7 @@ public class ShopInformation extends AppCompatActivity {
 
    private String selectedImage = "";
 
-   private Uri filePath ;
+   private int flag1 = 0 , flag2 =0;
     public ShopInformation() {
         // Required empty public constructor
 
@@ -128,14 +128,45 @@ public class ShopInformation extends AppCompatActivity {
         editShopName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shopNameEdt.setFocusableInTouchMode(true);
+                if(flag1 == 0 && flag2 == 0){
+                    flag1 = 1;
+                    shopNameEdt.setFocusable(true);
+                    shopNameEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
+                    shopNameEdt.setClickable(true); // user navigates with wheel and selects widget
+
+                    editShopName.setBackgroundColor(Color.GREEN);
+                }
+                else{
+                    flag1 = 0;
+                    shopNameEdt.setFocusable(false);
+                    shopNameEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+                    shopNameEdt.setClickable(false); // user navigates with wheel and selects widget
+
+                    editShopName.setBackgroundColor(Color.TRANSPARENT);
+                }
+
             }
         });
 
         editShopAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shopAddressEdt.setFocusableInTouchMode(true);
+                if(flag1 == 0 && flag2 == 0){
+                    flag2 = 1;
+                    shopAddressEdt.setFocusable(true);
+                    shopAddressEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
+                    shopAddressEdt.setClickable(true); // user navigates with wheel and selects widget
+
+                    editShopAddress.setBackgroundColor(Color.GREEN);
+                }
+                else{
+                    flag2 = 0;
+                    shopAddressEdt.setFocusable(false);
+                    shopAddressEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+                    shopAddressEdt.setClickable(false); // user navigates with wheel and selects widget
+
+                    editShopAddress.setBackgroundColor(Color.TRANSPARENT);
+                }
             }
         });
         shopIV.setOnClickListener(new View.OnClickListener() {
@@ -191,11 +222,11 @@ public class ShopInformation extends AppCompatActivity {
                     Toast.makeText(context, "Please Set Shop Profile Picture....", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(category == null)
+                else if(category == null && prevCategory == null)
                 {
                     Toast.makeText(context, "Please Set Shop Category....", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(location == null)
+                }else if(location == null && prevLocation == null)
                 {
                     Toast.makeText(context, "Please Set Shop Location....", Toast.LENGTH_SHORT).show();
                     return;
@@ -482,6 +513,7 @@ public class ShopInformation extends AppCompatActivity {
                         {
                             categoryDropDown.setSelection(categories.indexOf(task.getResult().child("Category").getValue()+""));
                             prevCategory = task.getResult().child("Category").getValue()+"";
+                            category = task.getResult().child("Category").getValue()+"";
 
                         }
                         else{
@@ -492,6 +524,7 @@ public class ShopInformation extends AppCompatActivity {
                         {
                             locationDropDown.setSelection(locations.indexOf(task.getResult().child("Location").getValue()+""));
                             prevLocation = task.getResult().child("Location").getValue()+"";
+                            location = task.getResult().child("Location").getValue()+"";
 
                         }
                         else{
@@ -721,74 +754,74 @@ public class ShopInformation extends AppCompatActivity {
         });
     }
 
-        private void uploadImage(String shopName, String shopAddress, String shopPic , String other1 , String other2 ,
-                                 String other3,  String location, String category) {
-        if (filePath != null) {
-            // Code for showing progressDialog while uploading
-            ProgressDialog progressDialog
-                    = new ProgressDialog(context);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-            String imgID = UUID.randomUUID().toString();
-            // Defining the child of storageReference
-            StorageReference ref = storageRef.child("images/" + imgID);
-            // adding listeners on upload
-            // or failure of image
-            ref.putFile(filePath)
-                    .addOnSuccessListener(
-                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-
-                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            Log.e("tag", "onSuccess: Uploaded Image URl is " + uri.toString());
-                                            addDataToFirebase(shopName,  shopAddress,  shopPic , other1 ,  other2 ,  other3 , location , category);
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.e("TAG", "DATA S " + e.getMessage());
-                                        }
-                                    });
-                                    progressDialog.dismiss();
-                                }
-                            })
-
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            // Error, Image not uploaded
-                            progressDialog.dismiss();
-                            Toast
-                                    .makeText(context,
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
-                                    .show();
-                        }
-                    })
-                    .addOnProgressListener(
-                            new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                                // Progress Listener for loading
-                                // percentage on the dialog box
-                                @Override
-                                public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int) progress + "%");
-                                }
-                            });
-        }
-    }
+//        private void uploadImage(String shopName, String shopAddress, String shopPic , String other1 , String other2 ,
+//                                 String other3,  String location, String category) {
+//        if (filePath != null) {
+//            // Code for showing progressDialog while uploading
+//            ProgressDialog progressDialog
+//                    = new ProgressDialog(context);
+//            progressDialog.setTitle("Uploading...");
+//            progressDialog.show();
+//            String imgID = UUID.randomUUID().toString();
+//            // Defining the child of storageReference
+//            StorageReference ref = storageRef.child("images/" + imgID);
+//            // adding listeners on upload
+//            // or failure of image
+//            ref.putFile(filePath)
+//                    .addOnSuccessListener(
+//                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                                @Override
+//                                public void onSuccess(
+//                                        UploadTask.TaskSnapshot taskSnapshot) {
+//
+//                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                        @Override
+//                                        public void onSuccess(Uri uri) {
+//                                            Log.e("tag", "onSuccess: Uploaded Image URl is " + uri.toString());
+//                                            addDataToFirebase(shopName,  shopAddress,  shopPic , other1 ,  other2 ,  other3 , location , category);
+//                                        }
+//                                    }).addOnFailureListener(new OnFailureListener() {
+//                                        @Override
+//                                        public void onFailure(@NonNull Exception e) {
+//                                            Log.e("TAG", "DATA S " + e.getMessage());
+//                                        }
+//                                    });
+//                                    progressDialog.dismiss();
+//                                }
+//                            })
+//
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//
+//                            // Error, Image not uploaded
+//                            progressDialog.dismiss();
+//                            Toast
+//                                    .makeText(context,
+//                                            "Failed " + e.getMessage(),
+//                                            Toast.LENGTH_SHORT)
+//                                    .show();
+//                        }
+//                    })
+//                    .addOnProgressListener(
+//                            new OnProgressListener<UploadTask.TaskSnapshot>() {
+//
+//                                // Progress Listener for loading
+//                                // percentage on the dialog box
+//                                @Override
+//                                public void onProgress(
+//                                        UploadTask.TaskSnapshot taskSnapshot) {
+//                                    double progress
+//                                            = (100.0
+//                                            * taskSnapshot.getBytesTransferred()
+//                                            / taskSnapshot.getTotalByteCount());
+//                                    progressDialog.setMessage(
+//                                            "Uploaded "
+//                                                    + (int) progress + "%");
+//                                }
+//                            });
+//        }
+//    }
 
     private ArrayList<String> fillLocations(ArrayList<String> arr)
     {

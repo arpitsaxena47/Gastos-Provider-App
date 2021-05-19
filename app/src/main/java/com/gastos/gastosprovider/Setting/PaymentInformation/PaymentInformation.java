@@ -21,7 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gastos.gastosprovider.HomeActivity;
 import com.gastos.gastosprovider.R;
+import com.gastos.gastosprovider.Setting.ShopInformation.ShopInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,6 +43,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +52,7 @@ public class PaymentInformation extends AppCompatActivity {
     private CardView addQRCodeCV;
     ImageView savePaymentInfo , btnBackPayment;
     private Context context;
-    private RecyclerView qrCodeRV;
+    public RecyclerView qrCodeRV;
     private QRCodeRVAdapter qrCodeRVAdapter;
     private ArrayList<QRCodeRVModal> qrCodeRVModalArrayList;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -76,10 +79,10 @@ public class PaymentInformation extends AppCompatActivity {
         qrCodeRVModalArrayList = new ArrayList<>();
 
         getDataQRCodeDataFromFirebase();
-
-        qrCodeRVAdapter = new QRCodeRVAdapter(context, qrCodeRVModalArrayList);
+        qrCodeRVAdapter = new QRCodeRVAdapter(context, qrCodeRVModalArrayList );
         qrCodeRV.setLayoutManager(new LinearLayoutManager(context));
         qrCodeRV.setAdapter(qrCodeRVAdapter);
+
 
         addQRCodeCV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,12 +103,17 @@ public class PaymentInformation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addDataToFirebase(qrCodeRVModalArrayList);
+
+                Intent homeIntent = new Intent(PaymentInformation.this , HomeActivity.class);
+                startActivity(homeIntent);
+                finish();
                 savePaymentInfo.setVisibility(View.GONE);
             }
         });
 
         savePaymentInfo.setVisibility(View.GONE);
 //        getDataQRCodeDataFromFirebase();
+
 
     }
 
@@ -117,7 +125,7 @@ public class PaymentInformation extends AppCompatActivity {
         progressDialog.show();
 
         String userId = mAuth.getCurrentUser().getUid();
-        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Payment_Information");
+        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Payment_Information").child("All Upi");
 
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -125,25 +133,34 @@ public class PaymentInformation extends AppCompatActivity {
                 if (!task.isSuccessful()) {
 //                   Log.e("firebase", "Error getting data", task.getException());
                     Toast.makeText(context, "Some Error Occurred...", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                    if(progressDialog.isShowing())
+                        progressDialog.dismiss();
+
 
                 } else {
                     if (task.getResult().getValue() != null) {
 
-//                        AccountData accountData = task.getResult(AccountData.class);
-//                        long size = task.getResult().getChildrenCount();
-                        for (DataSnapshot dataSnapshot:task.getResult().getChildren()) {
 
-                            qrCodeRVModalArrayList.add(new QRCodeRVModal(dataSnapshot.child("upiId").child("upiName").getValue() + "" ,
-                                    dataSnapshot.child("upiId").child("upiId").getValue()+""));
+                        Iterator<DataSnapshot> items = task.getResult().getChildren().iterator();
+                        while (items.hasNext()) {
+                            DataSnapshot dataSnapshot = items.next();
+                            qrCodeRVModalArrayList.add(new QRCodeRVModal(dataSnapshot.child("upiName").getValue() + "" ,
+                                    dataSnapshot.child("upiId").getValue()+""));
                         }
 
                     }
+                    else {
+                        Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
 
+                    }
+
+                    if(progressDialog.isShowing())
+                        progressDialog.dismiss();
                 }
+
+                qrCodeRVAdapter.notifyDataSetChanged();
             }
         });
-
 
 
     }
@@ -155,25 +172,37 @@ public class PaymentInformation extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 String upiId = data.getStringExtra("UPI");
 
-                if(upiId.contains("@ok"))
+                int flag = 0;
+                for(QRCodeRVModal model: qrCodeRVModalArrayList)
                 {
-                    qrCodeRVModalArrayList.add(new QRCodeRVModal("Google Pay UPI" , upiId));
+                    if(upiId.equals(model.getUpiId()))
+                    {
+                        flag = 1;
+                        Toast.makeText(PaymentInformation.this, "This UPI Already Exist!! ", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
                 }
-                else if(upiId.contains("@paytm"))
-                {
-                    qrCodeRVModalArrayList.add(new QRCodeRVModal("PayTm UPI" , upiId));
+                if(flag == 0){
+                    if(upiId.contains("@ok"))
+                    {
+                        qrCodeRVModalArrayList.add(new QRCodeRVModal("Google Pay UPI" , upiId));
+                    }
+                    else if(upiId.contains("@paytm"))
+                    {
+                        qrCodeRVModalArrayList.add(new QRCodeRVModal("PayTm UPI" , upiId));
+                    }
+                    else if(upiId.contains("@upi"))
+                    {
+                        qrCodeRVModalArrayList.add(new QRCodeRVModal("BHIM UPI" , upiId));
+                    }
+                    else
+                    {
+                        qrCodeRVModalArrayList.add(new QRCodeRVModal("Phone Pay UPI" , upiId));
+                    }
+                    qrCodeRVAdapter.notifyDataSetChanged();
+                    savePaymentInfo.setVisibility(View.VISIBLE);
                 }
-                else if(upiId.contains("@upi"))
-                {
-                    qrCodeRVModalArrayList.add(new QRCodeRVModal("BHIM UPI" , upiId));
-                }
-                else
-                {
-                    qrCodeRVModalArrayList.add(new QRCodeRVModal("Phone Pay UPI" , upiId));
-                }
-//                for(String upi: qrCodeRVModalArrayList.)
-                qrCodeRVAdapter.notifyDataSetChanged();
-                savePaymentInfo.setVisibility(View.VISIBLE);
+
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
@@ -197,7 +226,7 @@ public class PaymentInformation extends AppCompatActivity {
             user.put(arrayList.get(i).getUpiName() , new QRpair(arrayList.get(i).getUpiId() , arrayList.get(i).getUpiName()));
         }
             String userId = mAuth.getCurrentUser().getUid();
-            ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Payment_Information");
+            ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Payment_Information").child("All Upi");
 
             ref.setValue(user)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -230,31 +259,14 @@ public class PaymentInformation extends AppCompatActivity {
                 }
             });
 
+//            qrCodeRVAdapter.notifyDataSetChanged();
+   }
 
 
-    }
 
     public static class QRpair{
         public String upiId;
         public String upiName;
-        public QRpair() {
-        }
-
-        public String getUpiId() {
-            return upiId;
-        }
-
-        public void setUpiId(String upiId) {
-            this.upiId = upiId;
-        }
-
-        public String getUpiName() {
-            return upiName;
-        }
-
-        public void setUpiName(String upiName) {
-            this.upiName = upiName;
-        }
 
         public QRpair(String upiId, String upiName) {
             this.upiId = upiId;

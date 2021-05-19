@@ -27,7 +27,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="82dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
@@ -37,7 +37,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/idIVProfile"
@@ -60,19 +61,7 @@
                     android:textColor="#595959"
                     android:textSize="20dp" />
 
-                <TextView
-                    android:id="@+id/txtAccountHolderName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/idTVAccount"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginLeft="11dp"
-                    android:layout_marginTop="19dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_toRightOf="@id/idIVProfile"
-                    android:text="Account Holder Name"
-                    android:textColor="#595959"
-                    android:textSize="15dp" />
+
 
 
                 <ImageView
@@ -93,7 +82,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="82dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="15dp"
@@ -103,7 +92,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/idIVShopIcon"
@@ -127,22 +117,6 @@
                     android:textSize="20dp" />
 
 
-                <TextView
-                    android:id="@+id/txtShopName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/idTVShopping"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginLeft="11dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_toRightOf="@id/idIVShopIcon"
-                    android:maxLines="5"
-                    android:text="Address Information"
-                    android:textColor="#595959"
-                    android:textSize="15dp" />
-
-
                 <ImageView
                     android:id="@+id/idbtn2"
                     android:layout_width="30dp"
@@ -160,7 +134,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="82dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="15dp"
@@ -170,7 +144,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/idIVPaymentIcon"
@@ -193,21 +168,6 @@
                     android:textColor="#595959"
                     android:textSize="20dp"/>
 
-
-                <TextView
-                    android:id="@+id/txtPaymentName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/idTVPayment"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_toRightOf="@id/idIVPaymentIcon"
-                    android:maxLines="5"
-                    android:text="Bank Information"
-                    android:textColor="#595959"
-                    android:textSize="15dp" />
 
 
                 <ImageView
