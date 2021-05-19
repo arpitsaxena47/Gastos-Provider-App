@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
@@ -58,7 +60,9 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ShopInformation extends AppCompatActivity {
-
+    private static final String TAG = "Location of shop";
+     private String gotlocationlatitude;
+    private String gotlocationlongitude;
     private EditText shopNameEdt, shopAddressEdt;
     private TextView txtCoverPhoto , txtOther1 , txtOther2 , txtOther3 ;
     private ImageView backShopInfo , saveShopInfoButton , other1, other2 , other3;
@@ -201,8 +205,9 @@ public class ShopInformation extends AppCompatActivity {
                     return;
                 }
 
+
                 addDataToFirebase(shopNameEdt.getText().toString(), shopAddressEdt.getText().toString(), shopPicUrl , other1Url ,
-                        other2Url , other3Url , location , category );
+                        other2Url , other3Url , location , category,gotlocationlatitude,gotlocationlongitude );
                 saveShopInfoButton.setVisibility(View.GONE);
 //                Fragment fragment = new SettingsFragment();
 //                getFragmentManager().beginTransaction().replace(R.id.idFLContainer,fragment).commit();
@@ -211,6 +216,24 @@ public class ShopInformation extends AppCompatActivity {
                 finish();
             }
         });
+
+        //For adding location in backend
+        btnAddPinLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(shopAddressEdt.getText().toString().isEmpty()){
+                    Toast.makeText(context, "Please enter shop address first...", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                   Geolocation geolocation=new Geolocation();
+                    geolocation.getAddress(shopAddressEdt.getText().toString(),
+                            getApplicationContext(), new GeocoderHandler());
+
+                }
+            }
+        });
+
 
         shopNameEdt.addTextChangedListener(new TextWatcher() {
 
@@ -633,7 +656,7 @@ public class ShopInformation extends AppCompatActivity {
 
 
     private void addDataToFirebase(String shopName, String shopAddress, String shopPic , String other1 , String other2 ,
-                                   String other3,  String location, String category) {
+                                   String other3,  String location, String category,String locationLatitude,String locationLogitude) {
 
         ProgressDialog progressDialog
                 = new ProgressDialog(context);
@@ -647,6 +670,8 @@ public class ShopInformation extends AppCompatActivity {
         user.put("ShopPic" , shopPic);
         user.put("Location" , location);
         user.put("Category" , category);
+        user.put("ShopAddressLatitude" , locationLatitude);
+        user.put("ShopAddressLogitude" , locationLogitude);
 
 
         String userId = mAuth.getCurrentUser().getUid();
@@ -721,74 +746,74 @@ public class ShopInformation extends AppCompatActivity {
         });
     }
 
-        private void uploadImage(String shopName, String shopAddress, String shopPic , String other1 , String other2 ,
-                                 String other3,  String location, String category) {
-        if (filePath != null) {
-            // Code for showing progressDialog while uploading
-            ProgressDialog progressDialog
-                    = new ProgressDialog(context);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-            String imgID = UUID.randomUUID().toString();
-            // Defining the child of storageReference
-            StorageReference ref = storageRef.child("images/" + imgID);
-            // adding listeners on upload
-            // or failure of image
-            ref.putFile(filePath)
-                    .addOnSuccessListener(
-                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-
-                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            Log.e("tag", "onSuccess: Uploaded Image URl is " + uri.toString());
-                                            addDataToFirebase(shopName,  shopAddress,  shopPic , other1 ,  other2 ,  other3 , location , category);
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.e("TAG", "DATA S " + e.getMessage());
-                                        }
-                                    });
-                                    progressDialog.dismiss();
-                                }
-                            })
-
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            // Error, Image not uploaded
-                            progressDialog.dismiss();
-                            Toast
-                                    .makeText(context,
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
-                                    .show();
-                        }
-                    })
-                    .addOnProgressListener(
-                            new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                                // Progress Listener for loading
-                                // percentage on the dialog box
-                                @Override
-                                public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int) progress + "%");
-                                }
-                            });
-        }
-    }
+//        private void uploadImage(String shopName, String shopAddress, String shopPic , String other1 , String other2 ,
+//                                 String other3,  String location, String category) {
+//        if (filePath != null) {
+//            // Code for showing progressDialog while uploading
+//            ProgressDialog progressDialog
+//                    = new ProgressDialog(context);
+//            progressDialog.setTitle("Uploading...");
+//            progressDialog.show();
+//            String imgID = UUID.randomUUID().toString();
+//            // Defining the child of storageReference
+//            StorageReference ref = storageRef.child("images/" + imgID);
+//            // adding listeners on upload
+//            // or failure of image
+//            ref.putFile(filePath)
+//                    .addOnSuccessListener(
+//                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                                @Override
+//                                public void onSuccess(
+//                                        UploadTask.TaskSnapshot taskSnapshot) {
+//
+//                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                        @Override
+//                                        public void onSuccess(Uri uri) {
+//                                            Log.e("tag", "onSuccess: Uploaded Image URl is " + uri.toString());
+//                                            addDataToFirebase(shopName,  shopAddress,  shopPic , other1 ,  other2 ,  other3 , location , category);
+//                                        }
+//                                    }).addOnFailureListener(new OnFailureListener() {
+//                                        @Override
+//                                        public void onFailure(@NonNull Exception e) {
+//                                            Log.e("TAG", "DATA S " + e.getMessage());
+//                                        }
+//                                    });
+//                                    progressDialog.dismiss();
+//                                }
+//                            })
+//
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//
+//                            // Error, Image not uploaded
+//                            progressDialog.dismiss();
+//                            Toast
+//                                    .makeText(context,
+//                                            "Failed " + e.getMessage(),
+//                                            Toast.LENGTH_SHORT)
+//                                    .show();
+//                        }
+//                    })
+//                    .addOnProgressListener(
+//                            new OnProgressListener<UploadTask.TaskSnapshot>() {
+//
+//                                // Progress Listener for loading
+//                                // percentage on the dialog box
+//                                @Override
+//                                public void onProgress(
+//                                        UploadTask.TaskSnapshot taskSnapshot) {
+//                                    double progress
+//                                            = (100.0
+//                                            * taskSnapshot.getBytesTransferred()
+//                                            / taskSnapshot.getTotalByteCount());
+//                                    progressDialog.setMessage(
+//                                            "Uploaded "
+//                                                    + (int) progress + "%");
+//                                }
+//                            });
+//        }
+//    }
 
     private ArrayList<String> fillLocations(ArrayList<String> arr)
     {
@@ -825,7 +850,31 @@ public class ShopInformation extends AppCompatActivity {
 
     }
 
-}
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    gotlocationlatitude = bundle.getString("lati");
+                    gotlocationlongitude = bundle.getString("logi");
+                    break;
+
+                default:
+                    gotlocationlatitude = null;
+                    gotlocationlongitude = null;
+
+            }
+           // Log.e(TAG, gotlocationlatitude);
+          //  Log.e(TAG, gotlocationlongitude);
+           // Toast.makeText(context, "Latitude=" +gotlocationlatitude+"  " + "Longitude="+gotlocationlongitude, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Location has been added successfully", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    }
+
 
 
 
