@@ -21,8 +21,7 @@
             android:layout_marginTop="17dp"
             android:padding="4dp"
             android:text="Settings"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textAppearance="@style/settings" />
 
 
         <androidx.cardview.widget.CardView
@@ -231,7 +230,8 @@
                     android:layout_toRightOf="@id/idIVSupportIcons"
                     android:text="Send Feedback and Rate Us"
                     android:textColor="#595959"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:clickable="true"/>
 
             </RelativeLayout>
         </RelativeLayout>
@@ -281,7 +281,8 @@
                     android:layout_toRightOf="@id/idIVAbout"
                     android:text="Contact Us"
                     android:textColor="#595959"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp"
+                    android:clickable="true"/>
 
                 <TextView
                     android:id="@+id/legal"
@@ -294,7 +295,8 @@
                     android:layout_toRightOf="@id/idIVAbout"
                     android:text="Legal"
                     android:textColor="#595959"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp"
+                    android:clickable="true"/>
 
 
             </RelativeLayout>
@@ -306,7 +308,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
             android:layout_marginTop="14dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginEnd="10dp"
+            android:clickable="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"

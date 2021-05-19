@@ -3,11 +3,14 @@ package com.gastos.gastosprovider.Setting;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -19,6 +22,7 @@ import com.gastos.gastosprovider.PhoneNumberActivity;
 import com.gastos.gastosprovider.R;
 import com.gastos.gastosprovider.Setting.AccountInformation.AccountInformation;
 import com.gastos.gastosprovider.Setting.ShopInformation.ShopInformation;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,6 +48,8 @@ public class SettingsFragment extends Fragment {
         accountCV = view.findViewById(R.id.idbtn1);
         shopCV = view.findViewById(R.id.idbtn2);
         paymentCV = view.findViewById(R.id.idbtn3);
+
+
 
         accountCV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,17 +82,17 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-//        view.findViewById(R.id.rateus).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-//                try {
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-//                } catch (android.content.ActivityNotFoundException anfe) {
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-//                }
-//            }
-//        });
+        view.findViewById(R.id.rateus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String appPackageName = context.getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+            }
+        });
 
         view.findViewById(R.id.Contact).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +112,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.idRLLogOut).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
 
@@ -159,4 +165,6 @@ public class SettingsFragment extends Fragment {
 
         return view;
     }
+
+
 }

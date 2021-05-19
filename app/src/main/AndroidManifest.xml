@@ -11,18 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GastosApp">
         <activity android:name=".phoneNumber2_Activity" />
-        <activity android:name=".DynamicWebview"/>
-        <activity android:name=".Setting.PaymentInformation.PaymentInformation">
-        </activity>
-        <activity android:name=".Setting.ShopInformation.ImagePickerActivity"/>
-        <activity android:name=".Setting.AccountInformation.AccountInformation"/>
-        <activity android:name=".Setting.ShopInformation.ShopInformation"/>
+        <activity android:name=".DynamicWebview" />
+        <activity android:name=".Setting.PaymentInformation.PaymentInformation"></activity>
+        <activity android:name=".Setting.ShopInformation.ImagePickerActivity" />
+        <activity android:name=".Setting.AccountInformation.AccountInformation" />
+        <activity android:name=".Setting.ShopInformation.ShopInformation" />
         <activity android:name=".SetNewPin_Activity" />
         <activity android:name=".Setpin_Activity" />
         <activity android:name=".Enterpin_Activity" />
-        <activity android:name=".Setting.PaymentInformation.QRScannerActivity" >
-        </activity>
-        <activity android:name=".HomeActivity" >
+        <activity android:name=".Setting.PaymentInformation.QRScannerActivity"></activity>
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,15 +29,11 @@
         </activity>
         <activity android:name=".VerifyOTPActivity" />
         <activity android:name=".PhoneNumberActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
-
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-           />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -50,9 +44,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider" />
         </provider>
-    </application>
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- Permission for camera -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permission to vibrate -->
+    </application> <!-- Permission for camera -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Permission to vibrate -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -61,6 +55,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 </manifest>

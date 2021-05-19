@@ -39,16 +39,16 @@ public class DynamicWebview extends AppCompatActivity {
         mref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                html = dataSnapshot.getValue(String.class);
+//                html = dataSnapshot.getValue(String.class);
                 Log.e("TAG", "onDataChange: "+html+"sadasddsa");
-//              html =  "<!DOCTYPE HTML> <HTML> <BODY> <P STYLE=\"margin-bottom: 0px; line-height: 100%\"> " +
-//                        " Welcome to GASTOS, your number one solution of your daily payments." +
-//                        "We're dedicated to providing you with the best of the services, with a focus on dependability. customer service, and your " +
-//                        "benefits. </P>   <P STYLE=\"margin-bottom: 0.11px\">Instagram :" +
-//                        " <A HREF=\"https://instagram.com/_gastos_?igshid=19hctlc76b8x9\">_gastos_</A></P>  <LI><P STYLE=\"margin-bottom: 0.11px\">Facebook :" +
-//                        " <A HREF=\"https://www.facebook.com/sahgal.kumar.900\">GASTOS DEALZ</A></P> <LI><P STYLE=\"margin-bottom: 0.11px\">Twitter : " +
-//                        "<A HREF=\"https://twitter.com/GASTOS48485267?s=09\">GASTOS</A></P> </UL> <P STYLE=\"margin-left: 0.5px; margin-bottom: " +
-//                        "0.11px\">For any queries you can contact us as <A HREF=\"mailto:support@gastos.in\">support@gastos.in</A></P> </BODY> </HTML>";
+              html =  "<!DOCTYPE HTML> <HTML> <BODY> <P STYLE=\"margin-bottom: 0px; line-height: 100%\"> " +
+                        " Welcome to GASTOS, your number one solution of your daily payments." +
+                        "We're dedicated to providing you with the best of the services, with a focus on dependability. customer service, and your " +
+                        "benefits. </P>   <P STYLE=\"margin-bottom: 0.11px\">Instagram :" +
+                        " <A HREF=\"https://instagram.com/_gastos_?igshid=19hctlc76b8x9\">_gastos_</A></P>  <LI><P STYLE=\"margin-bottom: 0.11px\">Facebook :" +
+                        " <A HREF=\"https://www.facebook.com/sahgal.kumar.900\">GASTOS DEALZ</A></P> <LI><P STYLE=\"margin-bottom: 0.11px\">Twitter : " +
+                        "<A HREF=\"https://twitter.com/GASTOS48485267?s=09\">GASTOS</A></P> </UL> <P STYLE=\"margin-left: 0.5px; margin-bottom: " +
+                        "0.11px\">For any queries you can contact us as <A HREF=\"mailto:support@gastos.in\">support@gastos.in</A></P> </BODY> </HTML>";
 //                Log.e("TAG", "onDataChange: "+html+"sadasddsa");
 //                web.getSettings().setJavaScriptEnabled(true);
 //
