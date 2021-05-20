@@ -87,6 +87,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         resendOTPTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(VerifyOTPActivity.this, "Resending  OTP...", Toast.LENGTH_SHORT).show();
                 resendVerificationCode(phonenumber_value, resendOTPtoken);
             }
         });
