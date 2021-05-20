@@ -343,6 +343,7 @@
                     android:backgroundTint="@null"
                     android:textAllCaps="false"
                     app:backgroundTint="#588157"
+                    android:visibility="gone"
                     />
                    <!-- android:background="@drawable/rectangle_2"
                     android:textAppearance="@style/add"

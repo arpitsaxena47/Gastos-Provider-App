@@ -315,6 +315,7 @@ public class ShopInformation extends AppCompatActivity {
                 if(!editable.toString().equals(prevShopAddress))
                 {
                     saveShopInfoButton.setVisibility(View.VISIBLE);
+                    btnAddPinLocation.setVisibility(View.VISIBLE);
                 }
                 else
                 if( shopNameEdt.getText().toString().equals(prevShopName)  && shopPicUrl.isEmpty() &&
