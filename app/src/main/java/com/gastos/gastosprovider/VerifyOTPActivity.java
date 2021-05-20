@@ -99,6 +99,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
                     //this is for backspace
                     inputotp1.requestFocus();
+                    inputotp1.setText("");
 
                 }
                 return false;
@@ -112,6 +113,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
                     //this is for backspace
                     inputotp2.requestFocus();
+                    inputotp2.setText("");
                 }
                 return false;
             }
@@ -123,6 +125,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
                     //this is for backspace
                     inputotp3.requestFocus();
+                    inputotp3.setText("");
 
                 }
                 return false;
@@ -135,6 +138,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
                     //this is for backspace
                     inputotp4.requestFocus();
+                    inputotp4.setText("");
 
                 }
                 return false;
@@ -146,7 +150,15 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
                 if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
                     //this is for backspace
-                    inputotp5.requestFocus();
+                    if(inputotp6.getText().toString().equals(""))
+                    {
+                        inputotp5.requestFocus();
+                        inputotp5.setText("");
+                    }
+                    else{
+                        inputotp6.setText("");
+                    }
+
 
                 }
                 return false;
@@ -227,10 +239,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 {
                     inputotp3.requestFocus();
                 }
-                else
-                {
-                    inputotp1.requestFocus();
-                }
+
             }
 
             @Override
@@ -251,10 +260,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 {
                     inputotp4.requestFocus();
                 }
-                else
-                {
-                    inputotp2.requestFocus();
-                }
+
             }
 
             @Override
@@ -275,10 +281,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 {
                     inputotp5.requestFocus();
                 }
-                else
-                {
-                    inputotp3.requestFocus();
-                }
+
             }
 
             @Override
@@ -299,10 +302,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 {
                     inputotp6.requestFocus();
                 }
-                else
-                {
-                    inputotp4.requestFocus();
-                }
+
             }
 
             @Override

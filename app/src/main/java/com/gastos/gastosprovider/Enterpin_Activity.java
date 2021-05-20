@@ -77,6 +77,7 @@ public class Enterpin_Activity extends AppCompatActivity {
                 if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
                     //this is for backspace
                     dig1.requestFocus();
+                    dig1.setText("");
 
                 }
                 return false;
@@ -90,6 +91,7 @@ public class Enterpin_Activity extends AppCompatActivity {
                 if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
                     //this is for backspace
                     dig2.requestFocus();
+                    dig2.setText("");
                 }
                 return false;
             }
@@ -100,7 +102,15 @@ public class Enterpin_Activity extends AppCompatActivity {
                 //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
                 if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
                     //this is for backspace
-                    dig3.requestFocus();
+                    if(dig4.getText().toString().equals(""))
+                    {
+                        dig3.requestFocus();
+                        dig3.setText("");
+                    }
+                    else{
+                        dig4.setText("");
+                    }
+
 
                 }
                 return false;
