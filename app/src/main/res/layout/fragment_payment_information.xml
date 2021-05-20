@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/savePaymentChanges"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="28dp"
@@ -37,7 +37,8 @@
         android:layout_marginTop="80dp"
         android:padding="4dp"
         android:text="Payment Information"
-        android:textAppearance="@style/settings" />
+        android:textAppearance="@style/settings"
+        />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -17,8 +17,8 @@
 
     <ImageView
         android:id="@+id/saveAccountChanges"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="28dp"
