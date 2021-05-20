@@ -330,16 +330,25 @@
 
                 <Button
                     android:id="@+id/btnShopLocation"
-                    android:layout_width="61dp"
-                    android:layout_height="40dp"
+                    android:layout_width="65dp"
+                    android:layout_height="32dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="1dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/rectangle_2"
-                    android:text="add"
-                    android:textAppearance="@style/add"
+                    android:text="Add"
+                    android:textSize="10dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@null"
+                    android:textAllCaps="false"
+                    app:backgroundTint="#588157"
                     />
+                   <!-- android:background="@drawable/rectangle_2"
+                    android:textAppearance="@style/add"
+                    -->
+
+
 
             </RelativeLayout>
 
