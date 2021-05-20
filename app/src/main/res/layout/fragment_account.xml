@@ -10,30 +10,32 @@
         android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="29dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="25dp"
         android:clickable="true"
         android:src="@drawable/long_left_black" />
 
     <ImageView
         android:id="@+id/saveAccountChanges"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="29dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="21dp"
         android:clickable="true"
         android:src="@drawable/ic_baseline_done_24" />
     <TextView
         android:id="@+id/idTVHeadAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="10dp"
         android:layout_alignParentTop="true"
         android:padding="4dp"
+        android:textSize="25dp"
+        android:textColor="#000000"
         android:text="@string/account_inf"
         android:textAppearance="@style/settings" />
 
@@ -57,9 +59,12 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="4dp"
                 android:padding="3dp"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:text="@string/owner_name"
-                android:textAppearance="@style/shop_name" />
+                android:textColor="#595959"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02"
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -82,10 +87,11 @@
 
                 <ImageButton
                     android:id="@+id/editOwnerName"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@null"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_edit_24" />
@@ -97,9 +103,11 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:padding="3dp"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:text="@string/phone_numbe"
-                android:textAppearance="@style/shop_name" />
+                android:textColor="#595959"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -123,10 +131,11 @@
 
                 <ImageButton
                     android:id="@+id/editPhoneNum"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@null"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_edit_24" />
@@ -139,9 +148,11 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:padding="3dp"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:text="@string/email_addre"
-                android:textAppearance="@style/shop_name" />
+                android:textColor="#595959"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -164,10 +175,11 @@
 
                 <ImageButton
                     android:id="@+id/editEmailAddress"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@null"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_edit_24" />

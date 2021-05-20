@@ -11,30 +11,31 @@
         android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="29dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="25dp"
         android:clickable="true"
         android:src="@drawable/long_left_black" />
 
     <ImageView
         android:id="@+id/saveShopInfoChanges"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="29dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="21dp"
         android:clickable="true"
         android:src="@drawable/ic_baseline_done_24" />
     <TextView
         android:id="@+id/idTVHeadShopInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="10dp"
         android:layout_alignParentTop="true"
         android:padding="4dp"
+        android:textColor="#000000"
         android:text="@string/shop_inform"
         android:textAppearance="@style/settings" />
 
@@ -190,9 +191,11 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="4dp"
                 android:padding="3dp"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:text="@string/shop_name"
-                android:textAppearance="@style/shop_name" />
+                android:textColor="#595959"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -215,10 +218,11 @@
 
                 <ImageButton
                     android:id="@+id/editShopName"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="11dp"
                     android:background="@null"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_edit_24" />
@@ -230,9 +234,11 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:padding="3dp"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:text="@string/shop_addres"
-                android:textAppearance="@style/shop_name" />
+                android:textColor="#595959"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -255,10 +261,11 @@
 
                 <ImageButton
                     android:id="@+id/editShopAddress"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="11dp"
                     android:background="@null"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_edit_24" />
@@ -277,14 +284,17 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:padding="3dp"
-                    android:textAppearance="@style/shop_name"
+                    android:textColor="#595959"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02"
                     android:text="@string/shop_catego" />
 
                 <RelativeLayout
                     android:layout_width="138dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="6dp"
                     android:background="@drawable/rectangle_236"
                     android:orientation="vertical">
 
@@ -311,18 +321,26 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:layout_alignParentStart="true"
-                    android:textAppearance="@style/shop_name"
+                    android:textSize="20dp"
+                    android:textColor="#595959"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02"
                     android:text="@string/shop_locati" />
+
 
                 <Button
                     android:id="@+id/btnShopLocation"
                     android:layout_width="61dp"
                     android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/rectangle_2"
                     android:text="add"
-                    android:textAppearance="@style/add" />
+                    android:textAppearance="@style/add"
+                    />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -337,14 +355,17 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:layout_alignParentStart="true"
-                    android:textAppearance="@style/shop_name"
+                    android:textSize="20dp"
+                    android:textColor="#595959"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02"
                     android:text="@string/shop_locate_city" />
 
                 <RelativeLayout
                     android:layout_width="138dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="6dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rectangle_236">
 
