@@ -562,6 +562,8 @@ public class ShopInformation extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                     else {
+                        locationDropDown.setSelection(locations.size()-1);
+                        categoryDropDown.setSelection(categories.size()-1);
                         Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }

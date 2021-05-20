@@ -62,6 +62,7 @@ public class QRCodeRVAdapter extends RecyclerView.Adapter<QRCodeRVAdapter.ViewHo
         holder.upiId.setText(modal.getUpiId());
         if(position == 0) {
                 strokeOfPrimary(holder.itemCardView);
+                addToFirebase();
         }
 
     }
