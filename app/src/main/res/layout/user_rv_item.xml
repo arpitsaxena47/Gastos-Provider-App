@@ -22,7 +22,6 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="14dp"
             android:layout_marginBottom="11dp"
-            android:background="@drawable/prof_pic"
             />
 
         <TextView
@@ -80,7 +79,6 @@
            android:layout_marginTop="5dp"
             android:layout_marginRight="23dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/money_mode"
            />
 
     </RelativeLayout>
