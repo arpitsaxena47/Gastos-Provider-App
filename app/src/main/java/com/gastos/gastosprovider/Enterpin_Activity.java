@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 public class Enterpin_Activity extends AppCompatActivity {
 
 
@@ -27,6 +26,7 @@ public class Enterpin_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enterpin_);
+
 
         dig1 = findViewById(R.id.digit1);
         dig2 = findViewById(R.id.digit2);
@@ -49,6 +49,7 @@ public class Enterpin_Activity extends AppCompatActivity {
                         //Intent
                         Intent intent = new Intent(Enterpin_Activity.this,HomeActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                     else
                     {

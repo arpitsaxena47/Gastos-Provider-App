@@ -46,6 +46,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
 
 
                         startActivity(intent);
+                        finish();
 
 
                     } else {

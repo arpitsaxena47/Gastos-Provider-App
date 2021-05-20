@@ -40,6 +40,7 @@ public class SetNewPin_Activity extends AppCompatActivity {
                         Toast.makeText(SetNewPin_Activity.this, "set pin done=" + epin1, Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(SetNewPin_Activity.this, HomeActivity.class);
                         startActivity(i);
+                        finish();
                     }
                     else{
                         Toast.makeText(SetNewPin_Activity.this, "Both pin should be same" , Toast.LENGTH_SHORT).show();

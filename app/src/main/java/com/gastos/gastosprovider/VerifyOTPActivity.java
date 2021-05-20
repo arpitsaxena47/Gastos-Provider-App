@@ -339,11 +339,13 @@ public class VerifyOTPActivity extends AppCompatActivity {
                             {
                                 Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
                                 startActivity(i);
+                                finish();
                             }
                             else
                             {
                                 Intent i = new Intent(VerifyOTPActivity.this, SetNewPin_Activity.class);
                                 startActivity(i);
+                                finish();
                             }
                             //Toast.makeText(VerifyOTPActivity.this, "User verified..", Toast.LENGTH_SHORT).show();
                         } else {

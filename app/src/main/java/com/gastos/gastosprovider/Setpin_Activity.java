@@ -40,6 +40,7 @@ public class Setpin_Activity extends AppCompatActivity {
                     Toast.makeText(Setpin_Activity.this, "set pin done=" + epin1, Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Setpin_Activity.this, HomeActivity.class);
                     startActivity(i);
+                    finish();
                 }
                 else if(epin1.length() != 4){
                     Toast.makeText(Setpin_Activity.this, "PIN Should Be Of 4 Digits", Toast.LENGTH_SHORT).show();

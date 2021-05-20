@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -252,12 +253,12 @@ public class HomeFragment extends Fragment {
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-////                   Log.e("firebase", "Error getting data", task.getException());
-//                    Toast.makeText(context, "Some Error ..." , Toast.LENGTH_SHORT).show();
-//
-//                }
-               // else {
+                if (!task.isSuccessful()) {
+                   Log.e("firebase", "Error getting data", task.getException());
+                    Toast.makeText(context, "Some Error ..." , Toast.LENGTH_SHORT).show();
+
+                }
+                else {
                     if(task.getResult().getValue() != null) {
 
 //                        AccountData accountData = task.getResult(AccountData.class);
@@ -318,7 +319,7 @@ public class HomeFragment extends Fragment {
                         Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
                        // progressDialog.dismiss();
                     }
-               // }
+                }
 
             }
         });

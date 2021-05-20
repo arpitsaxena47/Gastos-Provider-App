@@ -39,6 +39,7 @@ public class phoneNumber2_Activity extends AppCompatActivity {
                         intent.putExtra("phone_number", num);
                         intent.putExtra("via", 2);
                         startActivity(intent);
+                        finish();
 
 
                     } else {
