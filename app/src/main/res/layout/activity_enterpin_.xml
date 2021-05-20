@@ -129,10 +129,10 @@
             <TextView
                 android:id="@+id/forgotPin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="22dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:background="@null"
-                android:text="Resend OTP"
+                android:text="Forgot Pin?"
                 android:textColor="#818181"
                 android:textSize="12dp" />
 
