@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -90,6 +91,67 @@ public class VerifyOTPActivity extends AppCompatActivity {
             }
         });
 
+
+        inputotp2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+                    //this is for backspace
+                    inputotp1.requestFocus();
+
+                }
+                return false;
+            }
+        });
+
+        inputotp3.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+                    //this is for backspace
+                    inputotp2.requestFocus();
+                }
+                return false;
+            }
+        });
+        inputotp4.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+                    //this is for backspace
+                    inputotp3.requestFocus();
+
+                }
+                return false;
+            }
+        });
+        inputotp5.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+                    //this is for backspace
+                    inputotp4.requestFocus();
+
+                }
+                return false;
+            }
+        });
+        inputotp6.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+                    //this is for backspace
+                    inputotp5.requestFocus();
+
+                }
+                return false;
+            }
+        });
        /* otpEdt1 = findViewById(R.id.inputcode1);
         otpEdt2 = findViewById(R.id.inputcode2);
         otpEdt3 = findViewById(R.id.inputcode3);
@@ -134,6 +196,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+
             }
 
             @Override
@@ -143,6 +206,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 {
                     inputotp2.requestFocus();
                 }
+
             }
 
             @Override
@@ -162,6 +226,10 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if (!s.toString().trim().isEmpty())
                 {
                     inputotp3.requestFocus();
+                }
+                else
+                {
+                    inputotp1.requestFocus();
                 }
             }
 
@@ -183,6 +251,10 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 {
                     inputotp4.requestFocus();
                 }
+                else
+                {
+                    inputotp2.requestFocus();
+                }
             }
 
             @Override
@@ -203,6 +275,10 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 {
                     inputotp5.requestFocus();
                 }
+                else
+                {
+                    inputotp3.requestFocus();
+                }
             }
 
             @Override
@@ -222,6 +298,10 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if (!s.toString().trim().isEmpty())
                 {
                     inputotp6.requestFocus();
+                }
+                else
+                {
+                    inputotp4.requestFocus();
                 }
             }
 

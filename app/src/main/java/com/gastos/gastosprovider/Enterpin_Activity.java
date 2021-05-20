@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,6 +70,42 @@ public class Enterpin_Activity extends AppCompatActivity {
             }
         });
 
+        dig2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+                    //this is for backspace
+                    dig1.requestFocus();
+
+                }
+                return false;
+            }
+        });
+
+        dig3.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+                    //this is for backspace
+                    dig2.requestFocus();
+                }
+                return false;
+            }
+        });
+        dig4.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+                    //this is for backspace
+                    dig3.requestFocus();
+
+                }
+                return false;
+            }
+        });
     }
 
     private String getOriginalPin()
@@ -108,11 +145,12 @@ public class Enterpin_Activity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 if (!s.toString().trim().isEmpty())
                 {
                     dig3.requestFocus();
                 }
+
+
             }
 
             @Override
@@ -133,6 +171,8 @@ public class Enterpin_Activity extends AppCompatActivity {
                 {
                     dig4.requestFocus();
                 }
+
+
             }
 
             @Override
@@ -140,6 +180,8 @@ public class Enterpin_Activity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 

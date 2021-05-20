@@ -21,15 +21,17 @@
         <activity android:name=".Enterpin_Activity" />
         <activity android:name=".Setting.PaymentInformation.QRScannerActivity"></activity>
         <activity android:name=".HomeActivity">
+
+        </activity>
+        <activity android:name=".VerifyOTPActivity" />
+        <activity android:name=".PhoneNumberActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VerifyOTPActivity" />
-        <activity android:name=".PhoneNumberActivity" />
-        <activity android:name=".MainActivity"></activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
