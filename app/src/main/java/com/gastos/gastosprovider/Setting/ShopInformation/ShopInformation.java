@@ -126,7 +126,7 @@ public class ShopInformation extends AppCompatActivity {
 
         shopIV = findViewById(R.id.idIVShop);
         loadProfileDefault();
-        saveShopInfoButton.setVisibility(View.GONE);
+//        saveShopInfoButton.setVisibility(View.GONE);
         ImagePickerActivity.clearCache(context);
 
         editShopName.setOnClickListener(new View.OnClickListener() {
@@ -341,7 +341,7 @@ public class ShopInformation extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(prevCategory.equals(parent.getItemAtPosition(position).toString())|| parent.getItemAtPosition(position).toString().equals(
+                if(prevCategory.equals(category) || parent.getItemAtPosition(position).toString().equals(
                         categories.get(categories.size()-1) ))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
@@ -372,7 +372,7 @@ public class ShopInformation extends AppCompatActivity {
         locationDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(prevLocation.equals(parent.getItemAtPosition(position).toString()) ||
+                if(prevLocation.equals(location) ||
                         parent.getItemAtPosition(position).toString().equals(locations.get(locations.size()-1)))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
@@ -541,7 +541,7 @@ public class ShopInformation extends AppCompatActivity {
                         {
                             categoryDropDown.setSelection(categories.indexOf(task.getResult().child("Category").getValue()+""));
                             prevCategory = task.getResult().child("Category").getValue()+"";
-                            category = task.getResult().child("Category").getValue()+"";
+                            category = prevCategory;
 
                         }
                         else{
@@ -552,7 +552,7 @@ public class ShopInformation extends AppCompatActivity {
                         {
                             locationDropDown.setSelection(locations.indexOf(task.getResult().child("Location").getValue()+""));
                             prevLocation = task.getResult().child("Location").getValue()+"";
-                            location = task.getResult().child("Location").getValue()+"";
+                            location = prevLocation;
 
                         }
                         else{
@@ -880,8 +880,7 @@ public class ShopInformation extends AppCompatActivity {
         arr.add("Boutique");
         arr.add("Grocery");
         arr.add("Medical");
-        arr.add("Select" +
-                " Category");
+        arr.add("Select Category");
 
 
         return arr;

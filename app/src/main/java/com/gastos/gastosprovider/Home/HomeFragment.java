@@ -33,7 +33,7 @@ import java.util.Locale;
 public class HomeFragment extends Fragment {
     private RecyclerView recycler;
    // private ShopPicAdapter adap;
-    private  FirebaseAuth auth1;
+    private  FirebaseAuth auth1 ;
     private  FirebaseDatabase database;
     private Context context;
  //   private String Latitude;
@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        context = container.getContext();
       /*  imageRV = view.findViewById(R.id.idRVImages);
         searchEdt = view.findViewById(R.id.idEdtSearch);
         usersRV = view.findViewById(R.id.idRvUsers);
