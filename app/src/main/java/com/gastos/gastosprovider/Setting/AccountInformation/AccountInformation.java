@@ -404,8 +404,10 @@ public class AccountInformation extends AppCompatActivity {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
 //                   Log.e("firebase", "Error getting data", task.getException());
-                    Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Some error occured..." , Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
+
+
 
                 }
                 else {
@@ -418,14 +420,8 @@ public class AccountInformation extends AppCompatActivity {
                         prevEmail = task.getResult().child("EmailAddress").getValue() + "";
 
                         ownerNameEdt.setText(prevOwnerName);
-                        if(prevPhoneNum.equals("")){
+                        phoneNumEdt.setText(prevPhoneNum);
 
-                            SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE);
-                            phoneNumEdt.setText(pref.getString("phoneNum",""));
-                        }
-                        else{
-                            phoneNumEdt.setText(prevPhoneNum);
-                        }
                         emailEdt.setText(prevEmail);
 //                        ownerNameEdt.setText(task.getResult().child("OwnerName").getValue() + "");
 //                        phoneNumEdt.setText(task.getResult().child("PhoneNumber").getValue() + "");
@@ -437,6 +433,11 @@ public class AccountInformation extends AppCompatActivity {
                     else {
                         Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
+                        if(prevPhoneNum.equals("")){
+
+                            SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE);
+                            phoneNumEdt.setText(pref.getString("phoneNum",""));
+                        }
                     }
                 }
 
