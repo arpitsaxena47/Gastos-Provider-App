@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ import java.util.Map;
 public class AccountInformation extends AppCompatActivity {
 
     private EditText ownerNameEdt, phoneNumEdt, emailEdt;
-    private ImageButton editOwnerName, editPhoneNum, editEmail;
+//    private ImageButton editOwnerName, editPhoneNum, editEmail;
     private ImageView saveAccountInfoButton , btnAccountBack;
     private Context context;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -44,7 +45,7 @@ public class AccountInformation extends AppCompatActivity {
     private DatabaseReference ref;
 
     private String prevOwnerName  = "", prevPhoneNum = "" , prevEmail = "";
-    private int flag1 = 0 , flag2 = 0 ,  flag3 = 0;
+//    private int flag1 = 0 , flag2 = 0 ,  flag3 = 0;
 
 
     @Override
@@ -53,6 +54,8 @@ public class AccountInformation extends AppCompatActivity {
 
         setContentView(R.layout.fragment_account);
         context = AccountInformation.this;
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         saveAccountInfoButton = findViewById(R.id.saveAccountChanges);
         btnAccountBack =findViewById(R.id.account_info_back);
 
@@ -65,9 +68,9 @@ public class AccountInformation extends AppCompatActivity {
         emailEdt = findViewById(R.id.idEdtEmailAddress);
 //        emailEdt.setClickable(false);
 
-        editOwnerName = findViewById(R.id.editOwnerName);
-        editPhoneNum = findViewById(R.id.editPhoneNum);
-        editEmail = findViewById(R.id.editEmailAddress);
+//        editOwnerName = findViewById(R.id.editOwnerName);
+//        editPhoneNum = findViewById(R.id.editPhoneNum);
+//        editEmail = findViewById(R.id.editEmailAddress);
 
         getData();
 
@@ -194,63 +197,63 @@ public class AccountInformation extends AppCompatActivity {
             }
         });
 
-        editOwnerName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(flag1 == 0 && flag2 == 0 && flag3 == 0){
-                    flag1 = 1;
-                    ownerNameEdt.setFocusable(true);
-                    ownerNameEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
-                    ownerNameEdt.setClickable(true); // user navigates with wheel and selects widget
-                    editOwnerName.setBackgroundColor(Color.GREEN);
-                }
-                else{
-                    flag1 = 0;
-                    ownerNameEdt.setFocusable(false);
-                    ownerNameEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-                    ownerNameEdt.setClickable(false); // user navigates with wheel and selects widget
-                    editOwnerName.setBackgroundColor(Color.TRANSPARENT);
-                }
-            }
-        });
-        editEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(flag1 == 0 && flag2 == 0 && flag3 == 0){
-                    flag2 = 1;
-                    emailEdt.setFocusable(true);
-                    emailEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
-                    emailEdt.setClickable(true); // user navigates with wheel and selects widget
-                    editEmail.setBackgroundColor(Color.GREEN);
-                }
-                else{
-                    flag2 = 0;
-                    emailEdt.setFocusable(false);
-                    emailEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-                    emailEdt.setClickable(false); // user navigates with wheel and selects widget
-                    editEmail.setBackgroundColor(Color.TRANSPARENT);
-                }            }
-        });
-        editPhoneNum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(flag1 == 0 && flag2 == 0 && flag3 == 0){
-                    flag3 = 1;
-                    phoneNumEdt.setFocusable(true);
-                    phoneNumEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
-                    phoneNumEdt.setClickable(true); // user navigates with wheel and selects widget
-                    editPhoneNum.setBackgroundColor(Color.GREEN);
-                }
-                else{
-                    flag3 = 0;
-                    phoneNumEdt.setFocusable(false);
-                    phoneNumEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-                    phoneNumEdt.setClickable(false); // user navigates with wheel and selects widget
-                    editPhoneNum.setBackgroundColor(Color.TRANSPARENT);
-                }
-
-            }
-        });
+//        editOwnerName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(flag1 == 0 && flag2 == 0 && flag3 == 0){
+//                    flag1 = 1;
+//                    ownerNameEdt.setFocusable(true);
+//                    ownerNameEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
+//                    ownerNameEdt.setClickable(true); // user navigates with wheel and selects widget
+//                    editOwnerName.setBackgroundColor(Color.GREEN);
+//                }
+//                else{
+//                    flag1 = 0;
+//                    ownerNameEdt.setFocusable(false);
+//                    ownerNameEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+//                    ownerNameEdt.setClickable(false); // user navigates with wheel and selects widget
+//                    editOwnerName.setBackgroundColor(Color.TRANSPARENT);
+//                }
+//            }
+//        });
+//        editEmail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(flag1 == 0 && flag2 == 0 && flag3 == 0){
+//                    flag2 = 1;
+//                    emailEdt.setFocusable(true);
+//                    emailEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
+//                    emailEdt.setClickable(true); // user navigates with wheel and selects widget
+//                    editEmail.setBackgroundColor(Color.GREEN);
+//                }
+//                else{
+//                    flag2 = 0;
+//                    emailEdt.setFocusable(false);
+//                    emailEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+//                    emailEdt.setClickable(false); // user navigates with wheel and selects widget
+//                    editEmail.setBackgroundColor(Color.TRANSPARENT);
+//                }            }
+//        });
+//        editPhoneNum.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(flag1 == 0 && flag2 == 0 && flag3 == 0){
+//                    flag3 = 1;
+//                    phoneNumEdt.setFocusable(true);
+//                    phoneNumEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
+//                    phoneNumEdt.setClickable(true); // user navigates with wheel and selects widget
+//                    editPhoneNum.setBackgroundColor(Color.GREEN);
+//                }
+//                else{
+//                    flag3 = 0;
+//                    phoneNumEdt.setFocusable(false);
+//                    phoneNumEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+//                    phoneNumEdt.setClickable(false); // user navigates with wheel and selects widget
+//                    editPhoneNum.setBackgroundColor(Color.TRANSPARENT);
+//                }
+//
+//            }
+//        });
 
         btnAccountBack.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -69,7 +69,8 @@
                     android:layout_gravity="center"
                     android:clickable="true"
                     android:scaleType="fitXY"
-                    android:src="@drawable/acc_image_icon" />
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
                 <TextView
                     android:id="@+id/txtCoverPhoto"
@@ -106,7 +107,7 @@
                         android:layout_gravity="center"
                         android:clickable="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/acc_image_icon" />
+                        android:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
                     <TextView
                         android:id="@+id/txtOther1"
@@ -138,7 +139,7 @@
                         android:layout_gravity="center"
                         android:clickable="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/acc_image_icon" />
+                        android:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
                     <TextView
                         android:id="@+id/txtOther2"
@@ -170,7 +171,7 @@
                         android:layout_gravity="center"
                         android:clickable="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/acc_image_icon" />
+                        android:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
                     <TextView
                         android:id="@+id/txtOther3"
@@ -207,26 +208,16 @@
 
                 <EditText
                     android:id="@+id/idEdtShopName"
-                    android:layout_width="268dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:hint="cafe_Bistro"
                     android:inputType="textMultiLine"
                     android:textAppearance="@style/cafe_bistro" />
 
-                <ImageButton
-                    android:id="@+id/editShopName"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="11dp"
-                    android:background="@null"
-                    android:clickable="true"
-                    android:src="@drawable/ic_baseline_edit_24" />
             </RelativeLayout>
 
             <TextView
@@ -250,26 +241,16 @@
 
                 <EditText
                     android:id="@+id/idEdtShopAddress"
-                    android:layout_width="268dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:hint="# 3, Whitefields 134 - 4 , Ashok Nagar, Pune, Maharashtra 411007"
                     android:inputType="textMultiLine"
                     android:textAppearance="@style/cafe_bistro" />
 
-                <ImageButton
-                    android:id="@+id/editShopAddress"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="11dp"
-                    android:background="@null"
-                    android:clickable="true"
-                    android:src="@drawable/ic_baseline_edit_24" />
             </RelativeLayout>
 
 
