@@ -11,9 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.numpad.NumPad;
-import com.google.firebase.auth.FirebaseAuth;
-
 public class phoneNumber2_Activity extends AppCompatActivity {
 
 //    private EditText phoneEdt;
