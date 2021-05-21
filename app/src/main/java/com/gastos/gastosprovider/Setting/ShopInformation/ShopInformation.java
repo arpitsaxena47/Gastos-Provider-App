@@ -75,12 +75,13 @@ public class ShopInformation extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseReference ref;
 
-    private String shopPicUrl = "" , other1Url = null,other2Url = null , other3Url = null;
-    private String prevShopName = "" , prevShopAddress = "" , prevLocation = "" , prevCategory = "" ;
+    private String shopPicUrl = "" , other1Url = "",other2Url = "" , other3Url = "" , location =  "" , category = "";
+    private String prevShopName = "" , prevShopAddress = "" , prevLocation = "" , prevCategory = "" ,
+            prevShopUrl = "" , prevOther1 = "" , prevOther2 = "" , prevOther3 = "" ;
 
     private ArrayList<String> locations = new ArrayList<>();
     private ArrayList<String> categories = new ArrayList<>();
-    String location =  null , category = null;
+
 
     public static final int REQUEST_IMAGE = 100;
 
@@ -231,11 +232,11 @@ public class ShopInformation extends AppCompatActivity {
                     Toast.makeText(context, "Please Set Shop Profile Picture....", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(category == null && prevCategory == null)
+                else if(category.equals("") && prevCategory.equals(""))
                 {
                     Toast.makeText(context, "Please Set Shop Category....", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(location == null && prevLocation == null)
+                }else if(location.equals("") && prevLocation.equals(""))
                 {
                     Toast.makeText(context, "Please Set Shop Location....", Toast.LENGTH_SHORT).show();
                     return;
@@ -295,8 +296,9 @@ public class ShopInformation extends AppCompatActivity {
                     saveShopInfoButton.setVisibility(View.VISIBLE);
                 }
                 else
-                if( shopAddressEdt.getText().toString().equals(prevShopAddress) && shopPicUrl.isEmpty() &&
-                        other1Url == null  && other2Url == null && other3Url == null && location == null && category == null)
+                if( shopAddressEdt.getText().toString().equals(prevShopAddress) && shopPicUrl.equals(prevShopUrl) &&
+                        (other1Url == null || other1Url.equals(prevOther1))   && (other2Url == null || other2Url.equals(prevOther2))
+                        && (other3Url == null || other3Url.equals(prevOther3)) && location.equals(prevLocation) && category.equals(prevCategory))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
@@ -323,8 +325,9 @@ public class ShopInformation extends AppCompatActivity {
                     btnAddPinLocation.setVisibility(View.VISIBLE);
                 }
                 else
-                if( shopNameEdt.getText().toString().equals(prevShopName)  && shopPicUrl.isEmpty() &&
-                        other1Url == null  && other2Url == null && other3Url == null && location == null && category == null)
+                if( shopNameEdt.getText().toString().equals(prevShopName)  &&  shopPicUrl.equals(prevShopUrl) &&
+                        (other1Url.equals(prevOther1))   && (other2Url.equals(prevOther2))
+                        && (other3Url.equals(prevOther3)) && location.equals(prevLocation) && category.equals(prevCategory))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
@@ -516,6 +519,7 @@ public class ShopInformation extends AppCompatActivity {
                             Picasso.get().load(task.getResult().child("ShopPic").getValue()+"")
                                     .into(shopIV);
                             shopPicUrl = task.getResult().child("ShopPic").getValue()+"";
+                            prevShopUrl = shopPicUrl;
                             txtCoverPhoto.setVisibility(View.GONE);
                         }
 
@@ -524,6 +528,7 @@ public class ShopInformation extends AppCompatActivity {
                             Picasso.get().load(task.getResult().child("OtherImages").child("Other1").getValue()+"")
                                     .into(other1);
                             other1Url = task.getResult().child("OtherImages").child("Other1").getValue()+"";
+                            prevOther1 = other1Url;
                             txtOther1.setVisibility(View.GONE);
                         }
 
@@ -532,6 +537,7 @@ public class ShopInformation extends AppCompatActivity {
                             Picasso.get().load(task.getResult().child("OtherImages").child("Other2").getValue()+"")
                                     .into(other2);
                             other2Url = task.getResult().child("OtherImages").child("Other2").getValue()+"";
+                            prevOther2 = other2Url;
                             txtOther2.setVisibility(View.GONE);
                         }
 
@@ -539,6 +545,7 @@ public class ShopInformation extends AppCompatActivity {
                             Picasso.get().load(task.getResult().child("OtherImages").child("Other3").getValue()+"")
                                     .into(other3);
                             other3Url = task.getResult().child("OtherImages").child("Other3").getValue()+"";
+                            prevOther3 = other3Url;
                             txtOther3.setVisibility(View.GONE);
                         }
 
@@ -753,11 +760,11 @@ public class ShopInformation extends AppCompatActivity {
 
         Map<String, Object> other = new HashMap<>();
 
-//        if(!other1.equals(""))
+        if(!other1.equals(""))
         other.put("Other1", other1);
-//        if(!other2.equals(""))
+        if(!other2.equals(""))
         other.put("Other2", other2);
-//        if(!other3.equals(""))
+        if(!other3.equals(""))
         other.put("Other3", other3);
 
         ref.child("OtherImages").setValue(other).addOnCompleteListener(new OnCompleteListener<Void>() {
