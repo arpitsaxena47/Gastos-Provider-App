@@ -90,7 +90,8 @@ public class QRCodeRVAdapter extends RecyclerView.Adapter<QRCodeRVAdapter.ViewHo
                 public void onClick(View view) {
 
                    androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Delete UPI ID Permanently!!");
+                   builder.setCancelable(false);
+                    builder.setTitle("Delete UPI ID Permanently!");
                     builder.setMessage("Are You Sure To delete this Upi Id Permanently?");
                     builder.setPositiveButton("Yes", (dialog, which) -> {
                         dialog.cancel();

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.numpad.NumPad;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class PhoneNumberActivity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
     private ImageView otp_button;
     private EditText phone_num;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,8 @@ public class PhoneNumberActivity extends AppCompatActivity {
 
         otp_button=findViewById(R.id.idBtnGetOTP);
         phone_num=findViewById(R.id.idEdtMobile);
+
+
         otp_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
