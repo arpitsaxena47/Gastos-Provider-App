@@ -126,7 +126,7 @@ public class QRScannerActivity extends AppCompatActivity {
                         if (input.length() > 10 && input.indexOf("?pa=")+4 < input.indexOf("&"))
                             input = input.substring(input.indexOf("?pa=") + 4, input.indexOf("&"));
                         if (input.matches("[a-zA-Z0-9\\.\\-]{2,256}\\@[a-zA-Z][a-zA-Z]{2,64}")) {
-                            Intent paymentInfoIntent = new Intent(QRScannerActivity.this, PaymentInformation.class);
+                            Intent paymentInfoIntent = new Intent();
                             paymentInfoIntent.putExtra("UPI", input);
                             setResult(Activity.RESULT_OK, paymentInfoIntent);
                             finish();

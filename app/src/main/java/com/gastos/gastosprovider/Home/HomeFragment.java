@@ -57,6 +57,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         context = container.getContext();
+        auth1 = FirebaseAuth.getInstance();
+        database=  FirebaseDatabase.getInstance();
       /*  imageRV = view.findViewById(R.id.idRVImages);
         searchEdt = view.findViewById(R.id.idEdtSearch);
         usersRV = view.findViewById(R.id.idRvUsers);
@@ -102,8 +104,7 @@ public class HomeFragment extends Fragment {
 
        */
         //For other Images
-        auth1 = FirebaseAuth.getInstance();
-        database=  FirebaseDatabase.getInstance();
+
 //        recycler = view.findViewById(R.id.local_r2);
 //        recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 //        FirebaseRecyclerOptions<ShopPic> options =
