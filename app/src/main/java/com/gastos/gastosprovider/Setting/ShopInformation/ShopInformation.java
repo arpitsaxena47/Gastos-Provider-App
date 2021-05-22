@@ -301,7 +301,9 @@ public class ShopInformation extends AppCompatActivity {
 
                 // Get the current location of the device and set the position of the map.
                 getDeviceLocation();
-                Toast.makeText(context, "Lati="+gotlocationlatitude +"Logi="+gotlocationlongitude, Toast.LENGTH_SHORT).show();
+                if(gotlocationlongitude!=0  && gotlocationlatitude!=0)
+                    Toast.makeText(context, "Location Pin set successfully", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "Lati="+gotlocationlatitude +"Logi="+gotlocationlongitude, Toast.LENGTH_SHORT).show();
             }
         });
 
