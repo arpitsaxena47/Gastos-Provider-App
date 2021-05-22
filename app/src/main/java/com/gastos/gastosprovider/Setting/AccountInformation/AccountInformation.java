@@ -407,7 +407,7 @@ public class AccountInformation extends AppCompatActivity {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
 //                   Log.e("firebase", "Error getting data", task.getException());
-                    Toast.makeText(context, "Check Your Internet Connection..." , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Check Your Internet Connection]=..." , Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
 
 
