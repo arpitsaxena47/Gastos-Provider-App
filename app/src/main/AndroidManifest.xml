@@ -18,7 +18,8 @@
         <activity android:name=".Setting.ShopInformation.ShopInformation" />
         <activity android:name=".SetNewPin_Activity" />
         <activity android:name=".Setpin_Activity" />
-        <activity android:name=".Enterpin_Activity" />
+        <activity android:name=".Enterpin_Activity" >
+        </activity>
         <activity android:name=".Setting.PaymentInformation.QRScannerActivity"></activity>
         <activity android:name=".HomeActivity">
         </activity>

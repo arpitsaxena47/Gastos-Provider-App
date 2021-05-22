@@ -35,7 +35,7 @@
         android:id="@+id/txtUpiId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textColor="#808080"
         android:layout_below="@id/txtUpiName" />
 

@@ -17,6 +17,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -67,26 +68,27 @@ public class ShopInformation extends AppCompatActivity {
     private EditText shopNameEdt, shopAddressEdt;
     private TextView txtCoverPhoto , txtOther1 , txtOther2 , txtOther3 ;
     private ImageView backShopInfo , saveShopInfoButton , other1, other2 , other3;
-    private ImageView shopIV , editShopName , editShopAddress;
+    private ImageView shopIV ;
     private Spinner categoryDropDown , locationDropDown;
     private Button btnAddPinLocation;
     private Context context;
     private FirebaseAuth mAuth;
     DatabaseReference ref;
 
-    private String shopPicUrl = "" , other1Url = null,other2Url = null , other3Url = null;
-    private String prevShopName = "" , prevShopAddress = "" , prevLocation = "" , prevCategory = "" ;
+    private String shopPicUrl = "" , other1Url = "",other2Url = "" , other3Url = "" , location =  "" , category = "";
+    private String prevShopName = "" , prevShopAddress = "" , prevLocation = "" , prevCategory = "" ,
+            prevShopUrl = "" , prevOther1 = "" , prevOther2 = "" , prevOther3 = "" ;
 
     private ArrayList<String> locations = new ArrayList<>();
     private ArrayList<String> categories = new ArrayList<>();
-    String location =  null , category = null;
+
 
     public static final int REQUEST_IMAGE = 100;
 
 
    private String selectedImage = "";
 
-   private int flag1 = 0 , flag2 =0;
+//   private int flag1 = 0 , flag2 =0;
     public ShopInformation() {
         // Required empty public constructor
 
@@ -98,6 +100,9 @@ public class ShopInformation extends AppCompatActivity {
 
         setContentView(R.layout.fragment_shop_information);
         context = ShopInformation.this;
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         mAuth = FirebaseAuth.getInstance();
         shopNameEdt = findViewById(R.id.idEdtShopName);
         shopAddressEdt = findViewById(R.id.idEdtShopAddress);
@@ -114,8 +119,8 @@ public class ShopInformation extends AppCompatActivity {
         other2 = findViewById(R.id.other2);
         other3 = findViewById(R.id.other3);
 
-        editShopName = findViewById(R.id.editShopName);
-        editShopAddress = findViewById(R.id.editShopAddress);
+//        editShopName = findViewById(R.id.editShopName);
+//        editShopAddress = findViewById(R.id.editShopAddress);
 
         categoryDropDown = findViewById(R.id.dropDownCategory);
         locationDropDown = findViewById(R.id.dropdownCity);
@@ -129,50 +134,51 @@ public class ShopInformation extends AppCompatActivity {
 //        saveShopInfoButton.setVisibility(View.GONE);
         ImagePickerActivity.clearCache(context);
 
-        editShopName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(flag1 == 0 && flag2 == 0){
-                    flag1 = 1;
-                    shopNameEdt.setFocusable(true);
-                    shopNameEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
-                    shopNameEdt.setClickable(true); // user navigates with wheel and selects widget
+//        editShopName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(flag1 == 0 && flag2 == 0){
+//                    flag1 = 1;
+//                    shopNameEdt.setFocusable(true);
+//                    shopNameEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
+//                    shopNameEdt.setClickable(true); // user navigates with wheel and selects widget
+//
+//                    editShopName.setBackgroundColor(Color.GREEN);
+//                }
+//                else{
+//                    flag1 = 0;
+//                    shopNameEdt.setFocusable(false);
+//                    shopNameEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+//                    shopNameEdt.setClickable(false); // user navigates with wheel and selects widget
+//
+//                    editShopName.setBackgroundColor(Color.TRANSPARENT);
+//                }
+//
+//            }
+//        });
 
-                    editShopName.setBackgroundColor(Color.GREEN);
-                }
-                else{
-                    flag1 = 0;
-                    shopNameEdt.setFocusable(false);
-                    shopNameEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-                    shopNameEdt.setClickable(false); // user navigates with wheel and selects widget
+//        editShopAddress.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(flag1 == 0 && flag2 == 0){
+//                    flag2 = 1;
+//                    shopAddressEdt.setFocusable(true);
+//                    shopAddressEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
+//                    shopAddressEdt.setClickable(true); // user navigates with wheel and selects widget
+//
+//                    editShopAddress.setBackgroundColor(Color.GREEN);
+//                }
+//                else{
+//                    flag2 = 0;
+//                    shopAddressEdt.setFocusable(false);
+//                    shopAddressEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+//                    shopAddressEdt.setClickable(false); // user navigates with wheel and selects widget
+//
+//                    editShopAddress.setBackgroundColor(Color.TRANSPARENT);
+//                }
+//            }
+//        });
 
-                    editShopName.setBackgroundColor(Color.TRANSPARENT);
-                }
-
-            }
-        });
-
-        editShopAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(flag1 == 0 && flag2 == 0){
-                    flag2 = 1;
-                    shopAddressEdt.setFocusable(true);
-                    shopAddressEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
-                    shopAddressEdt.setClickable(true); // user navigates with wheel and selects widget
-
-                    editShopAddress.setBackgroundColor(Color.GREEN);
-                }
-                else{
-                    flag2 = 0;
-                    shopAddressEdt.setFocusable(false);
-                    shopAddressEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-                    shopAddressEdt.setClickable(false); // user navigates with wheel and selects widget
-
-                    editShopAddress.setBackgroundColor(Color.TRANSPARENT);
-                }
-            }
-        });
         shopIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,11 +232,11 @@ public class ShopInformation extends AppCompatActivity {
                     Toast.makeText(context, "Please Set Shop Profile Picture....", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(category == null && prevCategory == null)
+                else if(category.equals("") && prevCategory.equals(""))
                 {
                     Toast.makeText(context, "Please Set Shop Category....", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(location == null && prevLocation == null)
+                }else if(location.equals("") && prevLocation.equals(""))
                 {
                     Toast.makeText(context, "Please Set Shop Location....", Toast.LENGTH_SHORT).show();
                     return;
@@ -290,8 +296,9 @@ public class ShopInformation extends AppCompatActivity {
                     saveShopInfoButton.setVisibility(View.VISIBLE);
                 }
                 else
-                if( shopAddressEdt.getText().toString().equals(prevShopAddress) && shopPicUrl.isEmpty() &&
-                        other1Url == null  && other2Url == null && other3Url == null && location == null && category == null)
+                if( shopAddressEdt.getText().toString().equals(prevShopAddress) && shopPicUrl.equals(prevShopUrl) &&
+                        (other1Url == null || other1Url.equals(prevOther1))   && (other2Url == null || other2Url.equals(prevOther2))
+                        && (other3Url == null || other3Url.equals(prevOther3)) && location.equals(prevLocation) && category.equals(prevCategory))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
@@ -318,8 +325,9 @@ public class ShopInformation extends AppCompatActivity {
                     btnAddPinLocation.setVisibility(View.VISIBLE);
                 }
                 else
-                if( shopNameEdt.getText().toString().equals(prevShopName)  && shopPicUrl.isEmpty() &&
-                        other1Url == null  && other2Url == null && other3Url == null && location == null && category == null)
+                if( shopNameEdt.getText().toString().equals(prevShopName)  &&  shopPicUrl.equals(prevShopUrl) &&
+                        (other1Url.equals(prevOther1))   && (other2Url.equals(prevOther2))
+                        && (other3Url.equals(prevOther3)) && location.equals(prevLocation) && category.equals(prevCategory))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
@@ -489,7 +497,7 @@ public class ShopInformation extends AppCompatActivity {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
 //                   Log.e("firebase", "Error getting data", task.getException());
-                    Toast.makeText(context, "Some Error Occurred..." , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Check Your Internet Connection..." , Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
 
                 }
@@ -511,6 +519,7 @@ public class ShopInformation extends AppCompatActivity {
                             Picasso.get().load(task.getResult().child("ShopPic").getValue()+"")
                                     .into(shopIV);
                             shopPicUrl = task.getResult().child("ShopPic").getValue()+"";
+                            prevShopUrl = shopPicUrl;
                             txtCoverPhoto.setVisibility(View.GONE);
                         }
 
@@ -519,6 +528,7 @@ public class ShopInformation extends AppCompatActivity {
                             Picasso.get().load(task.getResult().child("OtherImages").child("Other1").getValue()+"")
                                     .into(other1);
                             other1Url = task.getResult().child("OtherImages").child("Other1").getValue()+"";
+                            prevOther1 = other1Url;
                             txtOther1.setVisibility(View.GONE);
                         }
 
@@ -527,6 +537,7 @@ public class ShopInformation extends AppCompatActivity {
                             Picasso.get().load(task.getResult().child("OtherImages").child("Other2").getValue()+"")
                                     .into(other2);
                             other2Url = task.getResult().child("OtherImages").child("Other2").getValue()+"";
+                            prevOther2 = other2Url;
                             txtOther2.setVisibility(View.GONE);
                         }
 
@@ -534,6 +545,7 @@ public class ShopInformation extends AppCompatActivity {
                             Picasso.get().load(task.getResult().child("OtherImages").child("Other3").getValue()+"")
                                     .into(other3);
                             other3Url = task.getResult().child("OtherImages").child("Other3").getValue()+"";
+                            prevOther3 = other3Url;
                             txtOther3.setVisibility(View.GONE);
                         }
 
@@ -748,11 +760,11 @@ public class ShopInformation extends AppCompatActivity {
 
         Map<String, Object> other = new HashMap<>();
 
-//        if(!other1.equals(""))
+        if(!other1.equals(""))
         other.put("Other1", other1);
-//        if(!other2.equals(""))
+        if(!other2.equals(""))
         other.put("Other2", other2);
-//        if(!other3.equals(""))
+        if(!other3.equals(""))
         other.put("Other3", other3);
 
         ref.child("OtherImages").setValue(other).addOnCompleteListener(new OnCompleteListener<Void>() {

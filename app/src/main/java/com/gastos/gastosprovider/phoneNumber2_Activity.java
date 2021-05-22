@@ -11,8 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 public class phoneNumber2_Activity extends AppCompatActivity {
 
 //    private EditText phoneEdt;
@@ -21,6 +19,7 @@ public class phoneNumber2_Activity extends AppCompatActivity {
 
     private ImageView otp_button;
     private EditText phone_num;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +28,7 @@ public class phoneNumber2_Activity extends AppCompatActivity {
 
         otp_button=findViewById(R.id.idBtnGetOTP2);
         phone_num=findViewById(R.id.idEdtMobile2);
+
         otp_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
