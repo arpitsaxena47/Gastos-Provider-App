@@ -295,7 +295,7 @@ public class ShopInformation extends AppCompatActivity {
 //                }
 
                 // Prompt the user for permission.
-                getLocationPermission();
+               getLocationPermission();
 
 
 
@@ -979,6 +979,7 @@ public class ShopInformation extends AppCompatActivity {
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
 
         }
+
     }
 
     private void getDeviceLocation() {
