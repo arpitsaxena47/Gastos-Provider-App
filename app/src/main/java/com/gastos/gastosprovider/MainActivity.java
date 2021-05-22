@@ -39,39 +39,83 @@ public class MainActivity extends AppCompatActivity {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        authStateListener = new FirebaseAuth.AuthStateListener(){
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                // Get signedIn user
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            // you could place other firebase code
+            //logic to save the user details to Firebase
 
-                //if user is signed in, we call a helper method to save the user details to Firebase
-                if (user != null) {
-                    // User is signed in
-                    // you could place other firebase code
-                    //logic to save the user details to Firebase
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
                     Intent homeIntent=new Intent(MainActivity.this,Enterpin_Activity.class);
-                    startActivity(homeIntent);
-                    finish();
+                    homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity( homeIntent);
+
+                }
+            }, 2000);
+
 
 //                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                }  else{
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+        }  else{
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
 
-                            Intent intent = new Intent(MainActivity.this, PhoneNumberActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                    Intent intent = new Intent(MainActivity.this, PhoneNumberActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
 
-                        }
-                    }, 2000);
                 }
-            }
+            }, 2000);
+        }
 
-        };
+//        authStateListener = new FirebaseAuth.AuthStateListener(){
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                // Get signedIn user
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//
+//                //if user is signed in, we call a helper method to save the user details to Firebase
+//                if (user != null) {
+//                    // User is signed in
+//                    // you could place other firebase code
+//                    //logic to save the user details to Firebase
+//
+//                    final Handler handler = new Handler();
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            Intent homeIntent=new Intent(MainActivity.this,Enterpin_Activity.class);
+//                            homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity( homeIntent);
+//
+//                        }
+//                    }, 2000);
+//
+//
+////                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+//                }  else{
+//                    final Handler handler = new Handler();
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            Intent intent = new Intent(MainActivity.this, PhoneNumberActivity.class);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity(intent);
+//
+//                        }
+//                    }, 2000);
+//                }
+//            }
+//
+//        };
 
 //        button_login=findViewById(R.id.btnverified);
 //        button_login.setOnClickListener(new View.OnClickListener() {
@@ -110,28 +154,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (authStateListener != null){
-            firebaseAuth.removeAuthStateListener(authStateListener);
-        }
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        firebaseAuth.addAuthStateListener(authStateListener);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        if (firebaseAuth.getCurrentUser() != null) {
-            Intent intent = new Intent(MainActivity.this, PhoneNumberActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }}
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if (authStateListener != null){
+//            firebaseAuth.removeAuthStateListener(authStateListener);
+//        }
+//
+//    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        firebaseAuth.addAuthStateListener(authStateListener);
+//
+//        firebaseAuth = FirebaseAuth.getInstance();
+//
+//        if (firebaseAuth.getCurrentUser() != null) {
+//            Intent intent = new Intent(MainActivity.this, PhoneNumberActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//        }}
 
 
 

@@ -34,6 +34,7 @@ public class Enterpin_Activity extends AppCompatActivity {
     EditText dig1,dig2,dig3,dig4;
     private TextView forgotPin;
     private DatabaseReference ref;
+    int a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,6 +164,78 @@ public class Enterpin_Activity extends AppCompatActivity {
                 return false;
             }
         });
+
+        findViewById(R.id.t9_key_0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               a=0;
+            }
+        });
+        findViewById(R.id.t9_key_1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              a=1;
+            }
+        });
+        findViewById(R.id.t9_key_2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.t9_key_3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.t9_key_4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.t9_key_5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.t9_key_6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.t9_key_7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.t9_key_8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.t9_key_9).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.t9_key_backspace).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
+
+
     }
 
     private String getOriginalPin()

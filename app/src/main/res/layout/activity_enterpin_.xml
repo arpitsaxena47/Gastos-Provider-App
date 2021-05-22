@@ -143,6 +143,129 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="285dp"
+        android:layout_alignParentBottom="true"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="285dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/key"
+            />
+
+        <TableRow style="@style/keyboard_row"
+            android:id="@+id/t1"
+            android:layout_marginTop="30dp"
+            >
+
+            <TextView
+                android:id="@+id/t9_key_1"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_one"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/t9_key_2"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_two"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/t9_key_3"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_three"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+        </TableRow>
+
+        <TableRow style="@style/keyboard_row"
+            android:id="@+id/t2"
+            android:layout_below="@+id/t1"
+            android:layout_marginTop="14dp"
+            >
+
+            <TextView
+                android:id="@+id/t9_key_4"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_four"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/t9_key_5"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_five"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/t9_key_6"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_six"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+        </TableRow>
+
+        <TableRow style="@style/keyboard_row"
+            android:id="@+id/t3"
+            android:layout_below="@+id/t2"
+            android:layout_marginTop="14dp">
+
+            <TextView
+                android:id="@+id/t9_key_7"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_seven"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/t9_key_8"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_eight"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/t9_key_9"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_nine"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+        </TableRow>
+
+        <TableRow style="@style/keyboard_row"
+            android:id="@+id/t4"
+            android:layout_below="@+id/t3"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/t9_key_clear"
+                style="@style/keyboard_button"
+
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <TextView
+                android:id="@+id/t9_key_0"
+                style="@style/keyboard_number_button"
+                android:text="@string/number_zero"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/t9_key_backspace"
+                style="@style/keyboard_button"
+                android:text="@string/btn_backspace"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+        </TableRow>
+    </RelativeLayout>
+
 
 
 </RelativeLayout>
