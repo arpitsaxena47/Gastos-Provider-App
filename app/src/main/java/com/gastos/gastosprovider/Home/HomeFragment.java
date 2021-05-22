@@ -117,7 +117,7 @@ public class HomeFragment extends Fragment {
         //end of code
 
         //For othershopimages
-        database=  FirebaseDatabase.getInstance();
+      //  database=  FirebaseDatabase.getInstance();
 //        DatabaseReference ref3 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information").child("OtherImages");
 //        ref3.addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -255,7 +255,7 @@ public class HomeFragment extends Fragment {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                    Log.e("firebase", "Error getting data", task.getException());
-                    Toast.makeText(context, "Some Error ..." , Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "Some Error ..." , Toast.LENGTH_SHORT).show();
 
                 }
                 else {
@@ -316,7 +316,7 @@ public class HomeFragment extends Fragment {
 
                     }
                     else {
-                        Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
                        // progressDialog.dismiss();
                     }
                 }
