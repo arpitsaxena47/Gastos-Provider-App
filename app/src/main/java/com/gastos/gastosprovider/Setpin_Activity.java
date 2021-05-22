@@ -1,5 +1,6 @@
 package com.gastos.gastosprovider;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -13,13 +14,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Setpin_Activity extends AppCompatActivity {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
+public class Setpin_Activity extends AppCompatActivity {
+    private FirebaseAuth mauth;
     private String epin1,epin2;
     private EditText pin1,pin2;
     private ImageView btnDone;
     private SharedPreferences sharedPreferences;
     private TextView resetPin;
+    private DatabaseReference ref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +42,7 @@ public class Setpin_Activity extends AppCompatActivity {
         pin2 = findViewById(R.id.pin2);
         btnDone = findViewById(R.id.setpinOk);
        resetPin=findViewById(R.id.resetPin);
+        mauth = FirebaseAuth.getInstance();
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +52,37 @@ public class Setpin_Activity extends AppCompatActivity {
 
                     setPin(epin1);
                     Toast.makeText(Setpin_Activity.this, "set pin done=" + epin1, Toast.LENGTH_SHORT).show();
+                    //Pin save in firebase.
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("Pin",epin1);
+                    String userId = mauth.getCurrentUser().getUid();
+                    ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("MobilePin");
+
+                    ref.setValue(user)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if(task.isSuccessful()){
+
+                                    }
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                        }
+                    });
+
+
+
                     Intent i = new Intent(Setpin_Activity.this, HomeActivity.class);
                     startActivity(i);
                     finish();

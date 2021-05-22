@@ -4,12 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E5E5E5"
     tools:context=".MainActivity">
   <ImageView
+      android:id="@+id/logo"
       android:layout_width="wrap_content"
       android:layout_height="200dp"
       android:layout_centerHorizontal="true"
-      android:src="@drawable/ic_image_one" />
+      android:layout_alignParentTop="true"
+      android:layout_marginTop="103dp"
+      android:src="@drawable/logo" />
+
+  <TextView
+      android:id="@+id/gastos"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/logo"
+      android:layout_marginTop="13dp"
+      android:text="GASTOS"
+      android:layout_centerHorizontal="true"
+      android:textSize="19dp"
+      android:textColor="#2D796D"
+      android:letterSpacing="-0.02"
+      />
 
   <!--  <View
         android:layout_width="match_parent"
@@ -99,14 +116,15 @@
         android:src="@drawable/ic_image_two" />
 -->
 
-    <Button
+   <!-- <Button
         android:id="@+id/btnverified"
         android:layout_width="80dp"
         android:layout_height="50dp"
+        android:layout_below="@+id/gastos"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+       android:layout_marginTop="20dp"
         android:text="Next"
         android:textColor="@color/white"
         android:background="@null"
-        />
+        />  -->
 </RelativeLayout>

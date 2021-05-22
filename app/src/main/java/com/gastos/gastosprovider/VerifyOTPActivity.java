@@ -23,6 +23,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +41,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     String r;
 
    */
-
+  private DatabaseReference ref;
     TextView phone_num;
     EditText inputotp1, inputotp2, inputotp3, inputotp4, inputotp5,inputotp6;
     public String phonenumber_value;
@@ -335,18 +338,51 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            if(r==1)
-                            {
-                                Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
-                                startActivity(i);
-                                finish();
-                            }
-                            else
-                            {
-                                Intent i = new Intent(VerifyOTPActivity.this, SetNewPin_Activity.class);
-                                startActivity(i);
-                                finish();
-                            }
+                            String userId = mAuth.getCurrentUser().getUid();
+                            ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("MobilePin");
+
+                            ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task2) {
+                                    if (!task2.isSuccessful()) {
+//                                    Log.e("firebase", "Error getting data", task.getException());
+//                                    Toast.makeText(context, "Some Error ..." , Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(VerifyOTPActivity.this, "Pin has been not stored..", Toast.LENGTH_SHORT).show();
+//                                        Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
+//                                        startActivity(i);
+//                                        finish();
+                                    }
+                                    else {
+                                        if(task2.getResult().getValue() != null){
+                                            Toast.makeText(VerifyOTPActivity.this, "Pin has been stored already..", Toast.LENGTH_SHORT).show();
+                                            Intent i = new Intent(VerifyOTPActivity.this, Enterpin_Activity.class);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                        else{
+                                            Toast.makeText(VerifyOTPActivity.this, "Pin has been not stored..", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
+                                        startActivity(i);
+                                        finish();
+                                        }
+
+                                    }
+
+                                }
+                            });
+
+//                            if(r==1)
+//                            {
+//                                Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
+//                                startActivity(i);
+//                                finish();
+//                            }
+//                            else
+//                            {
+//                                Intent i = new Intent(VerifyOTPActivity.this, SetNewPin_Activity.class);
+//                                startActivity(i);
+//                                finish();
+                          //  }
                             //Toast.makeText(VerifyOTPActivity.this, "User verified..", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(VerifyOTPActivity.this, "Fail to verify the user..", Toast.LENGTH_SHORT).show();
