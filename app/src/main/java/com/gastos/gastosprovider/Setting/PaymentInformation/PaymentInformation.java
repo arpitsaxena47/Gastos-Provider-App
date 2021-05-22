@@ -132,7 +132,7 @@ public class PaymentInformation extends AppCompatActivity {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
 //                   Log.e("firebase", "Error getting data", task.getException());
-                    Toast.makeText(context, "Some Error Occurred...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Check Your Internet Connection...", Toast.LENGTH_SHORT).show();
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
 
@@ -185,7 +185,7 @@ public class PaymentInformation extends AppCompatActivity {
                 if(flag == 0){
                     if(upiId.contains("@ok"))
                     {
-                        qrCodeRVModalArrayList.add(new QRCodeRVModal("Google Pay UPI" , upiId));
+                        qrCodeRVModalArrayList.add(new QRCodeRVModal("GooglePay UPI" , upiId));
                     }
                     else if(upiId.contains("@paytm"))
                     {
@@ -197,7 +197,7 @@ public class PaymentInformation extends AppCompatActivity {
                     }
                     else
                     {
-                        qrCodeRVModalArrayList.add(new QRCodeRVModal("Phone Pay UPI" , upiId));
+                        qrCodeRVModalArrayList.add(new QRCodeRVModal("PhonePe UPI" , upiId));
                     }
                     qrCodeRVAdapter.notifyDataSetChanged();
                     savePaymentInfo.setVisibility(View.VISIBLE);
@@ -212,7 +212,6 @@ public class PaymentInformation extends AppCompatActivity {
 
     private void addDataToFirebase(ArrayList<QRCodeRVModal> arrayList)
     {
-
         ProgressDialog progressDialog
                 = new ProgressDialog(context);
         progressDialog.setTitle("Uploading...");
@@ -223,7 +222,7 @@ public class PaymentInformation extends AppCompatActivity {
 
         for(int i =0; i<arrayList.size();i++) {
 
-            user.put(arrayList.get(i).getUpiName() , new QRpair(arrayList.get(i).getUpiId() , arrayList.get(i).getUpiName()));
+            user.put(arrayList.get(i).getUpiId() , new QRpair(arrayList.get(i).getUpiId() , arrayList.get(i).getUpiName()));
         }
             String userId = mAuth.getCurrentUser().getUid();
             ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Payment_Information").child("All Upi");
