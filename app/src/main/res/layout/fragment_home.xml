@@ -24,7 +24,16 @@
                 android:background="#595959"
                 android:scaleType="fitXY"
                 />
-
+            <ImageView
+                android:id="@+id/rectangle_2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/gradient"
+                android:scaleType="fitXY"
+                />
 
             <TextView
                 android:id="@+id/shop_name"
@@ -66,7 +75,7 @@
                 android:rating="4"
                 android:stepSize="0.5"
                 android:isIndicator="false"
-                android:progressTint="#EAE8DC"
+                android:progressTint="#FFDF00"
                 style="?android:attr/ratingBarStyleSmall"
                 />
 
@@ -76,14 +85,15 @@
         <RelativeLayout
             android:id="@+id/r2"
             android:layout_width="match_parent"
-            android:layout_height="166dp"
+            android:layout_height="200dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="160dp">
+            android:layout_marginTop="160dp"
+            android:background="@null">
 
             <View
                 android:id="@+id/rec_1"
                 android:layout_width="wrap_content"
-                android:layout_height="166dp"
+                android:layout_height="200dp"
                 android:background="@drawable/shop_rec"
                 />
             <TextView
@@ -112,8 +122,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/menu"
-                android:layout_marginTop="16dp"
-                >
+                android:layout_marginTop="22dp"
+               >
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
@@ -133,11 +143,10 @@
 
                         <ImageView
                             android:id="@+id/otherpic1"
-                            android:layout_width="match_parent"
+                            android:layout_width="124dp"
                             android:layout_height="74dp"
                             android:background="#595959"
-                            android:scaleType="fitXY"
-                            />
+                            android:scaleType="fitXY" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -195,8 +204,9 @@
             android:id="@+id/r3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="310dp"
+             android:layout_alignParentTop="true"
+            android:layout_marginTop="345dp"
+
            >
 
                 <ScrollView
@@ -210,7 +220,7 @@
                         <View
                             android:id="@+id/rec_2"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/shop_card"
                             />
 

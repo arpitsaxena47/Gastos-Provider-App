@@ -2,11 +2,16 @@ package com.gastos.gastosprovider.Setting.ShopInformation;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,10 +36,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.gastos.gastosprovider.HomeActivity;
 import com.gastos.gastosprovider.R;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,6 +57,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -61,10 +75,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+
 public class ShopInformation extends AppCompatActivity {
     private static final String TAG = "Location of shop";
-     private String gotlocationlatitude="";
-    private String gotlocationlongitude="";
+     private double gotlocationlatitude=0;
+    private double gotlocationlongitude=0;
     private EditText shopNameEdt, shopAddressEdt;
     private TextView txtCoverPhoto , txtOther1 , txtOther2 , txtOther3 ;
     private ImageView backShopInfo , saveShopInfoButton , other1, other2 , other3;
@@ -74,7 +89,11 @@ public class ShopInformation extends AppCompatActivity {
     private Context context;
     private FirebaseAuth mAuth;
     DatabaseReference ref;
-
+    private final LatLng mDefaultLocation = new LatLng(30.7691099, 76.5758537);
+    private Location mLastKnownLocation;
+    private boolean mLocationPermissionGranted = false;
+    private FusedLocationProviderClient   mFusedLocationProviderClient ;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private String shopPicUrl = "" , other1Url = "",other2Url = "" , other3Url = "" , location =  "" , category = "";
     private String prevShopName = "" , prevShopAddress = "" , prevLocation = "" , prevCategory = "" ,
             prevShopUrl = "" , prevOther1 = "" , prevOther2 = "" , prevOther3 = "" ;
@@ -130,6 +149,8 @@ public class ShopInformation extends AppCompatActivity {
         saveShopInfoButton = findViewById(R.id.saveShopInfoChanges);
 
         shopIV = findViewById(R.id.idIVShop);
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
         loadProfileDefault();
 //        saveShopInfoButton.setVisibility(View.GONE);
         ImagePickerActivity.clearCache(context);
@@ -241,7 +262,7 @@ public class ShopInformation extends AppCompatActivity {
                     Toast.makeText(context, "Please Set Shop Location....", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if (gotlocationlongitude.isEmpty()|| gotlocationlatitude.isEmpty()){
+                else if (gotlocationlongitude==0|| gotlocationlatitude==0){
                     Toast.makeText(context, "Add Location Pin....", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -263,15 +284,24 @@ public class ShopInformation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(shopAddressEdt.getText().toString().isEmpty()){
-                    Toast.makeText(context, "Please enter shop address first...", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                   Geolocation geolocation=new Geolocation();
-                    geolocation.getAddress(shopAddressEdt.getText().toString(),
-                            getApplicationContext(), new GeocoderHandler());
+//                if(shopAddressEdt.getText().toString().isEmpty()){
+//                    Toast.makeText(context, "Please enter shop address first...", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                   Geolocation geolocation=new Geolocation();
+//                    geolocation.getAddress(shopAddressEdt.getText().toString(),
+//                            getApplicationContext(), new GeocoderHandler());
+//
+//                }
 
-                }
+                // Prompt the user for permission.
+                getLocationPermission();
+
+
+
+                // Get the current location of the device and set the position of the map.
+                getDeviceLocation();
+                Toast.makeText(context, "Lati="+gotlocationlatitude +"Logi="+gotlocationlongitude, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -322,7 +352,7 @@ public class ShopInformation extends AppCompatActivity {
                 if(!editable.toString().equals(prevShopAddress))
                 {
                     saveShopInfoButton.setVisibility(View.VISIBLE);
-                    btnAddPinLocation.setVisibility(View.VISIBLE);
+                  //  btnAddPinLocation.setVisibility(View.VISIBLE);
                 }
                 else
                 if( shopNameEdt.getText().toString().equals(prevShopName)  &&  shopPicUrl.equals(prevShopUrl) &&
@@ -712,7 +742,7 @@ public class ShopInformation extends AppCompatActivity {
 
 
     private void addDataToFirebase(String shopName, String shopAddress, String shopPic , String other1 , String other2 ,
-                                   String other3,  String location, String category,String locationLatitude,String locationLogitude) {
+                                   String other3,  String location, String category,double locationLatitude,double locationLogitude) {
 
         ProgressDialog progressDialog
                 = new ProgressDialog(context);
@@ -720,14 +750,16 @@ public class ShopInformation extends AppCompatActivity {
         progressDialog.show();
 //        progressDialog.setCanceledOnTouchOutside(true);
 
+        String l1=Double.toString(locationLatitude);
+        String l2=Double.toString(locationLogitude);
         Map<String, Object> user = new HashMap<>();
         user.put("ShopName",shopName);
         user.put("ShopAddress", shopAddress);
         user.put("ShopPic" , shopPic);
         user.put("Location" , location);
         user.put("Category" , category);
-        user.put("ShopAddressLatitude" , locationLatitude);
-        user.put("ShopAddressLogitude" , locationLogitude);
+        user.put("ShopAddressLatitude" , l1);
+        user.put("ShopAddressLogitude" , l2);
 
 
         String userId = mAuth.getCurrentUser().getUid();
@@ -905,26 +937,108 @@ public class ShopInformation extends AppCompatActivity {
 
     }
 
-    private class GeocoderHandler extends Handler {
-        @Override
-        public void handleMessage(Message message) {
+//    private class GeocoderHandler extends Handler {
+//        @Override
+//        public void handleMessage(Message message) {
+//
+//            switch (message.what) {
+//                case 1:
+//                    Bundle bundle = message.getData();
+//                    gotlocationlatitude = bundle.getString("lati");
+//                    gotlocationlongitude = bundle.getString("logi");
+//                    break;
+//
+//                default:
+//                    gotlocationlatitude = null;
+//                    gotlocationlongitude = null;
+//
+//            }
+//           // Log.e(TAG, gotlocationlatitude);
+//          //  Log.e(TAG, gotlocationlongitude);
+//           // Toast.makeText(context, "Latitude=" +gotlocationlatitude+"  " + "Longitude="+gotlocationlongitude, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Location has been added successfully", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+//
 
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    gotlocationlatitude = bundle.getString("lati");
-                    gotlocationlongitude = bundle.getString("logi");
-                    break;
+    private void getLocationPermission() {
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         */
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mLocationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
 
-                default:
-                    gotlocationlatitude = null;
-                    gotlocationlongitude = null;
+        }
+    }
 
+    private void getDeviceLocation() {
+        /*
+         * Get the best and most recent location of the device, which may be null in rare
+         * cases when a location is not available.
+         */
+        try {
+            if (mLocationPermissionGranted) {
+                Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
+
+                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        if (task.isSuccessful()) {
+                            // Set the map's camera position to the current location of the device.
+                            mLastKnownLocation = task.getResult();
+                            if (mLastKnownLocation != null) {
+                                Log.d(TAG, "Lati"+mLastKnownLocation.getLatitude() + "Logi"+ mLastKnownLocation.getLongitude());
+                                gotlocationlongitude=mLastKnownLocation.getLongitude();
+                                gotlocationlatitude=mLastKnownLocation.getLatitude();
+
+
+//                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+//                                        new LatLng(mLastKnownLocation.getLatitude(),
+//                                                mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+//
+//
+//
+//                                MarkerOptions markerOptions = new MarkerOptions();
+//
+//                                // Setting the position for the marker
+//                                LatLng latLng = new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
+//
+//                                markerOptions.position(latLng);
+//
+//                                // Setting the title for the marker.
+//                                // This will be displayed on taping the marker
+//                                markerOptions.title("Your Location");
+//                                Toast.makeText(MapsActivity.this,latLng.latitude+"  "+latLng.longitude,Toast.LENGTH_SHORT).show();
+//                                // Clears the previously touched position
+//                                mMap.clear();
+//
+//                                // Animating to the touched position
+//                                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+//
+//                                // Placing a marker on the touched position
+//                                mMap.addMarker(markerOptions);
+                            }
+                        } else {
+                            Log.d(TAG, "Current location is null. Using defaults.");
+                            Log.e(TAG, "Exception: %s", task.getException());
+//                            mMap.moveCamera(CameraUpdateFactory
+//                                    .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+//
+//                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                        }
+                    }
+                });
             }
-           // Log.e(TAG, gotlocationlatitude);
-          //  Log.e(TAG, gotlocationlongitude);
-           // Toast.makeText(context, "Latitude=" +gotlocationlatitude+"  " + "Longitude="+gotlocationlongitude, Toast.LENGTH_SHORT).show();
-            Toast.makeText(context, "Location has been added successfully", Toast.LENGTH_SHORT).show();
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage());
         }
     }
 

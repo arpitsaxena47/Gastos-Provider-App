@@ -1,5 +1,6 @@
 package com.gastos.gastosprovider;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +17,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
+
 public class Enterpin_Activity extends AppCompatActivity {
 
-
+    private FirebaseAuth Auth;
     private String originalPin;
     ImageView btnOk;
     EditText dig1,dig2,dig3,dig4;
     private TextView forgotPin;
+    private DatabaseReference ref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +47,7 @@ public class Enterpin_Activity extends AppCompatActivity {
         forgotPin=findViewById(R.id.forgotPin);
 
         btnOk = findViewById(R.id.go);
-
+        Auth = FirebaseAuth.getInstance();
         setpinEditText();
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +56,40 @@ public class Enterpin_Activity extends AppCompatActivity {
                         dig4.getText().toString() ;
                 if(enteredPin.length() == 4)
                 {
+                    String userId = Auth.getCurrentUser().getUid();
+                    ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("MobilePin");
+
+                    ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task2) {
+                            if (!task2.isSuccessful()) {
+
+                            }
+                            else {
+                                if(task2.getResult().getValue() != null) {
+
+                                    String prevPin = task2.getResult().child("Pin").getValue() != null?task2.getResult().child("Pin").getValue() + "":"";
+
+                                    if(enteredPin.equals(prevPin)){
+                                        Intent intent = new Intent(Enterpin_Activity.this,HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(Enterpin_Activity.this, "Entered Pin is Incorrect " , Toast.LENGTH_SHORT).show();
+                                    }
+
+
+                                }
+                                else {
+                                    // Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
+                                    // progressDialog.dismiss();
+                                }
+                            }
+
+                        }
+                    });
                     if(enteredPin.equals(getOriginalPin()) )
                     {
                         //Intent
