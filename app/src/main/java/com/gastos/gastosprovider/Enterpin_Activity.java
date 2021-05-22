@@ -34,8 +34,8 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
     EditText dig1,dig2,dig3,dig4;
     private TextView forgotPin;
     private DatabaseReference ref;
-    int a;
-    EditText edt ;
+   // int a;
+    private EditText edt ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,17 +127,19 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
             }
         });
 
-        findViewById(R.id.t9_key_0).setOnClickListener(this);
-        findViewById(R.id.t9_key_1).setOnClickListener(this);
-        findViewById(R.id.t9_key_2).setOnClickListener(this);
-        findViewById(R.id.t9_key_3).setOnClickListener(this);
-        findViewById(R.id.t9_key_4).setOnClickListener(this);
-        findViewById(R.id.t9_key_5).setOnClickListener(this);
-        findViewById(R.id.t9_key_6).setOnClickListener(this);
-        findViewById(R.id.t9_key_7).setOnClickListener(this);
-        findViewById(R.id.t9_key_8).setOnClickListener(this);
-        findViewById(R.id.t9_key_9).setOnClickListener(this);
-        findViewById(R.id.t9_key_backspace).setOnClickListener(this);
+
+
+        findViewById(R.id.t9_key_0).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_1).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_2).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_3).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_4).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_5).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_6).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_7).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_8).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_9).setOnClickListener(Enterpin_Activity.this);
+        findViewById(R.id.t9_key_backspace).setOnClickListener(Enterpin_Activity.this);
 
 //        dig2.setOnKeyListener(new View.OnKeyListener() {
 //            @Override
@@ -267,7 +269,26 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
             }
         });
 
+        dig4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                String searchString = s.toString();
+                int textLength = searchString.length();
+                dig4.setSelection(textLength);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
     }
 

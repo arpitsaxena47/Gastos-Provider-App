@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,14 +15,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-public class PhoneNumberActivity extends AppCompatActivity {
+public class PhoneNumberActivity extends AppCompatActivity  implements View.OnClickListener{
 
    // private EditText phoneEdt;
     //private ImageView getOtpBtn;
    // private FirebaseAuth mAuth;
     private ImageView otp_button;
     private EditText phone_num;
-
+    private EditText edt ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class PhoneNumberActivity extends AppCompatActivity {
         otp_button=findViewById(R.id.idBtnGetOTP);
         phone_num=findViewById(R.id.idEdtMobile);
 
+        edt = phone_num;
+        phone_num.setShowSoftInputOnFocus(false);
 
         otp_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +86,35 @@ public class PhoneNumberActivity extends AppCompatActivity {
         });
 
        */
+        ((EditText)findViewById(R.id.idEdtMobile)).addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                String searchString = s.toString();
+                int textLength = searchString.length();
+                phone_num.setSelection(textLength);
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        findViewById(R.id.t9_key_0).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_1).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_2).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_3).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_4).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_5).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_6).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_7).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_8).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_9).setOnClickListener(PhoneNumberActivity.this);
+        findViewById(R.id.t9_key_backspace).setOnClickListener(PhoneNumberActivity.this);
+
+
     }
 
   /*  private void sendOTP(String phoneNumber) {
@@ -95,4 +128,59 @@ public class PhoneNumberActivity extends AppCompatActivity {
     }
 
    */
+  @Override
+  public void onClick(View view) {
+      switch (view.getId())
+      {
+          case R.id.t9_key_0:
+              edt.setText(edt.getText()+"0");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_1:
+              edt.setText(edt.getText()+"1");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_2:
+              edt.setText(edt.getText()+"2");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_3:
+              edt.setText(edt.getText()+"3");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_4:
+              edt.setText(edt.getText()+"4");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_5:
+              edt.setText(edt.getText()+"5");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_6:
+              edt.setText(edt.getText()+"6");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_7:
+              edt.setText(edt.getText()+"7");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_8:
+              edt.setText(edt.getText()+"8");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_9:
+              edt.setText(edt.getText()+"9");
+              edt.requestFocus(1);
+              break;
+          case R.id.t9_key_backspace:
+              if(edt.getText().toString().length()!=0)
+              {
+
+                  edt.setText(edt.getText().toString().substring(0,edt.getText().toString().length()-1));
+              }
+              edt.requestFocus(-1);
+              break;
+      }
+  }
+
 }
