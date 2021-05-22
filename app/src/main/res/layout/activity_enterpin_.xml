@@ -145,8 +145,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="285dp"
+        android:layout_height="275dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
         >
 
         <ImageView
@@ -162,21 +163,21 @@
             >
 
             <TextView
-                android:id="@+id/t9_key_1"
+                android:id="@+id/key_1"
                 style="@style/keyboard_number_button"
                 android:text="@string/number_one"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/t9_key_2"
+                android:id="@+id/key_2"
                 style="@style/keyboard_number_button"
                 android:text="@string/number_two"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/t9_key_3"
+                android:id="@+id/key_3"
                 style="@style/keyboard_number_button"
                 android:text="@string/number_three"
                 android:textColor="@color/white"

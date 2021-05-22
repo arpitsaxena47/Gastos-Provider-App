@@ -34,7 +34,7 @@ public class Enterpin_Activity extends AppCompatActivity {
     EditText dig1,dig2,dig3,dig4;
     private TextView forgotPin;
     private DatabaseReference ref;
-    int a;
+   // int a=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,61 +168,61 @@ public class Enterpin_Activity extends AppCompatActivity {
         findViewById(R.id.t9_key_0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               a=0;
+              // a=0;
             }
         });
-        findViewById(R.id.t9_key_1).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.key_1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              a=1;
+             // a=1;
             }
         });
-        findViewById(R.id.t9_key_2).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.key_2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               // a=2;
             }
         });
-        findViewById(R.id.t9_key_3).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.key_3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               // a=3;
             }
         });
         findViewById(R.id.t9_key_4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //a=4;
             }
         });
         findViewById(R.id.t9_key_5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+              //  a=5;
             }
         });
         findViewById(R.id.t9_key_6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               // a=6;
             }
         });
         findViewById(R.id.t9_key_7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+              //  a=7;
             }
         });
         findViewById(R.id.t9_key_8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+              //  a=8;
             }
         });
         findViewById(R.id.t9_key_9).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+              /// /a=9;
             }
         });
         findViewById(R.id.t9_key_backspace).setOnClickListener(new View.OnClickListener() {
@@ -250,11 +250,12 @@ public class Enterpin_Activity extends AppCompatActivity {
         dig1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                //dig1.setText(""+a);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
 
                 if (!s.toString().trim().isEmpty())
                 {
@@ -270,11 +271,12 @@ public class Enterpin_Activity extends AppCompatActivity {
         dig2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+               // dig2.setText(Integer.toString(a));
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 if (!s.toString().trim().isEmpty())
                 {
                     dig3.requestFocus();
@@ -296,7 +298,7 @@ public class Enterpin_Activity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                //dig3.setText(""+a);
                 if (!s.toString().trim().isEmpty())
                 {
                     dig4.requestFocus();
