@@ -37,8 +37,8 @@ public class HomeFragment extends Fragment {
     private  FirebaseAuth auth1 ;
     private  FirebaseDatabase database;
     private Context context;
- //   private String Latitude;
-  //  private  String Logitude;
+    private String Latitude;
+    private  String Longitude;
     String prevShopAddress;
 //    private RecyclerView imageRV;
 //    private ArrayList<String> imageURls;
@@ -268,8 +268,8 @@ public class HomeFragment extends Fragment {
                        String prevShopName = task.getResult().child("ShopName").getValue() != null?task.getResult().child("ShopName").getValue() + "":"";
                          prevShopAddress = task.getResult().child("ShopAddress").getValue() !=null?task.getResult().child("ShopAddress").getValue() + "": "";
                         String prevShopCategory = task.getResult().child("Category").getValue() != null?task.getResult().child("Category").getValue() + "":"";
-                       //  Latitude = task.getResult().child("ShopAddressLatitude").getValue() != null?task.getResult().child("ShopAddressLatitude").getValue() + "":"";
-                       //  Logitude = task.getResult().child("ShopAddressLogitude").getValue() != null?task.getResult().child("ShopAddressLogitude").getValue() + "":"";
+                         Latitude = task.getResult().child("ShopAddressLatitude").getValue() != null?task.getResult().child("ShopAddressLatitude").getValue() + "":"";
+                        Longitude = task.getResult().child("ShopAddressLogitude").getValue() != null?task.getResult().child("ShopAddressLogitude").getValue() + "":"";
 //                        if(task.getResult().child("ShopName").getValue() != null)
                         shopName.setText(prevShopName);
 
@@ -343,6 +343,11 @@ public class HomeFragment extends Fragment {
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
+
+                String geoUri = "http://maps.google.com/maps?q=loc:" + Latitude + "," + Longitude ;
+                Log.e("TAG", "onClick: "+geoUri );
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(geoUri));
+                startActivity(intent);
             }
         });
 
