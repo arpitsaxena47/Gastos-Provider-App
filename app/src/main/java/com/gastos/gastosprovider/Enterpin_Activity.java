@@ -26,7 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-public class Enterpin_Activity extends AppCompatActivity {
+public class Enterpin_Activity extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth Auth;
     private String originalPin;
@@ -35,10 +35,12 @@ public class Enterpin_Activity extends AppCompatActivity {
     private TextView forgotPin;
     private DatabaseReference ref;
     int a;
+    EditText edt ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enterpin_);
+
 
 
         dig1 = findViewById(R.id.digit1);
@@ -46,6 +48,13 @@ public class Enterpin_Activity extends AppCompatActivity {
         dig3 = findViewById(R.id.digit3);
         dig4 = findViewById(R.id.digit4);
         forgotPin=findViewById(R.id.forgotPin);
+
+        edt = dig1;
+
+        dig1.setShowSoftInputOnFocus(false);
+        dig2.setShowSoftInputOnFocus(false);
+        dig3.setShowSoftInputOnFocus(false);
+        dig4.setShowSoftInputOnFocus(false);
 
         btnOk = findViewById(R.id.go);
         Auth = FirebaseAuth.getInstance();
@@ -118,123 +127,67 @@ public class Enterpin_Activity extends AppCompatActivity {
             }
         });
 
-        dig2.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-                    //this is for backspace
-                    dig1.requestFocus();
-                    dig1.setText("");
+        findViewById(R.id.t9_key_0).setOnClickListener(this);
+        findViewById(R.id.t9_key_1).setOnClickListener(this);
+        findViewById(R.id.t9_key_2).setOnClickListener(this);
+        findViewById(R.id.t9_key_3).setOnClickListener(this);
+        findViewById(R.id.t9_key_4).setOnClickListener(this);
+        findViewById(R.id.t9_key_5).setOnClickListener(this);
+        findViewById(R.id.t9_key_6).setOnClickListener(this);
+        findViewById(R.id.t9_key_7).setOnClickListener(this);
+        findViewById(R.id.t9_key_8).setOnClickListener(this);
+        findViewById(R.id.t9_key_9).setOnClickListener(this);
+        findViewById(R.id.t9_key_backspace).setOnClickListener(this);
 
-                }
-                return false;
-            }
-        });
-
-        dig3.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-                    //this is for backspace
-                    dig2.requestFocus();
-                    dig2.setText("");
-                }
-                return false;
-            }
-        });
-        dig4.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-                    //this is for backspace
-                    if(dig4.getText().toString().equals(""))
-                    {
-                        dig3.requestFocus();
-                        dig3.setText("");
-                    }
-                    else{
-                        dig4.setText("");
-                    }
-
-
-                }
-                return false;
-            }
-        });
-
-        findViewById(R.id.t9_key_0).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               a=0;
-            }
-        });
-        findViewById(R.id.t9_key_1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              a=1;
-            }
-        });
-        findViewById(R.id.t9_key_2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        findViewById(R.id.t9_key_3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        findViewById(R.id.t9_key_4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        findViewById(R.id.t9_key_5).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        findViewById(R.id.t9_key_6).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        findViewById(R.id.t9_key_7).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        findViewById(R.id.t9_key_8).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        findViewById(R.id.t9_key_9).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        findViewById(R.id.t9_key_backspace).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
-
-
+//        dig2.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+//                    //this is for backspace
+//                    dig1.requestFocus();
+//                    edt  = dig1;
+//                    dig1.setText("");
+//
+//                }
+//                return false;
+//            }
+//        });
+//
+//        dig3.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+//                    //this is for backspace
+//                    dig2.requestFocus();
+//                    edt = dig2;
+//                    dig2.setText("");
+//                }
+//                return false;
+//            }
+//        });
+//        dig4.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+//                    //this is for backspace
+//                    if(dig4.getText().toString().equals(""))
+//                    {
+//                        dig3.requestFocus();
+//                        edt = dig3;
+//                        dig3.setText("");
+//                    }
+//                    else{
+//                        dig4.setText("");
+//                    }
+//
+//
+//                }
+//                return false;
+//            }
+//        });
 
     }
 
@@ -259,6 +212,7 @@ public class Enterpin_Activity extends AppCompatActivity {
                 if (!s.toString().trim().isEmpty())
                 {
                     dig2.requestFocus();
+                    edt = dig2;
                 }
             }
 
@@ -278,6 +232,7 @@ public class Enterpin_Activity extends AppCompatActivity {
                 if (!s.toString().trim().isEmpty())
                 {
                     dig3.requestFocus();
+                    edt = dig3;
                 }
 
 
@@ -300,6 +255,7 @@ public class Enterpin_Activity extends AppCompatActivity {
                 if (!s.toString().trim().isEmpty())
                 {
                     dig4.requestFocus();
+                    edt = dig4;
                 }
 
 
@@ -315,4 +271,69 @@ public class Enterpin_Activity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId())
+        {
+            case R.id.t9_key_0:
+                edt.setText("0");
+                break;
+            case R.id.t9_key_1:
+                edt.setText("1");
+                break;
+            case R.id.t9_key_2:
+                edt.setText("2");
+                break;
+            case R.id.t9_key_3:
+                edt.setText("3");
+                break;
+            case R.id.t9_key_4:
+                edt.setText("4");
+                break;
+            case R.id.t9_key_5:
+                edt.setText("5");
+                break;
+            case R.id.t9_key_6:
+                edt.setText("6");
+                break;
+            case R.id.t9_key_7:
+                edt.setText("7");
+                break;
+            case R.id.t9_key_8:
+                edt.setText("8");
+                break;
+            case R.id.t9_key_9:
+                edt.setText("9");
+                break;
+            case R.id.t9_key_backspace:
+                if(edt == dig2)
+                {
+                    dig1.requestFocus();
+                    edt = dig1;
+                    edt.setText("");
+                }
+                else if(edt == dig3)
+                {
+                    dig2.requestFocus();
+                    edt = dig2;
+                    edt.setText("");
+                }
+                else if(edt == dig4)
+                {
+                    if(edt.getText().toString().equals(""))
+                    {
+                        dig3.requestFocus();
+                        edt = dig3;
+                        edt.setText("");
+                    }
+                    else{
+                        edt.setText("");
+                    }
+
+                }
+
+                break;
+        }
+    }
 }
