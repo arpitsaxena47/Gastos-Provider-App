@@ -17,7 +17,10 @@
         <activity android:name=".Setting.AccountInformation.AccountInformation" />
         <activity android:name=".Setting.ShopInformation.ShopInformation" />
         <activity android:name=".SetNewPin_Activity" />
-        <activity android:name=".Setpin_Activity" />
+        <activity android:name=".Setpin_Activity" >
+
+
+        </activity>
         <activity android:name=".Enterpin_Activity" >
 
         </activity>
@@ -26,16 +29,16 @@
         </activity>
         <activity android:name=".VerifyOTPActivity" />
         <activity android:name=".PhoneNumberActivity" >
+
+
+
+        </activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
-        </activity>
-        <activity android:name=".MainActivity">
-
         </activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

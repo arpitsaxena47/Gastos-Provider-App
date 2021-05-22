@@ -29,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
-public class VerifyOTPActivity extends AppCompatActivity {
+public class VerifyOTPActivity extends AppCompatActivity implements View.OnClickListener{
 
   /*  private EditText otpEdt1, otpEdt2, otpEdt3, otpEdt4, otpEdt5, otpEdt6;
     private ImageView verifyOtpBtn;
@@ -51,6 +51,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     private String verificationId;
     private PhoneAuthProvider.ForceResendingToken resendOTPtoken;
     private int r;
+    private EditText edt ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +73,16 @@ public class VerifyOTPActivity extends AppCompatActivity {
         inputotp5=findViewById(R.id.inputcode5);
         inputotp6=findViewById(R.id.inputcode6);
         resendOTPTV=findViewById(R.id.idTVResendOTP);
+
+
+        edt = inputotp1;
+
+        inputotp1.setShowSoftInputOnFocus(false);
+        inputotp2.setShowSoftInputOnFocus(false);
+        inputotp3.setShowSoftInputOnFocus(false);
+        inputotp4.setShowSoftInputOnFocus(false);
+        inputotp5.setShowSoftInputOnFocus(false);
+        inputotp6.setShowSoftInputOnFocus(false);
 
         r=getIntent().getIntExtra("via",2);
         setupOTPINPUTS();
@@ -96,78 +107,78 @@ public class VerifyOTPActivity extends AppCompatActivity {
         });
 
 
-        inputotp2.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-                    //this is for backspace
-                    inputotp1.requestFocus();
-                    inputotp1.setText("");
-
-                }
-                return false;
-            }
-        });
-
-        inputotp3.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-                    //this is for backspace
-                    inputotp2.requestFocus();
-                    inputotp2.setText("");
-                }
-                return false;
-            }
-        });
-        inputotp4.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-                    //this is for backspace
-                    inputotp3.requestFocus();
-                    inputotp3.setText("");
-
-                }
-                return false;
-            }
-        });
-        inputotp5.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-                    //this is for backspace
-                    inputotp4.requestFocus();
-                    inputotp4.setText("");
-
-                }
-                return false;
-            }
-        });
-        inputotp6.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-                    //this is for backspace
-                    if(inputotp6.getText().toString().equals(""))
-                    {
-                        inputotp5.requestFocus();
-                        inputotp5.setText("");
-                    }
-                    else{
-                        inputotp6.setText("");
-                    }
-
-
-                }
-                return false;
-            }
-        });
+//        inputotp2.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+//                    //this is for backspace
+//                    inputotp1.requestFocus();
+//                    inputotp1.setText("");
+//
+//                }
+//                return false;
+//            }
+//        });
+//
+//        inputotp3.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+//                    //this is for backspace
+//                    inputotp2.requestFocus();
+//                    inputotp2.setText("");
+//                }
+//                return false;
+//            }
+//        });
+//        inputotp4.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+//                    //this is for backspace
+//                    inputotp3.requestFocus();
+//                    inputotp3.setText("");
+//
+//                }
+//                return false;
+//            }
+//        });
+//        inputotp5.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+//                    //this is for backspace
+//                    inputotp4.requestFocus();
+//                    inputotp4.setText("");
+//
+//                }
+//                return false;
+//            }
+//        });
+//        inputotp6.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+//                    //this is for backspace
+//                    if(inputotp6.getText().toString().equals(""))
+//                    {
+//                        inputotp5.requestFocus();
+//                        inputotp5.setText("");
+//                    }
+//                    else{
+//                        inputotp6.setText("");
+//                    }
+//
+//
+//                }
+//                return false;
+//            }
+//        });
        /* otpEdt1 = findViewById(R.id.inputcode1);
         otpEdt2 = findViewById(R.id.inputcode2);
         otpEdt3 = findViewById(R.id.inputcode3);
@@ -204,6 +215,18 @@ public class VerifyOTPActivity extends AppCompatActivity {
         });
 
         */
+        findViewById(R.id.t9_key_0).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_1).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_2).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_3).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_4).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_5).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_6).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_7).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_8).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_9).setOnClickListener(VerifyOTPActivity.this);
+        findViewById(R.id.t9_key_backspace).setOnClickListener(VerifyOTPActivity.this);
+
     }
 
     private void setupOTPINPUTS()
@@ -221,6 +244,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if (!s.toString().trim().isEmpty())
                 {
                     inputotp2.requestFocus();
+                    edt = inputotp2;
                 }
 
             }
@@ -242,6 +266,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if (!s.toString().trim().isEmpty())
                 {
                     inputotp3.requestFocus();
+                    edt = inputotp3;
                 }
 
             }
@@ -263,6 +288,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if (!s.toString().trim().isEmpty())
                 {
                     inputotp4.requestFocus();
+                    edt = inputotp4;
                 }
 
             }
@@ -284,6 +310,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 if (!s.toString().trim().isEmpty())
                 {
                     inputotp5.requestFocus();
+                    edt = inputotp5;
                 }
 
             }
@@ -304,7 +331,9 @@ public class VerifyOTPActivity extends AppCompatActivity {
 
                 if (!s.toString().trim().isEmpty())
                 {
-                    inputotp6.requestFocus();
+                    String searchString = s.toString();
+                    int textLength = searchString.length();
+                    inputotp6.setSelection(textLength);
                 }
 
             }
@@ -432,6 +461,83 @@ public class VerifyOTPActivity extends AppCompatActivity {
             Toast.makeText(VerifyOTPActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId())
+        {
+            case R.id.t9_key_0:
+                edt.setText("0");
+                break;
+            case R.id.t9_key_1:
+                edt.setText("1");
+                break;
+            case R.id.t9_key_2:
+                edt.setText("2");
+                break;
+            case R.id.t9_key_3:
+                edt.setText("3");
+                break;
+            case R.id.t9_key_4:
+                edt.setText("4");
+                break;
+            case R.id.t9_key_5:
+                edt.setText("5");
+                break;
+            case R.id.t9_key_6:
+                edt.setText("6");
+                break;
+            case R.id.t9_key_7:
+                edt.setText("7");
+                break;
+            case R.id.t9_key_8:
+                edt.setText("8");
+                break;
+            case R.id.t9_key_9:
+                edt.setText("9");
+                break;
+            case R.id.t9_key_backspace:
+                if(edt == inputotp2)
+                {
+                    inputotp1.requestFocus();
+                    edt = inputotp1;
+                    edt.setText("");
+                }
+                else if(edt == inputotp3)
+                {
+                    inputotp2.requestFocus();
+                    edt = inputotp2;
+                    edt.setText("");
+                }
+                else if(edt == inputotp4)
+                {
+                    inputotp3.requestFocus();
+                    edt = inputotp3;
+                    edt.setText("");
+                }
+                else if(edt == inputotp5)
+                {
+                    inputotp4.requestFocus();
+                    edt = inputotp4;
+                    edt.setText("");
+                }
+                else if(edt == inputotp6)
+                {
+                    if(edt.getText().toString().equals(""))
+                    {
+                        inputotp5.requestFocus();
+                        edt = inputotp5;
+                        edt.setText("");
+                    }
+                    else{
+                        edt.setText("");
+                    }
+
+                }
+
+                break;
+        }
+    }
 
   /*  private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
