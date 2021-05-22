@@ -232,11 +232,11 @@ public class ShopInformation extends AppCompatActivity {
                     Toast.makeText(context, "Please Set Shop Profile Picture....", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(category.equals("") && prevCategory.equals(""))
+                else if(category.isEmpty() && prevCategory.isEmpty())
                 {
                     Toast.makeText(context, "Please Set Shop Category....", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(location.equals("") && prevLocation.equals(""))
+                }else if(location.isEmpty() && prevLocation.isEmpty())
                 {
                     Toast.makeText(context, "Please Set Shop Location....", Toast.LENGTH_SHORT).show();
                     return;
@@ -349,7 +349,8 @@ public class ShopInformation extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(prevCategory.equals(category) || parent.getItemAtPosition(position).toString().equals(
+
+                if( parent.getItemAtPosition(position).toString().equals(prevCategory) ||  parent.getItemAtPosition(position).toString().equals(
                         categories.get(categories.size()-1) ))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
@@ -380,7 +381,8 @@ public class ShopInformation extends AppCompatActivity {
         locationDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(prevLocation.equals(location) ||
+//                location = parent.getItemAtPosition(position).toString();
+                if( parent.getItemAtPosition(position).toString().equals(prevLocation) ||
                         parent.getItemAtPosition(position).toString().equals(locations.get(locations.size()-1)))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
@@ -497,6 +499,8 @@ public class ShopInformation extends AppCompatActivity {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
 //                   Log.e("firebase", "Error getting data", task.getException());
+                    locationDropDown.setSelection(locations.size()-1);
+                    categoryDropDown.setSelection(categories.size()-1);
                     Toast.makeText(context, "Check Your Internet Connection..." , Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
 

@@ -27,18 +27,19 @@
         android:clickable="true"
         android:visibility="gone"
         android:src="@drawable/ic_baseline_done_24" />
+
     <TextView
         android:id="@+id/idTVHeadShopInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="22dp"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="10dp"
-        android:layout_alignParentTop="true"
         android:padding="4dp"
-        android:textColor="#000000"
         android:text="@string/shop_inform"
-        android:textAppearance="@style/settings" />
+        android:textAppearance="@style/settings"
+        android:textColor="#000000" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -68,22 +69,19 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:clickable="true"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+                    android:scaleType="center"
+                    android:src="@drawable/acc_image_icon" />
 
                 <TextView
                     android:id="@+id/txtCoverPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_gravity="bottom"
                     android:elevation="1dp"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:text="Cover \nPicture"
                     android:textAppearance="@style/shop_name"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#000000" />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
@@ -107,21 +105,19 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:clickable="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+                        android:scaleType="center"
+                        android:src="@drawable/acc_image_icon" />
 
                     <TextView
                         android:id="@+id/txtOther1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_gravity="bottom"
                         android:elevation="1dp"
                         android:gravity="center"
                         android:text="Add other \nphoto 1"
                         android:textAppearance="@style/other"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#000000" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -140,21 +136,19 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:clickable="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+                        android:scaleType="center"
+                        android:src="@drawable/acc_image_icon" />
 
                     <TextView
                         android:id="@+id/txtOther2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_gravity="bottom"
                         android:elevation="1dp"
                         android:gravity="center"
                         android:text="Add other \nphoto 2"
                         android:textAppearance="@style/other"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#000000" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -173,21 +167,19 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:clickable="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+                        android:scaleType="center"
+                        android:src="@drawable/acc_image_icon" />
 
                     <TextView
                         android:id="@+id/txtOther3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_gravity="bottom"
                         android:elevation="1dp"
                         android:gravity="center"
                         android:text="Add other \nphoto 3"
                         android:textAppearance="@style/other"
-                        android:textColor="#ffffff" />
+                        android:textColor="#000000" />
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 

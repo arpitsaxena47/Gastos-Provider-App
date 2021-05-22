@@ -46,6 +46,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider" />
         </provider>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application> <!-- Permission for camera -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Permission to vibrate -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
