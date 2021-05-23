@@ -85,7 +85,7 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
         inputotp5.setShowSoftInputOnFocus(false);
         inputotp6.setShowSoftInputOnFocus(false);
 
-        r=getIntent().getIntExtra("via",2);
+        r=getIntent().getIntExtra("via",-1);
         setupOTPINPUTS();
         sendVerificationCode(phonenumber_value);
         btnVerify.setOnClickListener(new View.OnClickListener() {
@@ -435,20 +435,31 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                                 Intent i = new Intent(VerifyOTPActivity.this, SetNewPin_Activity.class);
                                 startActivity(i);
                                 finish();
+                                return;
                             }
-
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            if(user!=null){
-                                Intent i = new Intent(VerifyOTPActivity.this, Enterpin_Activity.class);
-                                startActivity(i);
-                                finish();
-                            }
-                           else
+                           else if(r==1)
                             {
                                 Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
                                 startActivity(i);
                                 finish();
+                                return;
                             }
+
+                             else {
+                                 FirebaseUser user = mAuth.getCurrentUser();
+                                 if(user!=null){
+                                     Intent i = new Intent(VerifyOTPActivity.this, Enterpin_Activity.class);
+                                     startActivity(i);
+                                     finish();
+                                 }
+                                 else
+                                 {
+                                     Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
+                                     startActivity(i);
+                                     finish();
+                                 }
+                             }
+
 
                             //Toast.makeText(VerifyOTPActivity.this, "User verified..", Toast.LENGTH_SHORT).show();
                         } else {
