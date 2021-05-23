@@ -1,8 +1,11 @@
 package com.gastos.gastosprovider;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -11,17 +14,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.gastos.gastosprovider.Setting.AccountInformation.AccountData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class phoneNumber2_Activity extends AppCompatActivity implements View.OnClickListener{
 
 //    private EditText phoneEdt;
 //    private ImageView getOtpBtn;
-//    private FirebaseAuth mAuth;
-
+    private FirebaseAuth mAuth;
+    private  FirebaseDatabase database;
     private ImageView otp_button;
     private EditText phone_num;
     private EditText edt ;
+    private  String oldnum="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,18 +46,28 @@ public class phoneNumber2_Activity extends AppCompatActivity implements View.OnC
 
         edt = phone_num;
         phone_num.setShowSoftInputOnFocus(false);
+        mAuth = FirebaseAuth.getInstance();
+        database=  FirebaseDatabase.getInstance();
 
+        getNumberFromFirebase();
         otp_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String num=phone_num.getText().toString().trim();
                 if(!num.isEmpty()) {
                     if (num.length() == 10) {
-                        Intent intent = new Intent(phoneNumber2_Activity.this, VerifyOTPActivity.class);
-                        intent.putExtra("phone_number", num);
-                        intent.putExtra("via", 2);
-                        startActivity(intent);
-                        finish();
+                        if(num.equals(oldnum)){
+                            Intent intent = new Intent(phoneNumber2_Activity.this, VerifyOTPActivity.class);
+                            intent.putExtra("phone_number", num);
+                            intent.putExtra("via", 2);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else{
+                            Toast.makeText(phoneNumber2_Activity.this, "This App is registered with this "+oldnum+"  Phone Number", Toast.LENGTH_SHORT).show();
+                        }
+
+
 
 
                     } else {
@@ -107,7 +130,26 @@ public class phoneNumber2_Activity extends AppCompatActivity implements View.OnC
 
     }
 
-//    private void sendOTP(String phoneNumber) {
+    private void getNumberFromFirebase() {
+
+        DatabaseReference ref = database.getReference("Merchant_data/"+mAuth.getUid()).child("Account_Information");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
+
+                AccountData info = dataSnapshot.getValue(AccountData.class);
+                oldnum=info.getPhoneNumber();
+            }
+
+            @Override
+            public void onCancelled ( @NonNull DatabaseError databaseError ) {
+                Toast.makeText(phoneNumber2_Activity.this, "Internet Connection Error...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    //    private void sendOTP(String phoneNumber) {
 //        String phone = "+" + "91" + phoneNumber;
 //        Toast.makeText(this, "OTP has been sent to your number..", Toast.LENGTH_SHORT).show();
 //        Intent i = new Intent(phoneNumber2_Activity.this, VerifyOTPActivity.class);
@@ -170,5 +212,7 @@ public void onClick(View view) {
             break;
     }
 }
+
+
 
 }

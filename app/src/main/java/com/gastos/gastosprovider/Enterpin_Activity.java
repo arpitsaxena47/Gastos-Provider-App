@@ -73,13 +73,13 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task2) {
                             if (!task2.isSuccessful()) {
-
+                                Toast.makeText(Enterpin_Activity.this, "Check Your Internet Connection... " , Toast.LENGTH_SHORT).show();
                             }
                             else {
                                 if(task2.getResult().getValue() != null) {
 
                                     String prevPin = task2.getResult().child("Pin").getValue() != null?task2.getResult().child("Pin").getValue() + "":"";
-
+                                  //  String prevPin=  task2.getResult().child("Pin").getValue();
                                     if(enteredPin.equals(prevPin)){
                                         Intent intent = new Intent(Enterpin_Activity.this,HomeActivity.class);
                                         startActivity(intent);
@@ -100,17 +100,17 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
 
                         }
                     });
-                    if(enteredPin.equals(getOriginalPin()) )
-                    {
-                        //Intent
-                        Intent intent = new Intent(Enterpin_Activity.this,HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else
-                    {
-                        Toast.makeText(Enterpin_Activity.this, "Entered Pin is Incorrect " , Toast.LENGTH_SHORT).show();
-                    }
+//                    if(enteredPin.equals(getOriginalPin()) )
+//                    {
+//                        //Intent
+//                        Intent intent = new Intent(Enterpin_Activity.this,HomeActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(Enterpin_Activity.this, "Entered Pin is Incorrect " , Toast.LENGTH_SHORT).show();
+//                    }
                 }
                 else
                 {
