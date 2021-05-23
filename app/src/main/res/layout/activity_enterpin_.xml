@@ -246,7 +246,7 @@
                 <TextView
                     android:id="@+id/t9_key_clear"
                     style="@style/keyboard_button"
-
+                    android:enabled="false"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
