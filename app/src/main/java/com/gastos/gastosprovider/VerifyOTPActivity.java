@@ -500,7 +500,7 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                 inputotp4.setText(code.substring(3, 4));
                 inputotp5.setText(code.substring(4, 5));
                 inputotp6.setText(code.substring(5, 6));
-                verifyCode(code);
+//                verifyCode(code);
             }
         }
 

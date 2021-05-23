@@ -168,7 +168,7 @@ public class QRCodeRVAdapter extends RecyclerView.Adapter<QRCodeRVAdapter.ViewHo
         String userId = mAuth.getCurrentUser().getUid();
         ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Payment_Information");
 
-        ref.child("All Upi").child(qrCodeRVModalArrayList.get(pos).getUpiName()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+        ref.child("All Upi").child(qrCodeRVModalArrayList.get(pos).getUpiId()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "UPI Deleted " , Toast.LENGTH_SHORT).show();
@@ -193,7 +193,6 @@ public class QRCodeRVAdapter extends RecyclerView.Adapter<QRCodeRVAdapter.ViewHo
                 }
             });
         }
-
 
 
     }

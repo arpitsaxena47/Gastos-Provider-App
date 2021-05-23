@@ -127,6 +127,25 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
             }
         });
 
+        dig4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
         findViewById(R.id.t9_key_0).setOnClickListener(Enterpin_Activity.this);
@@ -258,6 +277,7 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
                 {
                     dig4.requestFocus();
                     edt = dig4;
+                    
                 }
 
 

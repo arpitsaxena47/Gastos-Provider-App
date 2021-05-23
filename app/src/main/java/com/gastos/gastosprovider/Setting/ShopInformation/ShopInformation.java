@@ -542,8 +542,8 @@ public class ShopInformation extends AppCompatActivity {
 
 //                        AccountData accountData = task.getResult(AccountData.class);
 
-                        prevShopName = task.getResult().child("ShopName").getValue() != null?task.getResult().child("ShopName").getValue() + "":"";
-                        prevShopAddress = task.getResult().child("ShopAddress").getValue() !=null?task.getResult().child("ShopAddress").getValue() + "": "";
+                        prevShopName = task.getResult().child("ShopName").getValue() != null?task.getResult().child("ShopName").getValue() + "" : "";
+                        prevShopAddress = task.getResult().child("ShopAddress").getValue() !=null?task.getResult().child("ShopAddress").getValue() + "" : "";
 
 //                        if(task.getResult().child("ShopName").getValue() != null)
                             shopNameEdt.setText(prevShopName);
