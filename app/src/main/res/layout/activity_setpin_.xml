@@ -127,9 +127,9 @@
             android:layout_height="wrap_content">
 
             <TableRow style="@style/keyboard_row"
-                android:id="@+id/t1"
-                android:layout_marginTop="25dp"
-                tools:ignore="DuplicateIds">
+                android:id="@+id/e1"
+                android:layout_marginTop="20dp"
+                >
 
                 <TextView
                     android:id="@+id/t9_key_1"
@@ -154,10 +154,10 @@
             </TableRow>
 
             <TableRow style="@style/keyboard_row"
-                android:id="@+id/t2"
-                android:layout_below="@+id/t1"
-                android:layout_marginTop="14dp"
-                tools:ignore="DuplicateIds">
+                android:id="@+id/e2"
+                android:layout_below="@+id/e1"
+                android:layout_marginTop="12dp"
+                >
 
                 <TextView
                     android:id="@+id/t9_key_4"
@@ -182,9 +182,9 @@
             </TableRow>
 
             <TableRow style="@style/keyboard_row"
-                android:id="@+id/t3"
-                android:layout_below="@+id/t2"
-                android:layout_marginTop="14dp">
+                android:id="@+id/e3"
+                android:layout_below="@+id/e2"
+                android:layout_marginTop="12dp">
 
                 <TextView
                     android:id="@+id/t9_key_7"
@@ -209,8 +209,8 @@
             </TableRow>
 
             <TableRow style="@style/keyboard_row"
-                android:id="@+id/t4"
-                android:layout_below="@+id/t3"
+                android:id="@+id/e4"
+                android:layout_below="@+id/e3"
                 android:layout_marginTop="10dp">
 
                 <TextView
