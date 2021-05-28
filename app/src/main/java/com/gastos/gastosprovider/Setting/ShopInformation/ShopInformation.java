@@ -301,9 +301,7 @@ public class ShopInformation extends AppCompatActivity {
 
                 // Get the current location of the device and set the position of the map.
                 getDeviceLocation();
-                if(gotlocationlongitude!=0  && gotlocationlatitude!=0)
-                    Toast.makeText(context, "Location Pin set successfully", Toast.LENGTH_SHORT).show();
-               // Toast.makeText(context, "Lati="+gotlocationlatitude +"Logi="+gotlocationlongitude, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -605,6 +603,13 @@ public class ShopInformation extends AppCompatActivity {
                         }
                         else{
                             locationDropDown.setSelection(locations.size()-1);
+                        }
+
+                        if(task.getResult().child("ShopAddressLatitude").getValue() != null &&task.getResult().child("ShopAddressLogitude").getValue() != null  )
+                        {
+
+                           gotlocationlatitude = Double.parseDouble(task.getResult().child("ShopAddressLatitude").getValue() != null?task.getResult().child("ShopAddressLatitude").getValue()+"" : "");
+                            gotlocationlongitude= Double.parseDouble(task.getResult().child("ShopAddressLogitude").getValue() != null?task.getResult().child("ShopAddressLogitude").getValue()+"" : "");
                         }
 
                         progressDialog.dismiss();
@@ -977,9 +982,32 @@ public class ShopInformation extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-
         }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! do the
+                    // calendar task you need to do.
+                    mLocationPermissionGranted = true;
+                  //  getDeviceLocation();
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'switch' lines to check for other
+            // permissions this app might request
+        }
     }
 
     private void getDeviceLocation() {
@@ -998,11 +1026,15 @@ public class ShopInformation extends AppCompatActivity {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
                             if (mLastKnownLocation != null) {
-                                Log.d(TAG, "Lati"+mLastKnownLocation.getLatitude() + "Logi"+ mLastKnownLocation.getLongitude());
+                              //  Log.d(TAG, "Lati"+mLastKnownLocation.getLatitude() + "Logi"+ mLastKnownLocation.getLongitude());
                                 gotlocationlongitude=mLastKnownLocation.getLongitude();
                                 gotlocationlatitude=mLastKnownLocation.getLatitude();
 
-
+                                if(gotlocationlongitude!=0  && gotlocationlatitude!=0)
+                                    Toast.makeText(context, "Location coordinates added successfully", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(context, "Lati="+gotlocationlatitude +"Logi="+gotlocationlongitude, Toast.LENGTH_SHORT).show();
+                                else
+                                    Toast.makeText(context, "Location Can't be fetched", Toast.LENGTH_SHORT).show();
 //                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 //                                        new LatLng(mLastKnownLocation.getLatitude(),
 //                                                mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -1030,12 +1062,13 @@ public class ShopInformation extends AppCompatActivity {
 //                                mMap.addMarker(markerOptions);
                             }
                         } else {
-                            Log.d(TAG, "Current location is null. Using defaults.");
-                            Log.e(TAG, "Exception: %s", task.getException());
+                           // Log.d(TAG, "Current location is null. Using defaults.");
+                           // Log.e(TAG, "Exception: %s", task.getException());
 //                            mMap.moveCamera(CameraUpdateFactory
 //                                    .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
 //
 //                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                            Toast.makeText(context, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

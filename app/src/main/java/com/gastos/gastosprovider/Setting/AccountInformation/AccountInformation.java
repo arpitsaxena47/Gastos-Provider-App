@@ -197,63 +197,6 @@ public class AccountInformation extends AppCompatActivity {
             }
         });
 
-//        editOwnerName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(flag1 == 0 && flag2 == 0 && flag3 == 0){
-//                    flag1 = 1;
-//                    ownerNameEdt.setFocusable(true);
-//                    ownerNameEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
-//                    ownerNameEdt.setClickable(true); // user navigates with wheel and selects widget
-//                    editOwnerName.setBackgroundColor(Color.GREEN);
-//                }
-//                else{
-//                    flag1 = 0;
-//                    ownerNameEdt.setFocusable(false);
-//                    ownerNameEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-//                    ownerNameEdt.setClickable(false); // user navigates with wheel and selects widget
-//                    editOwnerName.setBackgroundColor(Color.TRANSPARENT);
-//                }
-//            }
-//        });
-//        editEmail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(flag1 == 0 && flag2 == 0 && flag3 == 0){
-//                    flag2 = 1;
-//                    emailEdt.setFocusable(true);
-//                    emailEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
-//                    emailEdt.setClickable(true); // user navigates with wheel and selects widget
-//                    editEmail.setBackgroundColor(Color.GREEN);
-//                }
-//                else{
-//                    flag2 = 0;
-//                    emailEdt.setFocusable(false);
-//                    emailEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-//                    emailEdt.setClickable(false); // user navigates with wheel and selects widget
-//                    editEmail.setBackgroundColor(Color.TRANSPARENT);
-//                }            }
-//        });
-//        editPhoneNum.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(flag1 == 0 && flag2 == 0 && flag3 == 0){
-//                    flag3 = 1;
-//                    phoneNumEdt.setFocusable(true);
-//                    phoneNumEdt.setFocusableInTouchMode(true); // user touches widget on phone with touch screen
-//                    phoneNumEdt.setClickable(true); // user navigates with wheel and selects widget
-//                    editPhoneNum.setBackgroundColor(Color.GREEN);
-//                }
-//                else{
-//                    flag3 = 0;
-//                    phoneNumEdt.setFocusable(false);
-//                    phoneNumEdt.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-//                    phoneNumEdt.setClickable(false); // user navigates with wheel and selects widget
-//                    editPhoneNum.setBackgroundColor(Color.TRANSPARENT);
-//                }
-//
-//            }
-//        });
 
         btnAccountBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -324,73 +267,7 @@ public class AccountInformation extends AppCompatActivity {
         }
 
 
-//    public String getOwnerNameEdt() {
-//
-//
-//        String userId = mAuth.getCurrentUser().getUid();
-//        final String[] ownerName = {""};
-//
-//
-//        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("OwnerName");
-//        ref.ad
-//       ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//           @Override
-//           public void onComplete(@NonNull Task<DataSnapshot> task) {
-//               if (!task.isSuccessful()) {
-////                   Log.e("firebase", "Error getting data", task.getException());
-//
-//               }
-//               else {
-//                   if(task.getResult().getValue()!= null)
-//                   ownerName[0] = task.getResult().getValue() + "";
-////                   Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//               }
-//           }
-//       });
-//        return ownerName[0];
-//    }
 
-//    public String getPhoneNumEdt() {
-//        String userId = mAuth.getCurrentUser().getUid();
-//        final String[] phoneNum = {""};
-//        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("PhoneNumber");
-//        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-////                   Log.e("firebase", "Error getting data", task.getException());
-//
-//                }
-//                else {
-//                    if(task.getResult().getValue() != null)
-//                    phoneNum[0] = task.getResult().getValue() + "";
-////                   Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//                }
-//            }
-//        });
-//        return phoneNum[0];
-//    }
-
-//    public String getEmailEdt() {
-//        String userId = mAuth.getCurrentUser().getUid();
-//        final String[] email = {""};
-//        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("EmailAddress");
-//        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-////                   Log.e("firebase", "Error getting data", task.getException());
-//
-//                }
-//                else {
-//                    if(task.getResult().getValue() != null)
-//                    email[0] = task.getResult().getValue() + "";
-////                   Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//                }
-//            }
-//        });
-//        return email[0];
-//    }
 
     private void getData() {
 

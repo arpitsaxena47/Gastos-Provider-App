@@ -64,7 +64,7 @@ public class phoneNumber2_Activity extends AppCompatActivity implements View.OnC
                             finish();
                         }
                         else{
-                            Toast.makeText(phoneNumber2_Activity.this, "This App is registered with this "+oldnum+"  Phone Number", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(phoneNumber2_Activity.this, "This App is Registered With this "+oldnum+"  Phone Number", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -81,24 +81,7 @@ public class phoneNumber2_Activity extends AppCompatActivity implements View.OnC
             }
         });
 
-//        phoneEdt = findViewById(R.id.idEdtMobile2);
-//        mAuth = FirebaseAuth.getInstance();
-//        getOtpBtn = findViewById(R.id.idBtnGetOTP2);
-//        String phoneNumber = phoneEdt.getText().toString();
-//        getOtpBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int l = phoneEdt.getText().length();
-//                if (TextUtils.isEmpty(phoneEdt.getText().toString()) && l<10) {
-//                    Toast.makeText(phoneNumber2_Activity.this, "Please enter a valid phone number..", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }else if(phoneEdt.getText().toString().length()!=10){
-//                    Toast.makeText(phoneNumber2_Activity.this, "Please enter a valid 10 digit phone number..", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                sendOTP(phoneEdt.getText().toString());
-//            }
-//        });
+
         ((EditText)findViewById(R.id.idEdtMobile2)).addTextChangedListener(new TextWatcher() {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -149,15 +132,7 @@ public class phoneNumber2_Activity extends AppCompatActivity implements View.OnC
 
     }
 
-    //    private void sendOTP(String phoneNumber) {
-//        String phone = "+" + "91" + phoneNumber;
-//        Toast.makeText(this, "OTP has been sent to your number..", Toast.LENGTH_SHORT).show();
-//        Intent i = new Intent(phoneNumber2_Activity.this, VerifyOTPActivity.class);
-//        i.putExtra("phone", phone);
-//        i.putExtra("via", "true");
-//        startActivity(i);
-//
-//    }
+
 @Override
 public void onClick(View view) {
     switch (view.getId())

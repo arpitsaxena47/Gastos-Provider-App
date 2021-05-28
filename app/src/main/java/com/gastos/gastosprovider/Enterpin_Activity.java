@@ -100,17 +100,7 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
 
                         }
                     });
-//                    if(enteredPin.equals(getOriginalPin()) )
-//                    {
-//                        //Intent
-//                        Intent intent = new Intent(Enterpin_Activity.this,HomeActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                    else
-//                    {
-//                        Toast.makeText(Enterpin_Activity.this, "Entered Pin is Incorrect " , Toast.LENGTH_SHORT).show();
-//                    }
+
                 }
                 else
                 {
@@ -160,55 +150,7 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.t9_key_9).setOnClickListener(Enterpin_Activity.this);
         findViewById(R.id.t9_key_backspace).setOnClickListener(Enterpin_Activity.this);
 
-//        dig2.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-//                    //this is for backspace
-//                    dig1.requestFocus();
-//                    edt  = dig1;
-//                    dig1.setText("");
-//
-//                }
-//                return false;
-//            }
-//        });
-//
-//        dig3.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-//                    //this is for backspace
-//                    dig2.requestFocus();
-//                    edt = dig2;
-//                    dig2.setText("");
-//                }
-//                return false;
-//            }
-//        });
-//        dig4.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-//                if(keyCode == KeyEvent.KEYCODE_DEL&&event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-//                    //this is for backspace
-//                    if(dig4.getText().toString().equals(""))
-//                    {
-//                        dig3.requestFocus();
-//                        edt = dig3;
-//                        dig3.setText("");
-//                    }
-//                    else{
-//                        dig4.setText("");
-//                    }
-//
-//
-//                }
-//                return false;
-//            }
-//        });
+
 
     }
 

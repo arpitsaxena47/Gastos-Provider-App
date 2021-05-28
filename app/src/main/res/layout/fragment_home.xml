@@ -211,16 +211,16 @@
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
 
                         <View
                             android:id="@+id/rec_2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@drawable/shop_card"
                             />
 
@@ -238,7 +238,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="21dp"
                                 android:text="Owner Name:"
-                                android:textSize="15dp"
+                                android:textSize="18dp"
                                 android:textColor="@color/textcolor2"
                                 />
                             <TextView
@@ -248,7 +248,7 @@
                                 android:layout_marginStart="21dp"
                                 android:layout_marginTop="10dp"
                                 android:text="Xxxxx"
-                                android:textSize="12dp"
+                                android:textSize="15dp"
                                 android:textColor="@color/textcolor2"
                                 />
                             <View
@@ -278,7 +278,7 @@
                                 android:layout_marginStart="21dp"
                                 android:layout_marginTop="20dp"
                                 android:text="Shop Address"
-                                android:textSize="15dp"
+                                android:textSize="18dp"
                                 android:textColor="@color/textcolor2"
                                 />
 
@@ -295,7 +295,7 @@
                                     android:layout_marginTop="10dp"
                                     android:maxLines="7"
                                     android:text="Xxxx "
-                                    android:textSize="12dp"
+                                    android:textSize="15dp"
                                     android:textColor="@color/textcolor2"
                                     />
 
@@ -333,7 +333,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="21dp"
                                 android:text="Category"
-                                android:textSize="15dp"
+                                android:textSize="18dp"
                                 android:textColor="@color/textcolor2"
                                 />
                             <TextView
@@ -343,7 +343,7 @@
                                 android:layout_marginStart="21dp"
                                 android:layout_marginTop="10dp"
                                 android:text="Xxxx"
-                                android:textSize="12dp"
+                                android:textSize="15dp"
                                 android:textColor="@color/textcolor2"
                                 />
                             <View

@@ -40,12 +40,6 @@ public class HomeFragment extends Fragment {
     private String Latitude;
     private  String Longitude;
     String prevShopAddress;
-//    private RecyclerView imageRV;
-//    private ArrayList<String> imageURls;
-//    private RecyclerView usersRV;
-//  //  private ArrayList<UserModal> userModalArrayList;
-//    private EditText searchEdt;
- //   private UserRVAdapter userRVAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -59,103 +53,6 @@ public class HomeFragment extends Fragment {
         context = container.getContext();
         auth1 = FirebaseAuth.getInstance();
         database=  FirebaseDatabase.getInstance();
-      /*  imageRV = view.findViewById(R.id.idRVImages);
-        searchEdt = view.findViewById(R.id.idEdtSearch);
-        usersRV = view.findViewById(R.id.idRvUsers);
-        userModalArrayList = new ArrayList<>();
-        imageURls = new ArrayList<>();
-        imageURls.add("https://images.unsplash.com/photo-1612831457091-ffd909920941?ixid=MXwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
-        imageURls.add("https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?ixid=MXwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
-        imageURls.add("https://images.unsplash.com/photo-1611095560192-ccc932f617e1?ixid=MXwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxNnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
-
-        userModalArrayList.add(new UserModal("Santosh Sehgal", "200", "25 Dec 2020", "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"));
-        userModalArrayList.add(new UserModal("Asjok Singh", "400", "25 Dec 2020", "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"));
-        userModalArrayList.add(new UserModal("Preeti Sehgal", "500", "25 Dec 2020", "https://images.pexels.com/photos/2625122/pexels-photo-2625122.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"));
-        userModalArrayList.add(new UserModal("Surya Kumar", "900", "25 Dec 2020", "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"));
-        userModalArrayList.add(new UserModal("Santosh Koli", "1000", "25 Dec 2020", "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"));
-
-        userRVAdapter = new UserRVAdapter(userModalArrayList, container.getContext());
-        LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        usersRV.setLayoutManager(manager);
-        usersRV.setAdapter(userRVAdapter);
-
-
-        SliderRVAdapter adapter = new SliderRVAdapter(container.getContext(), imageURls);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        imageRV.setLayoutManager(linearLayoutManager);
-        imageRV.setAdapter(adapter);
-
-        searchEdt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filterData(s.toString());
-            }
-        });
-
-       */
-        //For other Images
-
-//        recycler = view.findViewById(R.id.local_r2);
-//        recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        FirebaseRecyclerOptions<ShopPic> options =
-//                new FirebaseRecyclerOptions.Builder<ShopPic>()
-//                        .setQuery(FirebaseDatabase.getInstance().getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information").child("OtherImages"), ShopPic.class)
-//                        .build();
-//        //Log.i("jfbvkj", "FirebaseDatabase.getInstance().getReference().child(\"OtherPictures\"), ShopPic.class ");
-//        adap = new ShopPicAdapter(options);
-//        recycler.setAdapter(adap);
-//        recycler.setHasFixedSize(true);
-        //end of code
-
-        //For othershopimages
-      //  database=  FirebaseDatabase.getInstance();
-//        DatabaseReference ref3 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information").child("OtherImages");
-//        ref3.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
-//                // shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
-//               // ShopDetails info = dataSnapshot.getValue(ShopDetails.class);
-//                //((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
-//                // String link = dataSnapshot.getValue(String.class);
-//                // loading that data into rImage
-////                ImageView OtherImage1= view.findViewById(R.id.otherpic1);
-////                String url1 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
-////                Picasso.get().load(url1).into(OtherImage1);
-////
-////                ImageView OtherImage2= view.findViewById(R.id.otherpic2);
-////                String url2 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
-////                Picasso.get().load(url2).into(OtherImage2);
-////
-////                ImageView OtherImage3= view.findViewById(R.id.otherpic3);
-////                String url3 = dataSnapshot.child("Merchant_Data/"+auth1.getUid()).child("Shop_Information").child("OtherImages").getValue(String.class);
-////                Picasso.get().load(url3).into(OtherImage3);
-//                // variable which is ImageView
-//                // Picasso.get().load(info.getProfileImage()).into(ProfileImage);
-//                // ProfileImage = (String) info.getProfileImage();
-//                // Picasso..load(url).into(ProfileImage);
-//                //((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
-//              //  ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
-//                //  ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled ( @NonNull DatabaseError databaseError ) {
-//
-//            }
-//        });
-//
 
         // For OwnerName
 
@@ -163,79 +60,11 @@ public class HomeFragment extends Fragment {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
-               // shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
+
                 AccountData info = dataSnapshot.getValue(AccountData.class);
-             //  ((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
-             //  ImageView ProfileImage= view.findViewById(R.id.rectangle_1);
-             // String link = dataSnapshot.getValue(String.class);
-               // String url = dataSnapshot.child("Merchant_Data/"+auth.getUid()).getValue(String.class);
-                // loading that data into rImage
-              //  Picasso.get().load(url).into(ProfileImage);
-                // variable which is ImageView
-               // Picasso.get().load(info.getProfileImage()).into(ProfileImage);
-               // ProfileImage = (String) info.getProfileImage();
-              // Picasso..load(url).into(ProfileImage);
+
                 ((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
-               // ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
-              //  ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
 
-
-            }
-
-            @Override
-            public void onCancelled ( @NonNull DatabaseError databaseError ) {
-
-            }
-        });
-
-         // For Shop Details
-      /*  DatabaseReference ref2 = database.getReference("Merchant_data/"+auth1.getUid()).child("Shop_Information");
-        ref2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
-               // shopOwnerDetails info = dataSnapshot.getValue(shopOwnerDetails.class);
-                ShopDetails info = dataSnapshot.getValue(ShopDetails.class);
-                  ((TextView)view.findViewById(R.id.shop_name)).setText(info != null ? info.getShopName() : "ShopName");
-                ((TextView)view.findViewById(R.id.Address)).setText(info != null ? info.getShopAddress() : "ShopAddress");
-
-
-                if(info!=null)
-                {
-                    ImageView ProfileImage= view.findViewById(R.id.rectangle_1);
-                    Picasso.get().load(info.getShopPic()).into(ProfileImage);
-
-                }
-                if(info!=null)
-                {
-                    ImageView otherpic1= view.findViewById(R.id.otherpic1);
-                    Picasso.get().load(info.getOtherPic1()).into(otherpic1);
-
-
-                }
-                if(info!=null)
-                {
-                    ImageView otherpic2= view.findViewById(R.id.otherpic2);
-                    Picasso.get().load(info.getOtherPic2()).into(otherpic2);
-
-                }
-
-                if(info!=null)
-                {
-                    ImageView otherpic3= view.findViewById(R.id.otherpic3);
-                    Picasso.get().load(info.getOtherPic3()).into(otherpic3);
-
-                }
-                // String link = dataSnapshot.getValue(String.class);
-                 //String url = dataSnapshot.child("Merchant_data/"+auth1.getUid()).child("Shop_Information").getValue(String.class);
-                // loading that data into rImage
-                 // Picasso.get().load(url).into(ProfileImage);
-                // variable which is ImageView
-
-                // ProfileImage = (String) info.getProfileImage();
-                // Picasso..load(url).into(ProfileImage);
-                //((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
-
-                //  ((TextView)view.findViewById(R.id.cafe)).setText(info != null ? info.getShopCategory() : "ShopCategory");
 
 
             }
@@ -246,7 +75,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-       */
+
        //For Shop information
         String userId = auth1.getCurrentUser().getUid();
         ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Shop_Information");
@@ -330,15 +159,7 @@ public class HomeFragment extends Fragment {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?q=loc:%f,%f", Latitude,Logitude);
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-//                startActivity(intent);
 
-
-//                Uri mapUri = Uri.parse("geo:0,0?q=Latitude,Logitude");
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//                startActivity(mapIntent);
 
                 Uri mapUri = Uri.parse("geo:0,0?q=" + Uri.encode(prevShopAddress));
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
@@ -354,30 +175,5 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        adap.startListening();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        adap.stopListening();
- //   }
-   /* private void filterData(String query) {
-    ArrayList<UserModal> filteredList = new ArrayList<>();
-    for(UserModal modal : userModalArrayList){
-        if(modal.getUserName().toLowerCase().contains(query.toLowerCase())){
-            filteredList.add(modal);
-        }
-    }
-    if(filteredList.isEmpty()){
-        Toast.makeText(getContext(), "No data found..", Toast.LENGTH_SHORT).show();
-    }else{
-        userRVAdapter.filter(filteredList);
-    }
-    }
 
-    */
 }
