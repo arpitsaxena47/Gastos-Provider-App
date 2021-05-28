@@ -16,9 +16,9 @@
         <activity android:name=".DynamicWebview"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Setting.PaymentInformation.PaymentInformation">
+        <activity android:name=".Setting.PaymentInformation.PaymentInformation"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait">
         </activity>
         <activity android:name=".Setting.ShopInformation.ImagePickerActivity"
             android:configChanges="orientation"
@@ -32,36 +32,35 @@
         <activity android:name=".SetNewPin_Activity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Setpin_Activity" >
+        <activity android:name=".Setpin_Activity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Enterpin_Activity" >
+        <activity android:name=".Enterpin_Activity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Setting.PaymentInformation.QRScannerActivity">
+        <activity android:name=".Setting.PaymentInformation.QRScannerActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".HomeActivity">
+        <activity android:name=".HomeActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".VerifyOTPActivity" >
+        <activity android:name=".VerifyOTPActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".PhoneNumberActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+
 
         </activity>
-        <activity android:name=".PhoneNumberActivity" >
+        <activity android:name=".MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-
-
-        </activity>
-        <activity android:name=".MainActivity">
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
