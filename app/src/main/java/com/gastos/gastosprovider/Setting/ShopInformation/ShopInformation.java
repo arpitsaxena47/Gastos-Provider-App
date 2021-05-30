@@ -249,17 +249,18 @@ public class ShopInformation extends AppCompatActivity {
                     Toast.makeText(context, "Please enter shop address..", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(shopPicUrl.isEmpty()){
-                    Toast.makeText(context, "Please Set Shop Profile Picture....", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if(category.isEmpty() && prevCategory.isEmpty())
+                else if(category.isEmpty() )
                 {
                     Toast.makeText(context, "Please Set Shop Category....", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(location.isEmpty() && prevLocation.isEmpty())
+                }
+                else if(location.isEmpty() )
                 {
                     Toast.makeText(context, "Please Set Shop Location....", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(shopPicUrl.isEmpty()){
+                    Toast.makeText(context, "Please Set Shop Profile Picture....", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if (gotlocationlongitude==0|| gotlocationlatitude==0){
@@ -327,8 +328,8 @@ public class ShopInformation extends AppCompatActivity {
                 }
                 else
                 if( shopAddressEdt.getText().toString().equals(prevShopAddress) && shopPicUrl.equals(prevShopUrl) &&
-                        (other1Url == null || other1Url.equals(prevOther1))   && (other2Url == null || other2Url.equals(prevOther2))
-                        && (other3Url == null || other3Url.equals(prevOther3)) && location.equals(prevLocation) && category.equals(prevCategory))
+                        other1Url.equals(prevOther1)   &&  other2Url.equals(prevOther2)
+                        &&  other3Url.equals(prevOther3) && location.equals(prevLocation) && category.equals(prevCategory))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
@@ -352,20 +353,20 @@ public class ShopInformation extends AppCompatActivity {
                 if(!editable.toString().equals(prevShopAddress))
                 {
                     saveShopInfoButton.setVisibility(View.VISIBLE);
-                  //  btnAddPinLocation.setVisibility(View.VISIBLE);
+
                 }
                 else
                 if( shopNameEdt.getText().toString().equals(prevShopName)  &&  shopPicUrl.equals(prevShopUrl) &&
-                        (other1Url.equals(prevOther1))   && (other2Url.equals(prevOther2))
-                        && (other3Url.equals(prevOther3)) && location.equals(prevLocation) && category.equals(prevCategory))
+                        other1Url.equals(prevOther1)   && other2Url.equals(prevOther2)
+                        && other3Url.equals(prevOther3) && location.equals(prevLocation) && category.equals(prevCategory))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
                 }
             }
         });
 
-        locations = fillLocations(locations);
-        categories = fillCategories(categories);
+        fillLocations(locations);
+        fillCategories(categories);
 
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(ShopInformation.this, android.R.layout.simple_spinner_dropdown_item, categories){
             @Override
@@ -380,10 +381,11 @@ public class ShopInformation extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
-                if( parent.getItemAtPosition(position).toString().equals(prevCategory) ||  parent.getItemAtPosition(position).toString().equals(
-                        categories.get(categories.size()-1) ))
+                if( parent.getItemAtPosition(position).toString().equals(prevCategory) ||
+                        parent.getItemAtPosition(position).toString().equals(categories.get(categories.size()-1) ))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
+                    category = prevCategory;
                 }
                 else {
                     saveShopInfoButton.setVisibility(View.VISIBLE);
@@ -416,6 +418,7 @@ public class ShopInformation extends AppCompatActivity {
                         parent.getItemAtPosition(position).toString().equals(locations.get(locations.size()-1)))
                 {
                     saveShopInfoButton.setVisibility(View.GONE);
+                    location = prevLocation;
                 }
                 else {
 
@@ -996,7 +999,7 @@ public class ShopInformation extends AppCompatActivity {
                     // permission was granted, yay! do the
                     // calendar task you need to do.
                     mLocationPermissionGranted = true;
-                  //  getDeviceLocation();
+                    getDeviceLocation();
                 } else {
 
                     // permission denied, boo! Disable the
