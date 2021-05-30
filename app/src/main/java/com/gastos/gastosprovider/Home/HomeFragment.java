@@ -63,8 +63,8 @@ public class HomeFragment extends Fragment {
 
                 AccountData info = dataSnapshot.getValue(AccountData.class);
 
-                ((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "OwnerName");
-
+                ((TextView)view.findViewById(R.id.payment_ben_value)).setText(info != null ? info.getOwnerName() : "Xxxx");
+                //((TextView)view.findViewById(R.id.payment_ben_value)).setText(info.getOwnerName());
 
 
             }

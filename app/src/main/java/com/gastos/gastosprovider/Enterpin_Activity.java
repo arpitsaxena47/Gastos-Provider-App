@@ -67,7 +67,7 @@ public class Enterpin_Activity extends AppCompatActivity implements View.OnClick
                 if(enteredPin.length() == 4)
                 {
                     String userId = Auth.getCurrentUser().getUid();
-                    ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("MobilePin");
+                    ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Details");
 
                     ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override

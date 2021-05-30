@@ -52,6 +52,9 @@ public class Setpin_Activity extends AppCompatActivity implements View.OnClickLi
         pin1.setShowSoftInputOnFocus(false);
         pin2.setShowSoftInputOnFocus(false);
 
+        SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE);
+         String PhoneNumber=pref.getString("phoneNum","");
+
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,8 +67,9 @@ public class Setpin_Activity extends AppCompatActivity implements View.OnClickLi
                     //Pin save in firebase.
                     Map<String, Object> user = new HashMap<>();
                     user.put("Pin",epin1);
+                    user.put("Phone_Number",PhoneNumber);
                     String userId = mauth.getCurrentUser().getUid();
-                    ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("MobilePin");
+                    ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Details");
 
                     ref.setValue(user)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {

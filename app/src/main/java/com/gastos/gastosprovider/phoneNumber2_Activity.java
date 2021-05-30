@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gastos.gastosprovider.Setting.AccountInformation.AccountData;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,8 +31,9 @@ public class phoneNumber2_Activity extends AppCompatActivity implements View.OnC
 
 //    private EditText phoneEdt;
 //    private ImageView getOtpBtn;
-    private FirebaseAuth mAuth;
-    private  FirebaseDatabase database;
+    private FirebaseAuth Auth;
+    private DatabaseReference ref;
+   // private  FirebaseDatabase database;
     private ImageView otp_button;
     private EditText phone_num;
     private EditText edt ;
@@ -46,8 +49,8 @@ public class phoneNumber2_Activity extends AppCompatActivity implements View.OnC
 
         edt = phone_num;
         phone_num.setShowSoftInputOnFocus(false);
-        mAuth = FirebaseAuth.getInstance();
-        database=  FirebaseDatabase.getInstance();
+        Auth = FirebaseAuth.getInstance();
+       /// database=  FirebaseDatabase.getInstance();
 
         getNumberFromFirebase();
         otp_button.setOnClickListener(new View.OnClickListener() {
@@ -115,18 +118,42 @@ public class phoneNumber2_Activity extends AppCompatActivity implements View.OnC
 
     private void getNumberFromFirebase() {
 
-        DatabaseReference ref = database.getReference("Merchant_data/"+mAuth.getUid()).child("Account_Information");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
+    //    DatabaseReference ref = database.getReference("Merchant_data/"+mAuth.getUid()).child("Details/").child("Phone_Number");
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange ( @NonNull DataSnapshot dataSnapshot ) {
+//
+//                AccountData info = dataSnapshot.getValue(AccountData.class);
+//                oldnum=info.getPhoneNumber();
+//            }
+//
+//            @Override
+//            public void onCancelled ( @NonNull DatabaseError databaseError ) {
+//                Toast.makeText(phoneNumber2_Activity.this, "Internet Connection Error...", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-                AccountData info = dataSnapshot.getValue(AccountData.class);
-                oldnum=info.getPhoneNumber();
-            }
+        String userId = Auth.getCurrentUser().getUid();
+        ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Details");
 
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onCancelled ( @NonNull DatabaseError databaseError ) {
-                Toast.makeText(phoneNumber2_Activity.this, "Internet Connection Error...", Toast.LENGTH_SHORT).show();
+            public void onComplete(@NonNull Task<DataSnapshot> task2) {
+                if (!task2.isSuccessful()) {
+                    Toast.makeText(phoneNumber2_Activity.this, "Check Your Internet Connection... " , Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(task2.getResult().getValue() != null) {
+
+                        oldnum = task2.getResult().child("Phone_Number").getValue() != null?task2.getResult().child("Phone_Number").getValue() + "":"";
+
+                    }
+                    else {
+                        // Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
+                        // progressDialog.dismiss();
+                    }
+                }
+
             }
         });
 

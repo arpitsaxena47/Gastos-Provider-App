@@ -61,7 +61,7 @@ public class SetNewPin_Activity extends AppCompatActivity implements View.OnClic
                     Map<String, Object> user = new HashMap<>();
                     user.put("Pin",epin1);
                     String userId = mauth.getCurrentUser().getUid();
-                    ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("MobilePin");
+                    ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Details");
 
                     ref.setValue(user)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
