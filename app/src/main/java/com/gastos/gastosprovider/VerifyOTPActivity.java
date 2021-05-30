@@ -277,7 +277,6 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-
                              if(r==2)
                             {
                                 Intent i = new Intent(VerifyOTPActivity.this, SetNewPin_Activity.class);
@@ -285,27 +284,64 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                                 finish();
                                 return;
                             }
-                           else if(r==1)
-                            {
-                                Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
-                                startActivity(i);
-                                finish();
-                                return;
-                            }
 
                              else {
-                                 FirebaseUser user = mAuth.getCurrentUser();
-                                 if(user!=null){
-                                     Intent i = new Intent(VerifyOTPActivity.this, Enterpin_Activity.class);
-                                     startActivity(i);
-                                     finish();
-                                 }
-                                 else
-                                 {
-                                     Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
-                                     startActivity(i);
-                                     finish();
-                                 }
+                                 //FirebaseUser user = mAuth.getCurrentUser();
+                                 String userId = mAuth.getCurrentUser().getUid();
+                                 ref = FirebaseDatabase.getInstance().getReference().child("Merchant_data/" + userId).child("Details");
+
+                                 ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                     @Override
+                                     public void onComplete(@NonNull Task<DataSnapshot> task2) {
+                                         if (!task2.isSuccessful()) {
+                                             Toast.makeText(VerifyOTPActivity.this, "Check Your Internet Connection... " , Toast.LENGTH_SHORT).show();
+                                         }
+                                         else {
+                                             if(task2.getResult().getValue() != null) {
+
+//                                                 String prevPin = task2.getResult().child("Pin").getValue() != null?task2.getResult().child("Pin").getValue() + "":"";
+//                                                 //  String prevPin=  task2.getResult().child("Pin").getValue();
+//                                                 if(enteredPin.equals(prevPin)){
+//                                                     Intent intent = new Intent(Enterpin_Activity.this,HomeActivity.class);
+//                                                     startActivity(intent);
+//                                                     finish();
+//                                                 }
+//                                                 else
+//                                                 {
+//                                                     Toast.makeText(Enterpin_Activity.this, "Entered Pin is Incorrect " , Toast.LENGTH_SHORT).show();
+//                                                 }
+
+                                                 Intent i = new Intent(VerifyOTPActivity.this, Enterpin_Activity.class);
+                                                    startActivity(i);
+                                                   finish();
+                                                   return;
+                                             }
+                                             else {
+                                                 // Toast.makeText(context, "No Data Found..." , Toast.LENGTH_SHORT).show();
+                                                 // progressDialog.dismiss();
+
+                                                   Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
+                                                  startActivity(i);
+                                                   finish();
+                                                   return;
+                                             }
+                                         }
+
+                                     }
+                                 });
+//                                 if(userId!=null){
+//                                     Intent i = new Intent(VerifyOTPActivity.this, Enterpin_Activity.class);
+//                                     startActivity(i);
+//                                     finish();
+//                                     return;
+//                                 }
+//                                 else
+//                                 {
+//                                     Intent i = new Intent(VerifyOTPActivity.this, Setpin_Activity.class);
+//                                     startActivity(i);
+//                                     finish();
+//                                     return;
+//                                 }
                              }
 
 
@@ -348,7 +384,7 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                 inputotp4.setText(code.substring(3, 4));
                 inputotp5.setText(code.substring(4, 5));
                 inputotp6.setText(code.substring(5, 6));
-                //verifyCode(code);
+                verifyCode(code);
             }
         }
 
